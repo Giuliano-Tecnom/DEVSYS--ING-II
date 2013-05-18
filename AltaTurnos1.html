@@ -3,167 +3,130 @@
 <meta charset="UTF-8">
 <title>ClinicSystem - Turnos</title>
 
-
-
-
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script src="js/tutobootstrap.js"></script>
 
-	
-		
-		
-
-
 </head>
-    
- <body style="background-image:url('images/bg.png')">
-  
- <table style="margin-top: 40px; margin-left: 25px;">
-<tr>
-<td><div>
- 
-   
-    <h3 style="font-size: 76PX;margin-top: 30px; color: #00CCFF;">CLIMED</h3>    
-
+    <!-- Fin de HEAD-->
 	
-	</div></td>
-<td> 
-   <div style="margin-left: 200px; margin-top: 27px;">
-   <table>
-   <tr>
-    <td><a href="#"><button class="btn btn-large " type="button">Home</button></a></td>
-   <td><a href="#"><button class="btn btn-large" type="button">Pacientes</button></a></td>
-   <td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
-   <td><a href="#"><button class="btn btn-large btn-info"" type="button">Turnos</button></a></td>
-   </tr>
-   </table>
- </div>
-   </td>
-</tr>
+<body style="background-image:url('images/bg.png')">
 
-</table>
+ <table style="margin-top: 40px; margin-left: 25px;">
+	<tr>
+	<td>
+		<div>
+			<h3 style="font-size: 76PX;margin-top: 30px; color: #00CCFF;">CLIMED</h3>    
+		</div>
+	</td>
+	<td> 
+	<div style="margin-left: 200px; margin-top: 27px;">
+		<table>
+			<tr>
+			<td><a href="#"><button class="btn btn-large " type="button">Home</button></a></td>
+			<td><a href="#"><button class="btn btn-large" type="button">Pacientes</button></a></td>
+			<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+			<td><a href="#"><button class="btn btn-large btn-info"" type="button">Turnos</button></a></td>
+			</tr>
+		</table>
+	</div>
+	</td>
+	</tr>
+ </table>
 
 <!-- Fin de Menú-->
 
-<div style="margin-top: 50px;">
-<ul class="breadcrumb">
-  <li> <h5>Alta de Turno</h5></li>
+<div id="contenedor" style="margin-top: 50px;">
+
+	<ul class="breadcrumb" style="margin-left: 100px;">
+		<li> <h5>Alta de Turno</h5></li>
+	</ul>
   
-</ul>
-  
- <div style="float: left; margin-top: 50px; margin-left: 100px;"> 
+	<div style="float: left; margin-top: 50px; margin-left: 100px;"> 
    
-  <form class="form-horizontal">
-  <div class="control-group">
-    <input type="text" placeholder="Buscar Paciente..">
-  </div>
-  <div class="control-group">
-    <select multiple="multiple">
-           <option>Peter Brown</option>
-		   <option>Juan Perez</option>
-		   <option>Cristian A. Paredes</option>
-		   <option>Daniel Osvaldo</option>
-		   <option>Matias Presti</option>
-		   
-    </select>
-  </div>
-   
-  <div class="control-group">
-    <input type="text" placeholder="Buscar Medicos..">
-  </div>
-  <div class="control-group">
-    <select multiple="multiple">
-           <option>Peter Brown</option>
-		   <option>Juan Perez</option>
-		   <option>Cristian A. Paredes</option>
-		   <option>Daniel Osvaldo</option>
-		   <option>Matias Presti</option>
-		   <option>Todos</option>
-    </select>
-  </div>
-  <div style="margin-left: 300px;margin-top: -268px;">
-    <label>Obra Social</label>
-    <select multiple="multiple">
-           <option>GALENO</option>
-		   <option>OSSEG</option>
-		   <option>IOMA</option>
-		   <option>OSDE</option>
-		   <option>OSECAC</option>
-		   
-		   
-    </select>
-  </div>
-  
-  <div style="margin-left: 300px;margin-top: 45px;">
-    <label>Especialidad</label>
-    <select multiple="multiple">
-           <option>Psiquiatria</option>
-		   <option>Pediatria</option>
-		   <option>Ginecologia</option>
-		   <option>Cardiologia</option>
-		   <option>Traumatologia</option>
-		   <option>Cualquiera</option>
-	</select>
-  </div>
-  
-  <div style="margin-left: 600px;margin-top: -250px;">
-    <label>Fecha</label>
-  <select>
-  <option>1/06/2013</option>
-  <option>2/06/2013</option>
-  <option>3/06/2013</option>
-  <option>4/06/2013</option>
-  <option>5/06/2013</option>
-  <option>6/06/2013</option>
-  <option>7/06/2013</option>
-  </select>
-  </div>
-  
-   <div style="margin-left: 600px;margin-top: 24px;">
-    <label>Franja Horaria</label>
-  <select>
-  <option>Mañana</option>
-  <option>Tarde</option>
-    </select>
-  </div>
-  
-  
-  
-  <div style="margin-top: 90px; margin-left:600px;">
-   <button type="submit" class="btn">Siguiente</button>
-  </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-</form>
-  
-  
-  
-</div>
+		<form class="form-horizontal">
+			
+			<div class="control-group">
+				<input type="text" placeholder="Buscar Paciente..">
+			</div>
+			<div class="control-group">
+				<select multiple="multiple">
+					<option>Sergio Alcantara</option>
+					<option>Julian Gori</option>
+					<option>Guillermo Pedroza</option>
+					<option>Dario Cvitanich</option>
+					<option>Matias Carmona</option>
+				</select>
+			</div>
+			<div class="control-group">
+				<input type="text" placeholder="Buscar Medicos..">
+			</div>
+			<div class="control-group">
+				<select multiple="multiple">
+					<option>Todos</option>
+					<option>John John</option>
+					<option>Matic Alvaro</option>
+					<option>Dorrego Carlos</option>
+					<option>Osvaldo Daniel</option>
+					<option>Coentrao David</option>
+				</select>
+			</div>
+			<div style="margin-left: 300px;margin-top: -268px;">
+				<label>Obra Social</label>
+				<select multiple="multiple">
+					<option>GALENO</option>
+					<option>OSSEG</option>
+					<option>IOMA</option>
+					<option>OSDE</option>
+					<option>OSECAC</option>
+				</select>
+			</div>
+			<div style="margin-left: 300px;margin-top: 45px;">
+				<label>Especialidad</label>
+				<select multiple="multiple">
+					<option>Cualquiera</option>
+					<option>Psiquiatria</option>
+					<option>Pediatria</option>
+					<option>Ginecologia</option>
+					<option>Cardiologia</option>
+					<option>Traumatologia</option>
+				</select>
+			</div>
+			<div style="margin-left: 600px;margin-top: -250px;">
+				<label>Fecha</label>
+				<select>
+					<option>Cualquiera</option>
+					<option>1/06/2013</option>
+					<option>2/06/2013</option>
+					<option>3/06/2013</option>
+					<option>4/06/2013</option>
+					<option>5/06/2013</option>
+					<option>6/06/2013</option>
+					<option>7/06/2013</option>
+				</select>
+			</div>
+			<div style="margin-left: 600px;margin-top: 24px;">
+				<label>Franja Horaria</label>
+					<select>
+						<option>Manana</option>
+						<option>Tarde</option>
+					</select>
+			</div>
+			<div style="margin-top: 90px; margin-left:600px;">
+				<button type="submit" class="btn">Siguiente</button>
+			</div>
+		</form>
+	</div>
+		
+	<!-- BOTON DE SALIR-->
+	<ul class="breadcrumb" style="margin-top: 400px;">
+		<li> <button class="btn btn-inverse" type="button" style="margin-left: 800px;"> Salir </button></li>
+	</ul>
+	
+</div>      <!-- FIN DIV CONTENDOR -->
 
  
-</div>
-
- 
-
-
-
-
-
-
-
-
-
 </body>
 </html>
