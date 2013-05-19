@@ -40,11 +40,14 @@
 <!-- Fin de Menú-->
 
 <div id="contenedor" style="margin-top: 50px; ">
-
+	
 	<ul class="breadcrumb" style="margin-left: 100px;">
-		<li> <h5>Modificacion de Pacientes</h5></li>
+		<li> 
+			<h5>Modificacion de Pacientes <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+				                                 <!-- ICONO DE AYUDA -->  
+		</li>
 	</ul>
-  
+
 	<div style="float: left;  margin-left: 100px;"> 
    
 		<form class="form-horizontal">
@@ -53,26 +56,26 @@
 				<input type="text" placeholder="Nombre..">
 			</div>
 			<div class="control-group">
-				<input type="text" placeholder="Apellido">
+				<input type="text" placeholder="Apellido..">
 			</div>
 			<div class="control-group">
-				<input type="text" placeholder="DNI">
+				<input type="text" placeholder="DNI..">
 				<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin puntos, Ej: 36789456</span>
 			</div>
 			<div class="control-group">
-				<input type="text" placeholder="Email">
+				<input type="text" placeholder="Email..">
 				<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: aaa@gmail.com</span>
 			</div>
 			<div class="control-group">
-				<input type="text" placeholder="Telefono">
+				<input type="text" placeholder="Telefono..">
 				<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin parentesis, ni espacios Ej: 02214567800</span>
 			</div>
 			<div class="control-group">
-				<input type="text" placeholder="Direccion">
+				<input type="text" placeholder="Direccion..">
 				<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: 60 N 1009</span>
 			</div>
 			<div class="control-group">
-				<input type="text" placeholder="Fecha Nacimiento">
+				<input type="text" placeholder="Fecha de Nacimiento..">
 				<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD/MM/AAAA</span>
 			</div>
 			<div style="margin-left: 300px;margin-top: -350px;">
@@ -92,12 +95,18 @@
 				<button class="btn btn-success" type="button">Modificar</button>
 				<button class="btn btn-danger" type="button">Cancelar </button>
 			</div>
+			<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
 		</form>
 	</div>
 	
 	<!-- BOTON DE SALIR-->
 	<ul class="breadcrumb" style="margin-top: 400px;">
-		<li> <button class="btn btn-inverse" type="button" style="margin-left: 800px;"> Salir </button></li>
+		<li>
+			<div style="margin-left: 800px;">
+				<button class="btn btn-primary"type="button"> Atras </button>
+				<button class="btn btn-inverse" type="button"> Salir </button>
+			</div>
+		</li>
 	</ul>
 	
 </div>     <!-- FIN DIV CONTENDOR -->

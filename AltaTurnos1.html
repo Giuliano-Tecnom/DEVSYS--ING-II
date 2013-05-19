@@ -41,7 +41,10 @@
 <div id="contenedor" style="margin-top: 50px;">
 
 	<ul class="breadcrumb" style="margin-left: 100px;">
-		<li> <h5>Alta de Turno</h5></li>
+		<li> 
+			<h5>Alta de Turno<a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+				                                 <!-- ICONO DE AYUDA -->  
+		</li>
 	</ul>
   
 	<div style="float: left; margin-top: 50px; margin-left: 100px;"> 
@@ -110,19 +113,26 @@
 			<div style="margin-left: 600px;margin-top: 24px;">
 				<label>Franja Horaria</label>
 					<select>
+						<option>Cualquiera</option>
 						<option>Manana</option>
 						<option>Tarde</option>
 					</select>
 			</div>
-			<div style="margin-top: 90px; margin-left:600px;">
-				<button type="submit" class="btn">Siguiente</button>
+			<div style="margin-top: 40px; margin-left:600px;">
+				<button type="submit" class="btn btn-success">Siguiente</button>
+				<span class="help-block" style="font-size: 9px;"> Solo el campo paciente es OBLIGATORIO.</span>
 			</div>
 		</form>
 	</div>
 		
 	<!-- BOTON DE SALIR-->
 	<ul class="breadcrumb" style="margin-top: 400px;">
-		<li> <button class="btn btn-inverse" type="button" style="margin-left: 800px;"> Salir </button></li>
+		<li> 
+			<div style="margin-left: 800px;">
+				<button class="btn btn-primary"type="button"> Atras </button>
+				<button class="btn btn-inverse" type="button"> Salir </button>
+			</div>
+		</li>
 	</ul>
 	
 </div>      <!-- FIN DIV CONTENDOR -->

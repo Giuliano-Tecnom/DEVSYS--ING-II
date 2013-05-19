@@ -38,10 +38,12 @@
 
 <!-- Fin de Menú-->
 
-<div id="contenedor" style="margin-top: 50px; ">
-
+<div id="contenedor" style="margin-top: 50px; ">	
 	<ul class="breadcrumb" style="margin-left: 100px;">
-		<li> <h5>Gestion de Turnos</h5></li>
+		<li> 
+			<h5>Gestion de Turnos<a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+				                                 <!-- ICONO DE AYUDA -->  
+		</li>
 	</ul>
   
 	<div style="float: left;  margin-left: 100px;"> 
@@ -112,13 +114,14 @@
 						<option>Tarde</option>
 					</select>
 			</div>
-			<div style="margin-top: 90px; margin-left:600px;">
-				<button type="submit" class="btn">Siguiente</button>
+			<div style="margin-top: 40px; margin-left:600px;">
+				<button type="submit" class="btn btn-success">Siguiente</button>
 			</div>
+			<button class="btn btn-primary" type="button" style="margin-top: 15px;margin-left: 600px;">Turno Nuevo</button>
 		</form>
 	</div>
 
-	<div style="margin-left: 100px;">
+	<div style="margin-left: 100px;margin-top: 340px;">
 
 		<table class="table table-striped">
 			<tr>
@@ -151,7 +154,10 @@
 	<ul class="breadcrumb">
 		<li> 
 			<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
-			<button class="btn btn-inverse" type="button" style="margin-left: 800px;"> Salir </button>
+			<div style="margin-left: 800px;">
+				<button class="btn btn-primary"type="button"> Atras </button>
+				<button class="btn btn-inverse" type="button"> Salir </button>
+			</div>
 		</li>
 	</ul>
 

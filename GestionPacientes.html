@@ -39,9 +39,12 @@
 <!-- Fin de Menú-->
 
 <div id="contenedor" style="margin-top: 50px; ">
-
+	
 	<ul class="breadcrumb" style="margin-left: 100px;">
-		<li> <h5>Gestion de Pacientes</h5></li>
+		<li> 
+			<h5>Gestion de Pacientes<a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+				                                 <!-- ICONO DE AYUDA -->  
+		</li>
 	</ul>
   
 	<div style="float: left;  margin-left: 100px;"> 
@@ -70,13 +73,14 @@
 					<option>OSECAC</option>   
 				</select>
 			</div> 
-			<div style="margin-left:300px;margin-top: 54px;">
+			<div style="margin-left:300px;margin-top: 25px;">
 				<button class="btn btn-success" type="button">Buscar</button>
 				<button class="btn btn-danger" type="button">Limpiar </button>
 			</div>
+			<button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;">Paciente Nuevo</button>
 		</form>
 	</div>
-	<div style="margin-top: 218px;">
+	<div style="margin-top: 260px;">
 
 		<table class="table table-striped">
 			<tr>
@@ -130,7 +134,10 @@
 	<ul class="breadcrumb">
 		<li> 
 			<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
-			<button class="btn btn-inverse" type="button" style="margin-left: 800px;"> Salir </button>
+			<div style="margin-left: 800px;">
+				<button class="btn btn-primary"type="button"> Atras </button>
+				<button class="btn btn-inverse" type="button"> Salir </button>
+			</div>
 		</li>
 	</ul>
 
