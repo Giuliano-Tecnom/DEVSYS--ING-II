@@ -1,4 +1,6 @@
 <!doctype html>  
+
+
 <head>
 <meta charset="UTF-8">
 <title>ClinicSystem - Home</title>

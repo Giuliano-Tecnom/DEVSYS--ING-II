@@ -21,12 +21,12 @@
 		</header>
 
 		<div id="form-logeo">
-		
-			<form class="form-horizontal" style="margin-top: 20px;">
+
+			<form class="form-horizontal" style="margin-top: 20px;" action="funciones/logeo.php" method="post">
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Usuario</label>
 					<div class="controls">
-						<input type="text" id="inputEmail" placeholder="Usuario">
+						<input type="text" id="inputUser" placeholder="Usuario">
 					</div>
 				</div>
 				<div class="control-group">
