@@ -17,12 +17,12 @@
 	<div class="encapsulador">
 	
 		<header style="width: 310px; margin-left: 320px;">
-			<h3 style="font-size: 76PX; text-align: center;margin-top: 140px; color: #00CCFF;">CLIMED</h3>    
+			<h3 style="font-size: 76px; text-align: center;margin-top: 140px; color: #00CCFF;">CLIMED</h3>    
 		</header>
 
 		<div id="form-logeo">
 
-			<form class="form-horizontal" style="margin-top: 20px;" action="funciones/logeo.php" method="post">
+			<form class="form-horizontal" style="margin-top: 20px;" action="func/logeo.php" method="post">
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Usuario</label>
 					<div class="controls">
