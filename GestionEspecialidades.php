@@ -52,10 +52,10 @@
 			</ul>
 		  
 			
-			   <button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;"><a href="AltaEspecialidades.php">Especialidad Nueva </a></button>
+			<button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;"><a href="AltaEspecialidades.php">Agregar Especialidad</a></button>
 			
 			</div>
-			<div id="tabla-gestion-especialidades">
+			<div id="tabla-gestion-especialidades" style="margin-top:20px;">
 
 				<table class="table table-striped">
 					<tr>
@@ -72,8 +72,8 @@
 					<tr>
 						<td><?php echo $valor["idespecialidad"]; ?></td>
 						<td><?php echo $valor["nombre"]; ?></td>
-						<td><button class="btn btn-warning" type="button"><a href="borrarespecialidad.php?id=<?php echo $casa["idespecialidad"] ; ?>">Borrar </a></button> </td>
-						<td><button class="btn btn-danger" type="button"><a href="modificarespecialidad.php?id=<?php echo $casa["idespecialidad"] ; ?>">Modif </a></button> </td>
+						<td><button class="btn btn-warning" type="button"><a href="BorrarEspecialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>">Borrar </a></button> </td>
+						<td><button class="btn btn-danger" type="button"><a href="Especialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>">Modif </a></button> </td>
 						
 					</tr>
 				<?php
