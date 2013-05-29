@@ -52,7 +52,7 @@
 			</ul>
 		  
 			
-			   <button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;">Especialidad Nueva</button>
+			   <button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;"><a href="AltaEspecialidades.php">Especialidad Nueva </a></button>
 			
 			</div>
 			<div id="tabla-gestion-especialidades">
