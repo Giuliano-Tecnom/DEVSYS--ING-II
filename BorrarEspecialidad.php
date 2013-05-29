@@ -6,7 +6,7 @@
 	{
 		Header ('Location: GestionEspecialidades.php');
 	}
-	$consulta_delete = "DELETE FROM especialidades WHERE idespecialidad = '" . $_GET['idespecialidad'] ."';";
+	$consulta_delete = "UPDATE especialidades SET activo = 0 WHERE idespecialidad = '" . $_GET['idespecialidad'] ."';";
 	
 	echo $consulta_delete;
 	mysql_query($consulta_delete);

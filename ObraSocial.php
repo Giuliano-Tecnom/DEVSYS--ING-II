@@ -5,16 +5,19 @@ include_once('mysqlconnect.php');
  
 <head>
 <meta charset="UTF-8">
-<title>ClinicSystem - Especialidades</title>
+<title>ClinicSystem - Obra Social</title>
 
 <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
+<script rel="javascript" src="js/boostrap-alerts.js"></script>
 
 </head>
     <!-- Fin de HEAD-->
 	
 <body style="background-image:url('images/bg.png')">
+
+
  
 	<div class="encapsulador">
 	
@@ -42,33 +45,32 @@ include_once('mysqlconnect.php');
 
 			<ul class="breadcrumb">
 				<li> 
-					<h5>Modificar Especialidades <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+					<h5>Modificar Obra Social <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
-            <?php
+			<?php
 				if(isset($_GET['Error'])){
 					echo"<div class='alert alert-error'>
 						<h4>Error!</h4>
-						Ya existe una Especialidad con ese nombre. Verifique que la misma puede estar deshabilitada.
+						Ya existe una Obra Social con ese nombre. Verifique que la misma puede estar deshabilitada.
 					</div>";
 				}
 			?>
-			
 			<div id="form-alta-pacientes"> 
 			<?php
-					if(isset($_GET['idespecialidad']))
+					if(isset($_GET['idobra']))
 					{
-						$consulta_tipo = "SELECT nombre  FROM especialidades WHERE idespecialidad = '" . $_GET['idespecialidad'] . "';";
+						$consulta_tipo = "SELECT nombre  FROM obrasociales WHERE idobra = '" . $_GET['idobra'] . "';";
 						$resultado = mysql_query($consulta_tipo);
 						$nombre = mysql_fetch_array($resultado);
 			
 		   ?>
-				<form class="form-horizontal" method="POST" action="ModificarEspecialidad.php" enctype="multipart/form-data" > 
+				<form class="form-horizontal" method="POST" action="ModificarObra.php" enctype="multipart/form-data" > 
 		  
 					<div class="control-group">
 						<input id="nom" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?> ">
-					    <input type="hidden" name="idespecialidad" value="<?php echo $_GET['idespecialidad']; ?>" />
+					    <input type="hidden" name="idobra" value="<?php echo $_GET['idobra']; ?>" />
 						<button class="btn btn-danger" type="submit">Modificar</button>
 						
 					

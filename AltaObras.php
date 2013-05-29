@@ -5,7 +5,7 @@ include_once('mysqlconnect.php');
  
 <head>
 <meta charset="UTF-8">
-<title>ClinicSystem - Especialidades</title>
+<title>ClinicSystem - Obras Sociales</title>
 
 <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
@@ -42,47 +42,36 @@ include_once('mysqlconnect.php');
 
 			<ul class="breadcrumb">
 				<li> 
-					<h5>Modificar Especialidades <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+					<h5>Alta de Obras Sociales <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
-            <?php
+
+			<?php
 				if(isset($_GET['Error'])){
 					echo"<div class='alert alert-error'>
 						<h4>Error!</h4>
-						Ya existe una Especialidad con ese nombre. Verifique que la misma puede estar deshabilitada.
+						Ya existe una Obra Social con ese nombre. Verifique que la misma puede estar deshabilitada.
 					</div>";
 				}
 			?>
 			
 			<div id="form-alta-pacientes"> 
-			<?php
-					if(isset($_GET['idespecialidad']))
-					{
-						$consulta_tipo = "SELECT nombre  FROM especialidades WHERE idespecialidad = '" . $_GET['idespecialidad'] . "';";
-						$resultado = mysql_query($consulta_tipo);
-						$nombre = mysql_fetch_array($resultado);
-			
-		   ?>
-				<form class="form-horizontal" method="POST" action="ModificarEspecialidad.php" enctype="multipart/form-data" > 
+		   
+				<form class="form-horizontal" method="POST" action="AgregarObras.php" enctype="multipart/form-data" > 
 		  
 					<div class="control-group">
-						<input id="nom" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?> ">
-					    <input type="hidden" name="idespecialidad" value="<?php echo $_GET['idespecialidad']; ?>" />
-						<button class="btn btn-danger" type="submit">Modificar</button>
-						
-					
+						<input id="nom" type="text" placeholder="Nombre.." name="nombre">
 					</div>
 										
-						
+						<div style="margin-left:300px;margin-top: 90px;">
+						<button class="btn btn-success" type="submit">Agregar</button>
+						<button class="btn btn-danger" type="button">Cancelar </button>
+					</div>
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Campo Nombre obligatorio.</span>
 				</form>
 			</div>
 			
-			 
-			<?php 
-			        }
-			?>
 
 			<!-- BOTON DE SALIR Y ATRAS-->
 			<ul class="breadcrumb" style="margin-top: 600px;">

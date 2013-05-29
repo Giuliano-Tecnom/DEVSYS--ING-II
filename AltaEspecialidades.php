@@ -46,7 +46,14 @@ include_once('mysqlconnect.php');
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
-
+            <?php
+				if(isset($_GET['Error'])){
+					echo"<div class='alert alert-error'>
+						<h4>Error!</h4>
+						Ya existe una Especialidad con ese nombre. Verifique que la misma puede estar deshabilitada.
+					</div>";
+				}
+			?>
 			
 			<div id="form-alta-pacientes"> 
 		   

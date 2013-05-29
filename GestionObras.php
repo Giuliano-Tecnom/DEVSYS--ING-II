@@ -4,9 +4,8 @@
 	}else{
 		$ojito=$_GET['ojito'];
 	}
-	
 	include_once('mysqlconnect.php');
-	$consulta = "SELECT idespecialidad,nombre,activo FROM especialidades where activo = ".$ojito." OR 0 = ".$ojito." ";
+	$consulta = "SELECT idobra,nombre,activo FROM obrasociales where activo = ".$ojito." OR 0 = ".$ojito." ";
     $resultado = mysql_query($consulta);
 	
 
@@ -14,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ClinicSystem - Especialidades</title>
+<title>ClinicSystem - Obras Sociales</title>
 
 <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
@@ -51,24 +50,24 @@
 			
 			<ul class="breadcrumb">
 				<li> 
-					<h5>Gestion de Especialidades<a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+					<h5>Gestion de Obras Sociales<a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
 														 <!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>
-		  
+		  	
+
 			
-			<button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;">
-			   <a href="AltaEspecialidades.php">Agregar Especialidad</a>
-			</button>
+			<button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;"><a href="AltaObras.php">Agregar Obra Social</a></button>
 			
 			</div>
-			<div id="tabla-gestion-especialidades" style="margin-top:20px;">
+			<div id="tabla-gestion-obrasociales" style="margin-top:20px;">
 
 				<table class="table table-striped">
 					<tr>
-						<td>Especialidad</td>
-						<td>Activo
+						<td><b>Obra Social</b> </td>
+						<td><b>Activo</b>
 						<?php
+
 							if($ojito == 1){
 								echo "<a href='GestionObras.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
 							} else {
@@ -87,19 +86,19 @@
 					<tr>
 						<td><?php echo $valor["nombre"]; ?></td>
 						<?php 
-							$id = $valor['idespecialidad'];
+							$id = $valor['idobra'];
 							
 							if( $valor["activo"] == 1 ){
 								echo "<td>  Si </td>";
-								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarEspecialidad.php?idespecialidad=".$id."'>Borrar </a></button> </td>";
+								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarObra.php?idobra=".$id."'>Borrar </a></button> </td>";
 							}     
 						    else {
 							    echo "<td>No</td>";
-								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarEspecialidad.php?idespecialidad=".$id."'>Habilitar </a></button> </td>";
+								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarObra.php?idobra=".$id."'>Habilitar </a></button> </td>";
 							}  
 						?>
 						
-						<td><button class="btn btn-danger" type="button"><a href="Especialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>">Modif </a></button> </td>
+						<td><button class="btn btn-danger" type="button"><a href="ObraSocial.php?idobra=<?php echo $valor["idobra"]; ?>">Modif </a></button> </td>
 						
 					</tr>
 				<?php
