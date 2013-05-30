@@ -57,7 +57,8 @@
 		  	
 
 			
-			<button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;"><a href="AltaObras.php">Agregar Obra Social</a></button>
+			<button class="btn btn-primary" type="button" onclick="location.href='AltaObras.php'" 
+			style="margin-top: 25px;margin-left: 300px;">Agregar Obra Social</button>
 			
 			</div>
 			<div id="tabla-gestion-obrasociales" style="margin-top:20px;">
@@ -98,7 +99,7 @@
 							}  
 						?>
 						
-						<td><button class="btn btn-danger" type="button"><a href="ObraSocial.php?idobra=<?php echo $valor["idobra"]; ?>">Modif </a></button> </td>
+						<td><button class="btn btn-danger" onclick="location.href='ObraSocial.php?idobra=<?php echo $valor["idobra"]; ?>'" type="button">Modif</button> </td>
 						
 					</tr>
 				<?php

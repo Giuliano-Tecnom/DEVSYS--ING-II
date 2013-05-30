@@ -1,4 +1,14 @@
- 
+ <?php
+	include_once('mysqlconnect.php');
+	
+	$consulta = "SELECT idobra, nombre FROM obrasociales where activo = 1 ORDER BY nombre";
+    $resultado = mysql_query($consulta);			
+
+				
+				
+	
+				
+?>
 <head>
 <meta charset="UTF-8">
 <title>ClinicSystem - Pacientes</title>
@@ -46,46 +56,52 @@
 			
 			<div id="form-alta-pacientes"> 
 		   
-				<form class="form-horizontal">
+				<form class="form-horizontal" method="POST" action="AgregarPaciente.php" enctype="multipart/form-data" >
 		  
-					<div class="control-group" method="POST" action="agregarpaciente.php" enctype="multipart/form-data">
-						<input id="nom" type="text" placeholder="Nombre..">
+					<div class="control-group" >
+						<input name="nombre" type="text" placeholder="Nombre..">
 					</div>
 					<div class="control-group">
-						<input id="ape" type="text" placeholder="Apellido..">
+						<input name="apellido" type="text" placeholder="Apellido..">
 					</div>
 					<div class="control-group">
-						<input id="dni" type="text" placeholder="DNI..">
+						<input name="dni" type="text" placeholder="DNI..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin puntos, Ej: 36789456</span>
 					</div>
 					<div class="control-group">
-						<input id="email" type="text" placeholder="Email..">
+						<input name="email" type="text" placeholder="Email..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: aaa@gmail.com</span>
 					</div>
 					<div class="control-group">
-						<input id="tel" type="text" placeholder="Telefono..">
+						<input name="tel" type="text" placeholder="Telefono..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin parentesis, ni espacios Ej: 02214567800</span>
 					</div>
 					<div class="control-group">
-						<input id="dir" type="text" placeholder="Direccion..">
+						<input name="dir" type="text" placeholder="Direccion..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: 60 N 1009</span>
 					</div>
 					<div class="control-group">
-						<input id="fecnac" type="text" placeholder="Fecha de Nacimiento..">
-						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD/MM/AAAA</span>
+						<input name="fecnac" type="date" placeholder="Fecha de Nacimiento..">
+						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD.MM.AAAA</span>
 					</div>
-					<div style="margin-left: 300px;margin-top: -350px;">
+				
+					
+					
+					<div style="margin-left: 300px;margin-top: -285px;">
 						<label>Obra Social</label>
-						<select multiple="multiple" id="obra">
-							<option>GALENO</option>
-							<option>OSSEG</option>
-							<option>IOMA</option>
-							<option>OSDE</option>
-							<option>OSECAC</option>   
+						<select multiple="multiple" id="obra" name="obra[]">
+						<?php
+							while ($valor = mysql_fetch_array($resultado)) {
+						?>
+								<option value="<?php echo $valor["idobra"];?>"><?php echo $valor["nombre"]; ?></option>
+						<?php	  
+							}
+						?>
 						</select>
+						<span class="help-block" style="font-size: 9px;"> Seleccion multiple: SHIFT + CLIK.</span>
 					</div>
 					<div style="margin-left: 550px;margin-top: -77px;">
-						<button class="btn btn-mini" type="button">Editar</button>
+						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Editar</button>
 					</div>
 					<div style="margin-left:300px;margin-top: 90px;">
 						<button class="btn btn-success" type="submit">Agregar</button>

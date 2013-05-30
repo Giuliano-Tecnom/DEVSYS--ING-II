@@ -57,8 +57,8 @@
 			</ul>
 		  
 			
-			<button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;">
-			   <a href="AltaEspecialidades.php">Agregar Especialidad</a>
+			<button class="btn btn-primary" type="button" onclick="location.href='AltaEspecialidades.php'" style="margin-top: 25px;margin-left: 300px;">
+			   Agregar Especialidad
 			</button>
 			
 			</div>
@@ -70,9 +70,9 @@
 						<td>Activo
 						<?php
 							if($ojito == 1){
-								echo "<a href='GestionObras.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
+								echo "<a href='GestionEspecialidades.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
 							} else {
-								echo "<a href='GestionObras.php?ojito=1'><i class='icon-eye-open' style='margin-left: 3px; margin-top: 3px;'></i></a>";
+								echo "<a href='GestionEspecialidades.php?ojito=1'><i class='icon-eye-open' style='margin-left: 3px; margin-top: 3px;'></i></a>";
 							}
 						?>
 						</td>
@@ -99,7 +99,7 @@
 							}  
 						?>
 						
-						<td><button class="btn btn-danger" type="button"><a href="Especialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>">Modif </a></button> </td>
+						<td><button class="btn btn-danger" onclick="location.href='Especialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>'"type="button">Modif</button> </td>
 						
 					</tr>
 				<?php
