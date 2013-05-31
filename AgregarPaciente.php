@@ -5,6 +5,7 @@ include_once('mysqlconnect.php');
 	$obras=$_POST['obra'];
 	$dni=(int)trim(($_POST['dni']));
 	$consulta = " SELECT dni FROM pacientes where dni = '" . $dni. "' ";
+	
 	$res=mysql_query($consulta);
 	
 	if ( mysql_num_rows($res) == 0 ){
@@ -36,7 +37,7 @@ include_once('mysqlconnect.php');
 	
 	}else{
 	    
-		Header ('Location: AltaPacientes.php?Error=1');
+		//Header ('Location: AltaPacientes.php?Error=1');
 	
 	}
 	

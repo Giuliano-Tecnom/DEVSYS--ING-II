@@ -66,6 +66,12 @@
 							El paciente se agrego correctamente.
 							</div>";
 					}
+					if($_GET['Correcto'] == 2){
+						echo"<div class='alert alert-success'>
+							<h4>Exito!</h4>
+							El paciente se borro correctamente.
+							</div>";
+					}
 				}
 				
 				if(isset($_GET['Error'])){

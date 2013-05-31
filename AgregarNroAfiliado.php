@@ -1,7 +1,13 @@
 <?php
 
 include_once('mysqlconnect.php');
-	if(!isset($_POST['dni'])){    
+
+
+
+	if(isset($_POST['dni'])){ 
+
+		
+	
 		$obras = unserialize(stripslashes($_POST['obras']));
 	
 		for ($i=0; $i < count($obras) ; $i++){
@@ -17,7 +23,7 @@ include_once('mysqlconnect.php');
 	
 	}else{
 	
-		Header ('Location: FatalError.html');
+		//Header ('Location: FatalError.html');
 	
 	}
 	

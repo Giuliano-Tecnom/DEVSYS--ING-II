@@ -79,7 +79,7 @@
 			
 			<div id="form-alta-pacientes"> 
 		   
-				<form class="form-horizontal method="POST" action="AgregarPaciente.php" enctype="multipart/form-data" >
+				<form class="form-horizontal" method="POST" action="AgregarPaciente.php" enctype="multipart/form-data" >
 		  
 					<div class="control-group" >
 						<input name="nombre" type="text" placeholder="Nombre..">
@@ -92,7 +92,7 @@
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin puntos, Ej: 36789456</span>
 					</div>
 					<div class="control-group">
-						<input name="email" type="text" placeholder="Email..">
+						<input name="email" type="email" placeholder="Email..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: aaa@gmail.com</span>
 					</div>
 					<div class="control-group">
