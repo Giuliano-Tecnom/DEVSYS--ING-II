@@ -15,6 +15,10 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 
+<!--JQuery-->
+<script src='js/jquery.min.js'></script>
+<script src='js/jsvalidarAltaPaciente.js'></script>
+
 </head>
     <!-- Fin de HEAD-->
 	
@@ -79,32 +83,32 @@
 			
 			<div id="form-alta-pacientes"> 
 		   
-				<form class="form-horizontal" method="POST" action="AgregarPaciente.php" enctype="multipart/form-data" >
+				<form class="form-horizontal" method="POST" action="AgregarPaciente.php"  enctype="multipart/form-data" >
 		  
 					<div class="control-group" >
-						<input name="nombre" type="text" placeholder="Nombre..">
+						<input class="nombre" id="nombre" type="text" placeholder="Nombre..">
 					</div>
 					<div class="control-group">
-						<input name="apellido" type="text" placeholder="Apellido..">
+						<input class="apellido" type="text" placeholder="Apellido..">
 					</div>
 					<div class="control-group">
-						<input name="dni" type="text" placeholder="DNI..">
+						<input class="dni" type="text" placeholder="DNI..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin puntos, Ej: 36789456</span>
 					</div>
 					<div class="control-group">
-						<input name="email" type="email" placeholder="Email..">
+						<input class="email" type="email" placeholder="Email..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: aaa@gmail.com</span>
 					</div>
 					<div class="control-group">
-						<input name="tel" type="text" placeholder="Telefono..">
+						<input class="tel" type="text" placeholder="Telefono..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin parentesis, ni espacios Ej: 02214567800</span>
 					</div>
 					<div class="control-group">
-						<input name="dir" type="text" placeholder="Direccion..">
+						<input class="dir" type="text" placeholder="Direccion..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: 60 N 1009</span>
 					</div>
 					<div class="control-group">
-						<input name="fecnac" type="date" placeholder="Fecha de Nacimiento..">
+						<input class="fecnac" type="date" placeholder="Fecha de Nacimiento..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD.MM.AAAA</span>
 					</div>
 				

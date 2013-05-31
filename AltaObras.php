@@ -11,6 +11,11 @@ include_once('mysqlconnect.php');
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 
+
+<!--JQuery-->
+<script src='js/jquery.min.js'></script>
+<script src='js/validarAltaObra.js'></script>
+
 </head>
     <!-- Fin de HEAD-->
 	
@@ -61,7 +66,7 @@ include_once('mysqlconnect.php');
 				<form class="form-horizontal" method="POST" action="AgregarObras.php" enctype="multipart/form-data" > 
 		  
 					<div class="control-group">
-						<input id="nom" type="text" placeholder="Nombre.." name="nombre">
+						<input id="nom" type="text" placeholder="Nombre.." class="nombre">
 					</div>
 										
 						<div style="margin-left:300px;margin-top: 90px;">
