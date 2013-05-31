@@ -3,13 +3,11 @@
 	
 	$consulta = "SELECT idobra, nombre FROM obrasociales where activo = 1 ORDER BY nombre";
     $resultado = mysql_query($consulta);			
-
-				
-				
 	
-				
-?>
+?>      <!-- Fin de CONSULTAS-->
+
 <head>
+
 <meta charset="UTF-8">
 <title>ClinicSystem - Pacientes</title>
 
@@ -33,9 +31,9 @@
 				<div class="menu">
 					<table>
 						<tr>
-							<td><a href="#"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="#"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
+							<td><a href="GestionPacientes.php"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
+							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
 							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
 						</tr>
 					</table>
@@ -52,26 +50,36 @@
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
-            <?php
-				if(isset($_GET['Correcto'])){
-					echo"<div class='alert alert-success'>
-						<h4>Paciente Agregado Correctamente</h4>
-						
-					</div>";
-				}
-			?>
+            
 			<?php
+				
+				if(isset($_GET['Correcto'])){
+					echo "	<div class='alert alert-success' style='margin-left: 10px; margin-right: 10px;' >
+							<h4>Paciente Agregado Correctamente</h4>
+							</div> ";
+				}
+					
 				if(isset($_GET['Error'])){
-					echo"<div class='alert alert-error'>
-						<h4>El paciente que desea agregar ya se encuentra dado de alta.</h4>
-						
-					</div>";
+					if( $_GET['Error'] == 1 ){
+						echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
+								<h4>Error!!</h4>
+								Ya existe un paciente con el mismo DNI. Si no lo encuentra revise los Inactivos.
+								</div> ";
+					}
+					
+					if( $_GET['Error'] == 2 ){
+						echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;' >
+								<h4>Error!!</h4>
+								Primero debe dar de alta un paciente para luego asignar su Nro de Afiliado. Reintentelo!
+								</div> ";
+					}
+					
 				}
 			?>
 			
 			<div id="form-alta-pacientes"> 
 		   
-				<form class="form-horizontal" method="POST" action="AgregarPaciente.php" enctype="multipart/form-data" >
+				<form class="form-horizontal method="POST" action="AgregarPaciente.php" enctype="multipart/form-data" >
 		  
 					<div class="control-group" >
 						<input name="nombre" type="text" placeholder="Nombre..">
@@ -113,14 +121,14 @@
 							}
 						?>
 						</select>
-						<span class="help-block" style="font-size: 9px;"> Seleccion multiple: SHIFT + CLIK.</span>
+						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 					</div>
 					<div style="margin-left: 550px;margin-top: -77px;">
 						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Editar</button>
 					</div>
 					<div style="margin-left:300px;margin-top: 90px;">
 						<button class="btn btn-success" type="submit">Agregar</button>
-						<button class="btn btn-danger" type="button">Cancelar </button>
+						<button class="btn btn-danger" type="button" onclick="location.href='GestionPacientes.php'">Cancelar </button>
 					</div>
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
 				</form>
@@ -131,8 +139,8 @@
 			<ul class="breadcrumb" style="margin-top: 600px;">
 				<li> 
 					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button"> Atras </button>
-						<button class="btn btn-inverse" type="button"> Salir </button>
+						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
+						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
 					</div>
 				</li>
 			</ul>

@@ -1,14 +1,19 @@
- <?php
+<?php
+ 
 	include_once('mysqlconnect.php');
 	
-	$consulta = "SELECT nombre,obrasociales.idobra
-FROM pac_obrasocial inner join obrasociales on pac_obrasocial.idobra= obrasociales.idobra
-WHERE dni= ".$_GET['dni']." ";
-    $resultado = mysql_query($consulta);			
-
-	
-				
-?>
+	if(isset($_GET['dni'])){
+		$consulta = "SELECT nombre,obrasociales.idobra
+					FROM pac_obrasocial 
+					INNER JOIN obrasociales on pac_obrasocial.idobra= obrasociales.idobra
+					WHERE dni= ".$_GET['dni']." ";
+		$resultado = mysql_query($consulta);		
+	}else{
+		header('Location: AltaPacientes.php?Error=2');
+	}
+			
+?>     <!-- Fin de CONSULTAS-->
+   
 <head>
 <meta charset="UTF-8">
 <title>ClinicSystem - Pacientes</title>
@@ -33,9 +38,9 @@ WHERE dni= ".$_GET['dni']." ";
 				<div class="menu">
 					<table>
 						<tr>
-							<td><a href="#"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="#"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
+							<td><a href="GestionPacientes.php"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
+							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
 							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
 						</tr>
 					</table>
@@ -52,46 +57,44 @@ WHERE dni= ".$_GET['dni']." ";
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
-
-			<?php
-				if(isset($_GET['Error'])){
-					echo"<div class='alert alert-error'>
-						<h4>Error!</h4>
-						
-					</div>";
-				}
-				
-			?>
-		<form class="form-horizontal" method="POST" action="AgregarNroAfiliado.php" enctype="multipart/form-data">
-		   
-		  
 			
-			<?php
-				while ($valor = mysql_fetch_array($resultado)) {
-			?>
-					<label> <?php echo $valor['nombre']?></label>
-					<input name="<?php echo $valor['idobra'] ?>" type="text" placeholder="Nro Afiliado..">
-			<?php 
-				$obras[]= $valor['idobra'];
-				}
-				
-			?>
-				<input type="hidden" name="obras" value='<?php echo serialize($obras)?>' />	    
-				<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
-			
-			<div style="margin-left:300px;margin-top: 90px;">
-						<button class="btn btn-success" type="submit">Agregar</button>
-						<button class="btn btn-danger" type="button">Cancelar </button>
-					</div>
+		<div id="form-alta-nroafiliado">
 		
-		</form>
+			<form class="form-horizontal" method="POST" action="AgregarNroAfiliado.php" enctype="multipart/form-data">
+			   
+				<?php
+					while ($valor = mysql_fetch_array($resultado)) {
+				?>
+						<label class="label"> <?php echo $valor['nombre']?></label>
+						<br>
+						<input name="<?php echo $valor['idobra'] ?>" type="text" placeholder="Nro Afiliado..">
+						<br>
+				<?php 
+					$obras[]= $valor['idobra'];
+					}
+					
+				?>
+					<input type="hidden" name="obras" value='<?php echo serialize($obras)?>' />	    
+					<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
+				
+				<div style="margin-left:20px;margin-top: 50px;">
+							<button class="btn btn-success" type="submit">Agregar</button>
+							<button class="btn btn-danger" type="button" onclick="location.href='GestionPacientes.php'">Cancelar </button>
+						</div>
+			
+			</form>
+			
+		</div>	
+		
+		
+		
 
 			<!-- BOTON DE SALIR Y ATRAS-->
 			<ul class="breadcrumb" style="margin-top: 600px;">
 				<li> 
 					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button"> Atras </button>
-						<button class="btn btn-inverse" type="button"> Salir </button>
+						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
+						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
 					</div>
 				</li>
 			</ul>

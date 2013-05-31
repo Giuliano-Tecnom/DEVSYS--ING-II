@@ -1,16 +1,18 @@
 <?php
+	
 	if (!isset($_GET['ojito'])) {
 		$ojito=1;
 	}else{
 		$ojito=$_GET['ojito'];
 	}
+	
 	include_once('mysqlconnect.php');
-	$consulta = "SELECT * FROM pacientes 
-	where pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";
+	
+	$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";
     $resultado = mysql_query($consulta);
 	
-
 ?> 
+
 <head>
 <meta charset="UTF-8">
 <title>ClinicSystem - Pacientes</title>
@@ -35,9 +37,9 @@
 				<div class="menu">
 					<table>
 						<tr>
-							<td><a href="#"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="#"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
+							<td><a href="GestionPacientes.php"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
+							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
 							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
 						</tr>
 					</table>
@@ -55,51 +57,66 @@
 				</li>
 			</ul>
 		  
-		  <?php if(isset($_GET['Correcto'])){
-					echo"<div class='alert alert-success'>
-						<h4>Paciente Agregado Correctamente</h4>
-						
-					</div>";
+			<?php 
+		  
+				if(isset($_GET['Correcto'])){
+					if($_GET['Correcto'] == 1){
+						echo"<div class='alert alert-success'>
+							<h4>Exito!</h4>
+							El paciente se agrego correctamente.
+							</div>";
+					}
 				}
-				?>
 				
-				<?php if(isset($_GET['Error'])){
+				if(isset($_GET['Error'])){
+					if($_GET['Error'] == 1)
 					echo"<div class='alert alert-error'>
-						<h4>El Paciente seleccionado no se puede borrar. </h4>
-						
-					</div>";
+						<h4>Error!! </h4>
+						</div>";
 				}
-				?>
+				
+			?>
+			
 			<div id="form-gestion-pacientes"> 
 		   
 				<form class="form-horizontal">
 					<div class="control-group">
-						<input id="nom" type="text" placeholder="Buscar por nombre..">
+						<input name="nom" type="text" placeholder="Buscar por nombre..">
 					</div>
 					<div class="control-group">
-						<input id="ape" type="text" placeholder="Buscar por apellido..">
+						<input name="ape" type="text" placeholder="Buscar por apellido..">
 					</div>
 					<div class="control-group">
-						<input id="dni" type="text" placeholder="Buscar por DNI..">
+						<input name="dni" type="text" placeholder="Buscar por DNI..">
 					</div> 
 					<div class="control-group">
-						<input id="email" type="text" placeholder="Buscar por Email..">
+						<input name="email" type="text" placeholder="Buscar por Email..">
 					</div>
 					<div class="control-group">
 						Edad desde:
-						<select id="edadmin" class="span2">
-						  <option value="0">0</option>
+						<select name="edadmin" class="span2">
+							<option value="0"> < 1 </option>
+							<?php
+								for($i=1; $i < 121; $i++){
+									echo " <option value='".$i."'>".$i."</option> ";
+								}	
+							?>
 						</select> 
 					</div>
 					<div class="control-group">
 						Edad Hasta: 
-						<select id="edadmax" class="span2">
-						  <option value="120">120</option>
+						<select name="edadmax" class="span2">
+							<?php
+						  		for($i=120; $i > 0; $i--){
+									echo " <option value='".$i."'>".$i."</option> ";
+								}
+							?>
+							<option value="0"> < 1 </option>
 						</select> 
 					</div>
 					<div style="margin-left: 300px;margin-top: -265px;">
 						<label>Obra Social</label>
-						<select multiple="multiple">
+						<select multiple="multiple" name="obras[]">
 							<option>Cualquiera</option>
 							<option>GALENO</option>
 							<option>OSSEG</option>
@@ -199,8 +216,8 @@
 				<li> 
 					<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
 					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button"> Atras </button>
-						<button class="btn btn-inverse" type="button"> Salir </button>
+						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
+						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
 					</div>
 				</li>
 			</ul>

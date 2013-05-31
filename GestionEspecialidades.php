@@ -36,9 +36,9 @@
 				<div class="menu">
 					<table>
 						<tr>
-							<td><a href="#"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Pacientes</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
+							<td><a href="GestionPacientes.php"><button class="btn btn-large" type="button">Pacientes</button></a></td>
+							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
 							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
 						</tr>
 					</table>
@@ -56,18 +56,19 @@
 				</li>
 			</ul>
 		  
-			
-			<button class="btn btn-primary" type="button" onclick="location.href='AltaEspecialidades.php'" style="margin-top: 25px;margin-left: 300px;">
+			<div style="margin-left: 15px;">
+			<button class="btn btn-primary" type="button" onclick="location.href='AltaEspecialidades.php'">
 			   Agregar Especialidad
 			</button>
-			
 			</div>
-			<div id="tabla-gestion-especialidades" style="margin-top:20px;">
+			
+			<div id="tabla-gestion-especialidades" style="margin-top: 25px; margin-left: 15px; margin-right: 15px;">
 
 				<table class="table table-striped">
-					<tr>
-						<td>Especialidad</td>
-						<td>Activo
+					<tr class="info">
+						
+						<td><b>Especialidad</b></td>
+						<td><b>Activo</b>
 						<?php
 							if($ojito == 1){
 								echo "<a href='GestionEspecialidades.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
@@ -78,20 +79,21 @@
 						</td>
 						<td></td>
 						<td></td>
-						
+					
 					</tr>
 					<?php
 				while ($valor = mysql_fetch_array($resultado))
 				{
 				?>
 					<tr>
+						
 						<td><?php echo $valor["nombre"]; ?></td>
 						<?php 
 							$id = $valor['idespecialidad'];
 							
 							if( $valor["activo"] == 1 ){
 								echo "<td>  Si </td>";
-								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarEspecialidad.php?idespecialidad=".$id."'>Borrar </a></button> </td>";
+								echo "<td><button class='btn btn-warning' type='button' onclick='location.href='BorrarEspecialidad.php?idespecialidad=".$id."''> Borrar </button> </td>";
 							}     
 						    else {
 							    echo "<td>No</td>";
@@ -100,7 +102,6 @@
 						?>
 						
 						<td><button class="btn btn-danger" onclick="location.href='Especialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>'"type="button">Modif</button> </td>
-						
 					</tr>
 				<?php
 				}
@@ -113,8 +114,8 @@
 				<li> 
 					<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
 					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button"> Atras </button>
-						<button class="btn btn-inverse" type="button"> Salir </button>
+						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
+						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
 					</div>
 				</li>
 			</ul>
