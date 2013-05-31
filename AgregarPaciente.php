@@ -3,13 +3,17 @@
 include_once('mysqlconnect.php');
 	
 	$obras=$_POST['obra'];
+	
+	
 	$dni=(int)trim(($_POST['dni']));
+	
+	
 	$consulta = " SELECT dni FROM pacientes where dni = " . $dni. " ";
 	$res=mysql_query($consulta);
 
 	
 	if ( mysql_num_rows($res) == 0 ){
-	
+	    //Insertar pacientes
 		$consulta = "INSERT INTO pacientes(dni,apellido, nombre,email
 										   ,telefono,fechaNac,direccion)
 					VALUES ('" . $dni. "','" .$_POST['apellido']. "','" .$_POST['nombre']. "',
@@ -18,6 +22,7 @@ include_once('mysqlconnect.php');
 					";
 		mysql_query($consulta);
 		
+		//Insertar obra
 		for ($i=0; $i < count($obras) ; $i++){
 	        $consulta = "INSERT INTO pac_obrasocial (dni,idobra)
 						VALUES ('" .$dni. "','" .$obras[$i]. "')
@@ -38,7 +43,7 @@ include_once('mysqlconnect.php');
 	
 	}else{
 	    
-		//Header ('Location: AltaPacientes.php?Error=1');
+		Header ('Location: AltaPacientes.php?Error=1');
 	
 	}
 	

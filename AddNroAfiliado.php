@@ -9,12 +9,13 @@
 					WHERE dni= ".$_GET['dni']." ";
 					
 		$resultado = mysql_query($consulta);	
-		
+	if(isset($_GET['Error'])){
 		$consultaobra = "SELECT nombre FROM obrasociales WHERE pac_obrasocial.idobra = ".$_GET['idobra']." " ;
 		$resobra = mysql_query($consultaobra);
 		while ($valor = mysql_fetch_array($resultado)) {
 			$nomObra = $valor['nombre'];
 		}
+	}
 	}else{
 		header('Location: AltaPacientes.php?Error=2');
 	}
@@ -71,7 +72,8 @@
 							<h4>Error!! </h4>
 							Ya existe un afiliado a ".$nomObra." con ese Nro de Afiliado. Por Favor vuelva ATRAS.
 							</div>";
-					}else{
+					}
+				}else{
 
 				
 			?>
@@ -105,7 +107,7 @@
 			</div>	
 			<?php
 					}
-				}
+				
 			?>
 			
 			
