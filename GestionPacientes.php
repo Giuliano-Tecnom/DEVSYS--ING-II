@@ -1,4 +1,16 @@
-<!doctype html>  
+<?php
+	if (!isset($_GET['ojito'])) {
+		$ojito=1;
+	}else{
+		$ojito=$_GET['ojito'];
+	}
+	include_once('mysqlconnect.php');
+	$consulta = "SELECT * FROM pacientes 
+	where pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";
+    $resultado = mysql_query($consulta);
+	
+
+?> 
 <head>
 <meta charset="UTF-8">
 <title>ClinicSystem - Pacientes</title>
@@ -43,6 +55,13 @@
 				</li>
 			</ul>
 		  
+		  <?php if(isset($_GET['Correcto'])){
+					echo"<div class='alert alert-success'>
+						<h4>Paciente Agregado Correctamente</h4>
+						
+					</div>";
+				}
+				?>
 			<div id="form-gestion-pacientes"> 
 		   
 				<form class="form-horizontal">
@@ -85,56 +104,85 @@
 						<button class="btn btn-success" type="button">Buscar</button>
 						<button class="btn btn-danger" type="button">Limpiar </button>
 					</div>
-					<button class="btn btn-primary" type="button" style="margin-top: 25px;margin-left: 300px;">Paciente Nuevo</button>
+					<button class="btn btn-primary" type="button" onclick="location.href='AltaPacientes.php'"
+					style="margin-top: 25px;margin-left: 300px;">Paciente Nuevo</button>
 				</form>
 			</div>
 			<div id="tabla-gestion-pacientes">
 
 				<table class="table table-striped">
 					<tr>
-						<td>Nombre y Apellido</td>
+						<td>Nombre </td> 
+						<td>Apellido</td>
 						<td>Direccion</td>
 						<td>Telefono</td>
 						<td>Email</td>
 						<td>Obra Social</td>
 						<td>Dni</td>
 						<td>F.Nac</td>
+						<td><b>Activo</b>
+						<?php
+
+							if($ojito == 1){
+								echo "<a href='GestionPacientes.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
+							} else {
+								echo "<a href='GestionPacientes.php?ojito=1'><i class='icon-eye-open' style='margin-left: 3px; margin-top: 3px;'></i></a>";
+							}
+						?>
+						</td>
 						<td></td>
 						<td></td>
 					</tr>
+					<?php
+				while ($valor = mysql_fetch_array($resultado))
+				{
+				?>
 					<tr>
-						<td>Julian Gori</td>
-						<td>60 N 1033</td>
-						<td>2214562345</td>
-						<td>juanPeruzzi@gmail.com</td>
-						<td>Galeno</td>
-						<td>39179777</td>
-						<td>23/08/2000</td>
-						<td><button class="btn btn-warning" type="button">Modificar</button></td>
-						<td><button class="btn btn-danger" type="button">Borrar</button></td>
+						<td><?php echo $valor["nombre"]; ?></td>
+						<td><?php echo $valor["apellido"]; ?></td>
+						<td><?php echo $valor["direccion"]; ?></td>
+						<td><?php echo $valor["telefono"]; ?></td>
+						<td><?php echo $valor["email"]; ?></td>
+						<td><?php
+						
+						
+						$query= "SELECT  * from pac_obrasocial 
+	                             inner join obrasociales on obrasociales.idobra=pac_obrasocial.idobra 
+								 where dni ='" .$valor["dni"]. "'";
+
+						
+						$res = mysql_query($query);
+						while ($obra=mysql_fetch_array($res)) {
+						echo "&nbsp;".$obra["nombre"]."";
+						}
+						
+						
+						?>
+						
+						
+						
+						</td>
+						<td><?php echo $valor["dni"]; ?></td>
+						<td><?php echo $valor["fechaNac"]; ?></td>
+						<?php 
+							$id = $valor['idpaciente'];
+							
+							if( $valor["activo"] == 1 ){
+								echo "<td>  Si </td>";
+								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarPaciente.php?idespecialidad=".$id."'>Borrar </a></button> </td>";
+							}     
+						    else {
+							    echo "<td>No</td>";
+								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarPaciente.php?idespecialidad=".$id."'>Habilitar </a></button> </td>";
+							}  
+						?>
+						
+						<td><button class="btn btn-danger" onclick="location.href='Pacientes.php?idobra=<?php echo $valor["idobra"]; ?>'" type="button">Modif</button> </td>
+						
 					</tr>
-					<tr>
-						<td>Guillermo Pedroza</td>
-						<td>63 N 1033</td>
-						<td>2214556745</td>
-						<td>acarlitos@gmail.com</td>
-						<td>OSSEG</td>
-						<td>30179456</td>
-						<td>23/08/1978</td>
-						<td><button class="btn btn-warning" type="button">Modificar</button></td>
-						<td><button class="btn btn-danger" type="button">Borrar</button></td>
-					</tr>
-					<tr>
-						<td>Dario Cvitanich</td>
-						<td>45 N 604</td>
-						<td>2211234567</td>
-						<td>carovelazco@gmail.com</td>
-						<td>Ioma</td>
-						<td>37345567</td>
-						<td>23/08/1993</td>
-						<td><button class="btn btn-warning" type="button">Modificar</button></td>
-						<td><button class="btn btn-danger" type="button">Borrar</button></td>
-					</tr>
+				<?php
+				}
+				?>	
 				</table>
 			</div>
 

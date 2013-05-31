@@ -18,8 +18,9 @@ include_once('mysqlconnect.php');
 	        ";
 		
 	 mysql_query($consulta);
-	
+	 
 	}
+	Header ('Location: AltaPacientes.php?Correcto');	
 	
 	
 ?>

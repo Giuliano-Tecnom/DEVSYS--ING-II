@@ -6,9 +6,6 @@ FROM pac_obrasocial inner join obrasociales on pac_obrasocial.idobra= obrasocial
 WHERE dni= ".$_GET['dni']." ";
     $resultado = mysql_query($consulta);			
 
-		
-				
-				
 	
 				
 ?>
@@ -51,12 +48,20 @@ WHERE dni= ".$_GET['dni']." ";
 
 			<ul class="breadcrumb">
 				<li> 
-					<h5>Alta de Pacientes <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+					<h5>Alta de NroAfialiado <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
 
-			
+			<?php
+				if(isset($_GET['Error'])){
+					echo"<div class='alert alert-error'>
+						<h4>Error!</h4>
+						
+					</div>";
+				}
+				
+			?>
 		<form class="form-horizontal" method="POST" action="AgregarNroAfiliado.php" enctype="multipart/form-data">
 		   
 		  

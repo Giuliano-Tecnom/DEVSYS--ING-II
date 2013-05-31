@@ -34,7 +34,7 @@ include_once('mysqlconnect.php');
 	
 
 	  if (count($obras)==0) {
-	      Header ('Location: GestionPacientes.php');
+	      Header ('Location: GestionPacientes.php?Correcto');
 	     }
 	  else 
 	  {

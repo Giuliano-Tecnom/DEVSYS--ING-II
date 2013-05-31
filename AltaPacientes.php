@@ -52,7 +52,22 @@
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
-
+            <?php
+				if(isset($_GET['Correcto'])){
+					echo"<div class='alert alert-success'>
+						<h4>Paciente Agregado Correctamente</h4>
+						
+					</div>";
+				}
+			?>
+			<?php
+				if(isset($_GET['Error'])){
+					echo"<div class='alert alert-error'>
+						<h4>El paciente que desea agregar ya se encuentra dado de alta.</h4>
+						
+					</div>";
+				}
+			?>
 			
 			<div id="form-alta-pacientes"> 
 		   
