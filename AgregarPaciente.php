@@ -4,11 +4,12 @@ include_once('mysqlconnect.php');
 	
 	$obras=$_POST['obra'];
 	$dni=(int)trim(($_POST['dni']));
-	$consulta = " SELECT dni FROM pacientes where dni = '" . $dni. "' ";
-	
+	$consulta = " SELECT dni FROM pacientes where dni = " . $dni. " ";
 	$res=mysql_query($consulta);
+
 	
 	if ( mysql_num_rows($res) == 0 ){
+	
 		$consulta = "INSERT INTO pacientes(dni,apellido, nombre,email
 										   ,telefono,fechaNac,direccion)
 					VALUES ('" . $dni. "','" .$_POST['apellido']. "','" .$_POST['nombre']. "',
