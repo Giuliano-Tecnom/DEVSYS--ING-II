@@ -62,6 +62,14 @@
 					</div>";
 				}
 				?>
+				
+				<?php if(isset($_GET['Error'])){
+					echo"<div class='alert alert-error'>
+						<h4>El Paciente seleccionado no se puede borrar. </h4>
+						
+					</div>";
+				}
+				?>
 			<div id="form-gestion-pacientes"> 
 		   
 				<form class="form-horizontal">
@@ -89,7 +97,7 @@
 						  <option value="120">120</option>
 						</select> 
 					</div>
-					<div style="margin-left: 300px;margin-top: -300px;">
+					<div style="margin-left: 300px;margin-top: -265px;">
 						<label>Obra Social</label>
 						<select multiple="multiple">
 							<option>Cualquiera</option>
@@ -165,15 +173,15 @@
 						<td><?php echo $valor["dni"]; ?></td>
 						<td><?php echo $valor["fechaNac"]; ?></td>
 						<?php 
-							$id = $valor['idpaciente'];
+							$dni = $valor['dni'];
 							
 							if( $valor["activo"] == 1 ){
 								echo "<td>  Si </td>";
-								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarPaciente.php?idespecialidad=".$id."'>Borrar </a></button> </td>";
+								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarPaciente.php?dni=".$dni."'>Borrar </a></button> </td>";
 							}     
 						    else {
 							    echo "<td>No</td>";
-								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarPaciente.php?idespecialidad=".$id."'>Habilitar </a></button> </td>";
+								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarPaciente.php?dni=".$dni."'>Habilitar </a></button> </td>";
 							}  
 						?>
 						
