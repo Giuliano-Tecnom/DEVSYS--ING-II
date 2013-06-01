@@ -39,7 +39,10 @@
 		<div id="imagenhome"> 
 			<img src="images/homeclinic.jpg" class="img-polaroid">
 		</div>
-		
+		<div style="margin-top: 72PX;">
+		<a href="GestionObras.php"><button class="btn btn-large" type="button">Obras Soc</button></a>
+		<a href="GestionEspecialidades.php"><button class="btn btn-large" type="button">Especialidades</button></a>
+		</div>
 		<!-- BOTON DE SALIR Y ATRAS-->
 		<ul class="breadcrumb" style="margin-top: 600px;">
 			<li> 
