@@ -79,12 +79,12 @@
 
 .error{
     background-color: #BC1010;
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 2px;
     color: white;
     font-weight: bold;
-    margin-left: 16px;
-    margin-top: 6px;
+    margin-left: 13px;
+    margin-top: -2px;
     position: absolute;
 }
 .error:before{ /* Este es un truco para crear una flechita */

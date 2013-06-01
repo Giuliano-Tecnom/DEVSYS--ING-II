@@ -65,7 +65,7 @@ include_once('mysqlconnect.php');
 				<form class="form-horizontal" method="POST" action="AgregarEspecialidad.php" enctype="multipart/form-data" > 
 		  
 					<div class="control-group">
-						<input id="nom" type="text" placeholder="Nombre.." class="nombre">
+						<input id="nom" type="text" maxlength="30" placeholder="Nombre.." class="nombree" name="nombre">
 					</div>
 										
 					<div style="margin-left: 22px;">
