@@ -12,6 +12,10 @@ include_once('mysqlconnect.php');
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 <script rel="javascript" src="js/boostrap-alerts.js"></script>
 
+<!--JQuery-->
+<script src='js/jquery.min.js'></script>
+<script src='js/validarObra.js'></script>
+
 </head>
     <!-- Fin de HEAD-->
 	
@@ -69,9 +73,9 @@ include_once('mysqlconnect.php');
 				<form class="form-horizontal" method="POST" action="ModificarObra.php" enctype="multipart/form-data" > 
 		  
 					<div class="control-group">
-						<input id="nom" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?>">
+						<input class="nombree" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?>">
 					    <input type="hidden" name="idobra" value="<?php echo $_GET['idobra']; ?>" />
-						<button class="btn btn-danger" type="submit">Modificar</button>
+						<button class="btnsubmit btn-danger" type="submit">Modificar</button>
 						
 					
 					</div>

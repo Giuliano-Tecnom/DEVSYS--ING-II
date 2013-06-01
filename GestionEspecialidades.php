@@ -55,7 +55,15 @@
 														 <!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>
-		  
+			<?php
+				if(isset($_GET['Error'])){
+					if($_GET['Error'] == 1)
+					echo"<div class='alert alert-error'>
+						<h4>Error!!</h4>
+						La Especialidad no se puede eliminar porque existen medicos relacionados a ella. 
+						</div>";
+				}
+			?>
 			<div style="margin-left: 15px;">
 			<button class="btn btn-primary" type="button" onclick="location.href='AltaEspecialidades.php'">
 			   Agregar Especialidad
@@ -93,7 +101,7 @@
 							
 							if( $valor["activo"] == 1 ){
 								echo "<td>  Si </td>";
-								echo "<td><button class='btn btn-warning' type='button' onclick='location.href='BorrarEspecialidad.php?idespecialidad=".$id."''> Borrar </button> </td>";
+								echo "<td><button class='btn btn-warning' type='button' ><a href='BorrarEspecialidad.php?idespecialidad=".$id."'> Borrar </a></button> </td>";
 							}     
 						    else {
 							    echo "<td>No</td>";
