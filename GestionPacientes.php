@@ -208,7 +208,7 @@
 							}  
 						?>
 						
-						<td><button class="btn btn-danger" onclick="location.href='ModificarPacientes.php?dni=<?php echo $dni; ?> '" type="button">Modif</button> </td>
+						<td><button class="btn btn-danger" onclick="location.href='Pacientes.php?dni=<?php echo $dni; ?> '" type="button">Modif</button> </td>
 
 					</tr>
 				<?php
