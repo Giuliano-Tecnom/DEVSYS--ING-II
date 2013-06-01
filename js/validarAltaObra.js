@@ -1,9 +1,9 @@
 $(document).ready(function () {
     
-    $(".btn").click(function (){
+    $(".btnsubmit").click(function (){
         $(".error").remove();
-        if( $(".nombre").val() == "" ){
-            $(".nombre").focus().after("<span class='error'>Ingrese el nombre de la obra social</span>");
+        if( $(".nombree").val() == "" ){
+            $(".nombree").focus().after("<span class='error'>Ingrese el nombre de la obra social</span>");
             return false;
         }
     });

@@ -35,9 +35,9 @@
 				<div class="menu">
 					<table>
 						<tr>
-							<td><a href="#"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Pacientes</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
+							<td><a href="GestionPacientes.php"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
+							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
 							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
 						</tr>
 					</table>
@@ -55,7 +55,26 @@
 				</li>
 			</ul>
 		  	
-
+			<?php 
+		  
+				if(isset($_GET['Correcto'])){
+					if($_GET['Correcto'] == 1){
+						echo"<div class='alert alert-success'>
+							<h4>Exito!</h4>
+							La obra social se elimino correctamente.
+							</div>";
+					}
+				}
+				
+				if(isset($_GET['Error'])){
+					if($_GET['Error'] == 1)
+					echo"<div class='alert alert-error'>
+						<h4>Error!!</h4>
+						La obra social no se puede eliminar porque existen pacientes o medicos relacionados a ella. 
+						</div>";
+				}
+				
+			?>
 			
 			<button class="btn btn-primary" type="button" onclick="location.href='AltaObras.php'" 
 			style="margin-top: 25px;margin-left: 300px;">Agregar Obra Social</button>

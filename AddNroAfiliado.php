@@ -30,6 +30,10 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 
+<!--JQuery-->
+<script src='js/jquery.min.js'></script>
+<script src='js/validarNumeroAfiliado.js'></script>
+
 </head>
     <!-- Fin de HEAD-->
 	
@@ -87,7 +91,7 @@
 					?>
 							<label class="label"> <?php echo $valor['nombre']?></label>
 							<br>
-							<input name="<?php echo $valor['idobra'] ?>" type="text" placeholder="Nro Afiliado..">
+							<input name="<?php echo $valor['idobra'] ?>" type="text" maxlength="30" required placeholder="Nro Afiliado..">
 							<br>
 					<?php 
 						$obras[]= $valor['idobra'];
@@ -98,7 +102,7 @@
 						<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
 					
 					<div style="margin-left:20px;margin-top: 50px;">
-								<button class="btn btn-success" type="submit">Agregar</button>
+								<button class="btnsubmit btn-success" type="submit">Agregar</button>
 								<button class="btn btn-danger" type="button" onclick="location.href='GestionPacientes.php'">Cancelar </button>
 							</div>
 				

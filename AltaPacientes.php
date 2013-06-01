@@ -86,29 +86,29 @@
 				<form class="form-horizontal" method="POST" action="AgregarPaciente.php" enctype="multipart/form-data" >
 		  
 					<div class="control-group" >
-						<input class="namee" name="nombre" type="text" placeholder="Nombre..">
+						<input class="namee" name="nombre" type="text" maxlength="50" placeholder="Nombre..">
 					</div>
 					<div class="control-group">
-						<input class="apellidoo" name="apellido" type="text" placeholder="Apellido..">
+						<input class="apellidoo" name="apellido" type="text" maxlength="50" placeholder="Apellido..">
 					</div>
 					<div class="control-group">
-						<input class="dnii" name="dni" type="text" placeholder="DNI..">
+						<input class="dnii" name="dni" type="text" maxlength="9" placeholder="DNI..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin puntos, Ej: 36789456</span>
 					</div>
 					<div class="control-group">
-						<input class="emaill" name="email" type="email" placeholder="Email..">
+						<input class="emaill" name="email" type="email" maxlength="35" placeholder="Email..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: aaa@gmail.com</span>
 					</div>
 					<div class="control-group">
-						<input class="tell" name="tel" type="text" placeholder="Telefono..">
+						<input class="tell" name="tel" type="text" maxlength="25" placeholder="Telefono..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin parentesis, ni espacios Ej: 02214567800</span>
 					</div>
 					<div class="control-group">
-						<input class="dirr" name="dir" type="text" placeholder="Direccion..">
+						<input class="dirr" name="dir" type="text" maxlength="150" placeholder="Direccion..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: 60 N 1009</span>
 					</div>
 					<div class="control-group">
-						<input class="fecnacc" name="fecnac" type="date" placeholder="Fecha de Nacimiento..">
+						<input class="fecnacc" name="fecnac" type="date" min="1900-01-01" max="2013-06-01" placeholder="Fecha de Nacimiento..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD.MM.AAAA</span>
 					</div>
 				
@@ -131,7 +131,7 @@
 						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Editar</button>
 					</div>
 					<div style="margin-left:300px;margin-top: 90px;">
-						<button class="btn btn-success" type="submit">Agregar</button>
+						<button class="btnsubmit btn-success" type="submit">Agregar</button>
 						<button class="btn btn-danger" type="button" onclick="location.href='GestionPacientes.php'">Cancelar </button>
 					</div>
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
