@@ -1,8 +1,7 @@
 $(document).ready(function () {
-    var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-
     $(".btnsubmit").click(function (){
         $(".error").remove();
+		//INICIO VALIDACION APELLIDO Y NOMBRE
         if( $(".namee").val() == "" ){
             $(".namee").focus().after("<span class='error'>Ingrese el nombre del paciente</span>");
             return false;
@@ -10,6 +9,7 @@ $(document).ready(function () {
 			if( $(".apellidoo").val() == "" ){
 				$(".apellidoo").focus().after("<span class='error'>Ingrese el apellido del paciente</span>");
 				return false;
+		//FIN VALIDACION APELLIDO Y NOMBRE
 			} else {
 				//INICIO VALIDACION DNI
 				if( $(".dnii").val() == "" ){
@@ -24,19 +24,18 @@ $(document).ready(function () {
 					}		
 				//FIN VALIDACION DNI
 					if($(".emaill").val() != ""){
-							if(!emailreg.test($(".emaill").val())){
-								$(".emaill").focus().after("<span class='error'>Ingrese un email correcto</span>");
-								return false;
-							}
+						var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+						if(!emailreg.test($(".emaill").val())){
+							$(".emaill").focus().after("<span class='error'>Ingrese un email correcto</span>");
+							return false;
+						}
 					} else {
-						
 						//INICIO VALIDACION TELEFONO
 						if( $(".tell").val() == "" ){
 							$(".tell").focus().after("<span class='error'>Ingrese el telefono del paciente</span>");
 							return false;
 						} else {
-							
-								var telreg = /^([0-9\s\+\-])+$/;
+							    var telreg = /^([0-9\+\-])+$/;
 								var num_telefono = $(".tell").val().length
 								if(!telreg.test($(".tell").val())) {
 									$(".tell").focus().after("<span class='error'>Ingrese un telefono valido</span>");
@@ -53,7 +52,7 @@ $(document).ready(function () {
 								return false;
 							//FIN VALIDACION DIRECCION
 							} else {
-								if( $(".fecnacc").val() == "" ){ //Desmenuzar date
+								if( $(".fecnacc").val() == "" ){
 									$(".fecnacc").focus().after("<span class='error'>Ingrese la fecha de nacimiento del paciente</span>");
 									return false;
 								}

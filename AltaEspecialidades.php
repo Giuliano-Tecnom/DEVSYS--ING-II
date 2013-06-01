@@ -69,7 +69,7 @@ include_once('mysqlconnect.php');
 					</div>
 										
 					<div style="margin-left: 22px;">
-						<button class="btn btn-success" type="submit">Agregar</button>
+						<button class="btnsubmit btn-success" type="submit">Agregar</button>
 						<button class="btn btn-danger" type="button" onclick="location.href='GestionEspecialidades.php'">Cancelar </button>
 						<span class="help-block" style="font-size: 9px; margin-left: 28px;"> Campo Nombre obligatorio.</span>
 					</div>

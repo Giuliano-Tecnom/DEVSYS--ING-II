@@ -35,9 +35,9 @@
 				<div class="menu">
 					<table>
 						<tr>
-							<td><a href="#"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Pacientes</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
+							<td><a href="GestionPacientes.php"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
+							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
 							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
 						</tr>
 					</table>

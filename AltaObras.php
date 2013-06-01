@@ -32,9 +32,9 @@ include_once('mysqlconnect.php');
 				<div class="menu">
 					<table>
 						<tr>
-							<td><a href="#"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="#"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Medicos</button></a></td>
+							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
+							<td><a href="GestionPacientes.php"><button class="btn btn-large btn-info" type="button">Pacientes</button></a></td>
+							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
 							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
 						</tr>
 					</table>
@@ -70,7 +70,7 @@ include_once('mysqlconnect.php');
 					</div>
 										
 						<div style="margin-left:300px;margin-top: 90px;">
-						<button class="btn btn-success" type="submit">Agregar</button>
+						<button class="btnsubmit btn-success" type="submit">Agregar</button>
 						<button class="btn btn-danger" type="button">Cancelar </button>
 					</div>
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Campo Nombre obligatorio.</span>
