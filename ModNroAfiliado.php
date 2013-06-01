@@ -2,22 +2,29 @@
  
 	include_once('mysqlconnect.php');
 	
-	if(isset($_GET['dni'])){
-		$consulta = "SELECT nombre,obrasociales.idobra
-					FROM pac_obrasocial 
-					INNER JOIN obrasociales on pac_obrasocial.idobra= obrasociales.idobra
-					WHERE dni= ".$_GET['dni']." ";
-					
-		$resultado = mysql_query($consulta);	
-	if(isset($_GET['Error'])){
-		$consultaobra = "SELECT nombre FROM obrasociales WHERE pac_obrasocial.idobra = ".$_GET['idobra']." " ;
-		$resobra = mysql_query($consultaobra);
-		while ($valor = mysql_fetch_array($resultado)) {
-			$nomObra = $valor['nombre'];
-		}
+	if( isset ($_GET['oaborrar'])) {
+		$obrasABorrarString = $_GET['oaborrar'];
+		$obrasABorrar = explode(",",$_GET['oaborrar']);
+	} else {
+		$obrasABorrar = array();
+		$obrasABorrarString;
 	}
-	}else{
-		header('Location: AltaPacientes.php?Error=2');
+	
+	if(isset($_GET['obras'])){
+		$obrasSeleccionadasString = $_GET['obras'];
+
+		if (!($obrasSeleccionadasString == "")){
+			$obrasConIdNombreConsulta = "SELECT os.nombre, os.idobra, po.nroAfiliado
+											FROM obrasociales as os
+											LEFT JOIN pac_obrasocial as po 
+											ON po.idobra = os.idobra
+											WHERE os.idobra IN (".$obrasSeleccionadasString.")";
+			$obrasConIdNombre = mysql_query($obrasConIdNombreConsulta);
+			
+			//$obrasSeleccionadas = explode(",",$obrasSeleccionadasString); 
+		}
+	} else {
+		$obrasSeleccionadasString;
 	}
 			
 ?>     <!-- Fin de CONSULTAS-->
@@ -35,7 +42,7 @@
 	
 <body style="background-image:url('images/bg.png')">
  
-	<div class="encapsulador">
+ <div class="encapsulador">
 	
 		<table style="margin-top: 40px; ">
 			<tr>
@@ -61,41 +68,58 @@
 
 			<ul class="breadcrumb">
 				<li> 
-					<h5>Alta de NroAfialiado <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+					<h5>Modificacio / Alta de Nro Afialiado <a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
 																				<!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>   <!-- Fin del titulo de pagina-->
-			<?php
-				if(isset($_GET['Error'])){
-					if($_GET['Error'] == 1){
-						echo"<div class='alert alert-error'>
-							<h4>Error!! </h4>
-							Ya existe un afiliado a ".$nomObra." con ese Nro de Afiliado. Por Favor vuelva ATRAS.
-							</div>";
-					}
-				}else{
-
-				
-			?>
 			
 			<div id="form-alta-nroafiliado">
 			
-				<form class="form-horizontal" method="POST" action="AgregarNroAfiliado.php" enctype="multipart/form-data">
+				<form class="form-horizontal" name="form" method="POST" action="ModificarNroAfiliado.php" enctype="multipart/form-data">
 				   
 					<?php
-						while ($valor = mysql_fetch_array($resultado)) {
+						if (!empty($obrasSeleccionadasString)){
+							while ($valor = mysql_fetch_array($obrasConIdNombre)) {
 					?>
 							<label class="label"> <?php echo $valor['nombre']?></label>
+
 							<br>
-							<input name="<?php echo $valor['idobra'] ?>" type="text" placeholder="Nro Afiliado..">
+							<?php
+							if ($valor['nroAfiliado'] != "") {
+							?>
+							<input name="<?php echo $valor['idobra'] ?>" type="text" maxlength="30" required placeholder="Nro Afiliado.." value="<?php echo $valor['nroAfiliado'] ?>">
+							<?php
+							} else {
+							?>
+							<input name="<?php echo $valor['idobra'] ?>" type="text" maxlength="30" required placeholder="Nro Afiliado..">
+							<?php
+							}
+							?>
 							<br>
 					<?php 
-						$obras[]= $valor['idobra'];
-						}
-						
-					?>
-						<input type="hidden" name="obras" value='<?php echo serialize($obras)?>' />	    
+							$obrasSoloIDS[]= $valor['idobra'];
+							}
+							$obrasSoloIDS = implode(",",$obrasSoloIDS);
+							
+					?>		
+						<input type="hidden" name="obrasSoloIDS" value='<?php echo $obrasSoloIDS ?>' />	  
+						<input type="hidden" name="obrasABorrarString" value='<?php echo $obrasABorrarString ?>' />	  						
 						<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
+						<?php
+						} else {
+						?>
+						
+						 
+						<input type="hidden" name="obrasABorrarString" value='<?php echo $obrasABorrarString ?>' />	  						
+						<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
+						<script language="JavaScript">document.form.submit();</script>
+						<?php
+						}
+						?>
+						
+
+
+						
 					
 					<div style="margin-left:20px;margin-top: 50px;">
 								<button class="btn btn-success" type="submit">Agregar</button>
@@ -105,13 +129,6 @@
 				</form>
 				
 			</div>	
-			<?php
-					}
-				
-			?>
-			
-			
-
 				<!-- BOTON DE SALIR Y ATRAS-->
 				<ul class="breadcrumb" style="margin-top: 500px;">
 					<li> 
@@ -125,6 +142,7 @@
 			</div>     <!-- FIN DIV CONTENDOR -->
 	
 	</div>  <!-- FIN ENCAPSULADOR-->
-
+ 
+ 
 </body>
 </html>

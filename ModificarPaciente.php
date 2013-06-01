@@ -1,7 +1,6 @@
 <?php
 	
-	if (empty($_POST['dni']))
-	{
+	if (empty($_POST['dni'])) {
 		Header ('Location: Pacientes.php');
 	}
 	
@@ -22,32 +21,38 @@
 		$modif = mysql_query($consulta_modif);
 		
 		//Obras sociales que tenías previo a la modificacion.
-		$consulta = "SELECT nombre,obrasociales.idobra FROM pac_obrasocial
+		$obrasocialesPrevias = "SELECT nombre,obrasociales.idobra FROM pac_obrasocial
 							              INNER JOIN obrasociales on obrasociales.idobra=pac_obrasocial.idobra
 										 WHERE  dni=".$_POST['dni']." ";
-		$resultado = mysql_query($consulta);
+		$resultado = mysql_query($obrasocialesPrevias);
 		
+		$obrasQuePosee = array();
 		while ($valor = mysql_fetch_array($resultado)) {
-			$obrasAnt[] = $valor['idobra'];
+			$obrasQuePosee[] = $valor['idobra'];
 		}
 		
-		$obrasNvas= $_POST['obra']; //Obras nuevas
-		
-		$obrasBorrar = array_diff($obrasAnt, $obrasNvas); // obras a borrar
-		
-		for($i=0; $i < count($obrasBorrar); $i++){
-			$consulta = " DELETE FROM obrasociales WHERE idobra = ".$obrasBorrar[$i]." ";
-			$resultado = mysql_query($consulta);
+		if(isset($_POST['obra'])){
+			$obrasSeleccionadas = $_POST['obra']; //Obras Seleccionadas
+		} else{
+			$obrasSeleccionadas;
 		}
+		$obrasBorrar = array();
+		/*if(count($obrasQuePosee) > 0) {
+			if(count($obrasSeleccionadas) > 0) {
+				$obrasBorrar = array_diff($obrasQuePosee, $obrasSeleccionadas); // obras a borrar
+			} else {
+				$obrasBorrar = $obrasQuePosee;
+			}
+		}*/
+		$obrasBorrarString = implode(",",$obrasQuePosee);
 		
-
-		
-		
-		
-	//	Header ("Location: ModNroAfiliado.php?dni=".$dni." ");
+		$obrasSeleccionadasString = implode(",",$obrasSeleccionadas);
+			
+		echo count($obrasBorrar);
+	 	Header ("Location: ModNroAfiliado.php?dni=".$dni."&obras=".$obrasSeleccionadasString."&oaborrar=".$obrasBorrarString."");
 	
-	}else{
-	 //  Header ("Location: Pacientes.php?Error=1");
+	} else {
+	  Header ("Location: Pacientes.php?Error=1");
 	
 	}
 ?>

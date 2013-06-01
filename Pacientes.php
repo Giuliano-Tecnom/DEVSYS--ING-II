@@ -18,6 +18,10 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 
+<!--JQuery-->
+<script src='js/jquery.min.js'></script>
+<script src='js/validarModificarPaciente.js'></script>
+
 </head>
     <!-- Fin de HEAD-->
 	
@@ -57,7 +61,16 @@
 														 <!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>
-
+            <?php
+            if(isset($_GET['Error'])){
+					if($_GET['Error'] == 1)
+					echo"<div class='alert alert-error'>
+						<h4>Error!! </h4>
+						No se puede ya existe un paciente con ese dni.
+						</div>";
+				}
+			
+			?>
 			<?php
 
 	
@@ -71,32 +84,32 @@
 		   
 				<form class="form-horizontal" method="POST" action="ModificarPaciente.php" enctype="multipart/form-data" > 
 					
-					<input name="idpaciente" type="hidden" value="<?php echo $datospaciente['idpaciente'];?>">
+					<input name="idpaciente" type="hidden" maxlength="50" value="<?php echo $datospaciente['idpaciente'];?>">
 					
 					<div class="control-group">
-						<input name="nom" type="text" placeholder="Nombre.." value="<?php echo $datospaciente['nombre'];?> ">
+						<input class="nomm" name="nom" type="text" maxlength="50" placeholder="Nombre.." value="<?php echo $datospaciente['nombre'];?>">
 					</div>
 					<div class="control-group">
-						<input name="ape" type="text" placeholder="Apellido.." value="<?php echo $datospaciente['apellido'];?> ">
+						<input class="apee" name="ape" type="text" maxlength="50" placeholder="Apellido.." value="<?php echo $datospaciente['apellido'];?>">
 					</div>
 					<div class="control-group">
-						<input name="dni" type="text" placeholder="DNI.." value="<?php echo $datospaciente['dni'];?>">
+						<input class="dnii" name="dni" type="text" maxlength="9" placeholder="DNI.." value="<?php echo $datospaciente['dni'];?>">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin puntos, Ej: 36789456</span>
 					</div>
 					<div class="control-group">
-						<input name="email" type="text" placeholder="Email.." value="<?php echo $datospaciente['email'];?>">
+						<input class="emaill" name="email" type="text" maxlength="35" placeholder="Email.." value="<?php echo $datospaciente['email'];?>">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: aaa@gmail.com</span>
 					</div>
 					<div class="control-group">
-						<input name="tel" type="text" placeholder="Telefono.." value="<?php echo $datospaciente['telefono'];?>">
+						<input class="tell" name="tel" type="text" maxlength="25" placeholder="Telefono.." value="<?php echo $datospaciente['telefono'];?>">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin parentesis, ni espacios Ej: 02214567800</span>
 					</div>
 					<div class="control-group">
-						<input name="dir" type="text" placeholder="Direccion.." value="<?php echo $datospaciente['direccion'];?>">
+						<input class="dirr" name="dir" type="text" maxlength="150" placeholder="Direccion.." value="<?php echo $datospaciente['direccion'];?>">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: 60 N 1009</span>
 					</div>
 					<div class="control-group">
-						<input name="fecnac" type="date" placeholder="Fecha de Nacimiento.." value="<?php echo $datospaciente['fechaNac'];?>">
+						<input class="fecnacc" name="fecnac" type="date" min="1900-01-01" max="2013-06-01" placeholder="Fecha de Nacimiento.." value="<?php echo $datospaciente['fechaNac'];?>">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD/MM/AAAA</span>
 					</div>
 					<div style="margin-left: 300px;margin-top: -285px;">
@@ -114,10 +127,13 @@
 						<?php	  
 							}
 						
-							$consulta = "SELECT nombre FROM obrasociales
-                                         WHERE nombre not in (SELECT nombre FROM pac_obrasocial
-                                         inner JOIN obrasociales ON obrasociales.idobra = pac_obrasocial.idobra
-                                         WHERE dni=".$_GET['dni'].")";
+							$consulta = "SELECT o.nombre, o.idobra  
+										 FROM obrasociales as o
+                                         WHERE nombre not in   (SELECT nombre
+																FROM pac_obrasocial
+																INNER JOIN obrasociales
+																ON obrasociales.idobra = pac_obrasocial.idobra
+																WHERE dni=".$_GET['dni'].")";
 							$resultado = mysql_query($consulta);
 						
 							while ($valor = mysql_fetch_array($resultado)) {
@@ -134,7 +150,7 @@
 						<button class="btn btn-mini" type="button" onclick="location.href='GestionObras.php'">Editar</button>
 					</div>
 					<div style="margin-left:300px;margin-top: 90px;">
-						<button class="btn btn-success" type="submit">Modificar</button>
+						<button class="btnsubmit btn-success" type="submit">Modificar</button>
 						<button class="btn btn-danger" type="button" onclick="location.href='GestionPacientes.php' ">Cancelar </button>
 					</div>
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>

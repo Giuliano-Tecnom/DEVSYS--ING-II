@@ -11,7 +11,7 @@ include_once('mysqlconnect.php');
 		$obras = unserialize(stripslashes($_POST['obras']));
 	
 		for ($i=0; $i < count($obras) ; $i++){
-			$nro=$_POST[$obras[$i]];
+			$nro=$_POST[$obras[$i]]; //Esto es el numero de afiliado que se cargan en los textfields de las Obras.
 			$consulta = "SELECT * FROM pac_obrasocial WHERE nroAfiliado = '".$nro."' AND idobra = '" .$obras[$i]. "' " ;
 			$res = mysql_query($consulta);
 			// Busco si hay un paciente con el mismo numero de afiliado en la misma obra social.

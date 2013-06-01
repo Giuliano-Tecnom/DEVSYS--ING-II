@@ -72,6 +72,12 @@
 							El paciente se borro correctamente.
 							</div>";
 					}
+					if($_GET['Correcto'] == 3){
+						echo"<div class='alert alert-success'>
+							<h4>Exito!</h4>
+							El paciente se modifico correctamente.
+							</div>";
+					}
 				}
 				
 				if(isset($_GET['Error'])){
@@ -81,8 +87,17 @@
 						</div>";
 				}
 				
+				if(isset($_GET['Error'])){
+					if($_GET['Error'] == 2)
+					echo"<div class='alert alert-error'>
+						<h4>Error!! </h4>
+	
+						</div>";
+				}
+				
 			?>
 			
+			<!--
 			<div id="form-gestion-pacientes"> 
 		   
 				<form class="form-horizontal">
@@ -135,23 +150,26 @@
 						<button class="btn btn-success" type="button">Buscar</button>
 						<button class="btn btn-danger" type="button">Limpiar </button>
 					</div>
-					<button class="btn btn-primary" type="button" onclick="location.href='AltaPacientes.php'"
-					style="margin-top: 25px;margin-left: 300px;">Paciente Nuevo</button>
+					
 				</form>
 			</div>
+			-->
+			<button class="btn btn-primary" type="button" onclick="location.href='AltaPacientes.php'"
+					style="margin-top: 25px;margin-left: 420px;">Paciente Nuevo</button>
+					
 			<div id="tabla-gestion-pacientes">
 
 				<table class="table table-striped">
 					<tr>
-						<td>Nombre </td> 
-						<td>Apellido</td>
-						<td>Direccion</td>
-						<td>Telefono</td>
-						<td>Email</td>
-						<td>Obra Social</td>
-						<td>Dni</td>
-						<td>F.Nac</td>
-						<td><b>Activo</b>
+						<td><b>Nombre</b> </td> 
+						<td><b>Apellido</b></td>
+						<td><b>Direccion</b></td>
+						<td><b>Telefono</b></td>
+						<td><b>Email</b></td>
+						<td><b>Obra Social</b></td>
+						<td><b>Dni</b></td>
+						<td><b>F.Nac</b></td>
+						<td><b>Activo</b></b>
 						<?php
 
 							if($ojito == 1){

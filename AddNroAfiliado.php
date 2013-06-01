@@ -5,17 +5,17 @@
 	if(isset($_GET['dni'])){
 		$consulta = "SELECT nombre,obrasociales.idobra
 					FROM pac_obrasocial 
-					INNER JOIN obrasociales on pac_obrasocial.idobra= obrasociales.idobra
+					INNER JOIN obrasociales on pac_obrasocial.idobra = obrasociales.idobra
 					WHERE dni= ".$_GET['dni']." ";
 					
 		$resultado = mysql_query($consulta);	
-	if(isset($_GET['Error'])){
-		$consultaobra = "SELECT nombre FROM obrasociales WHERE pac_obrasocial.idobra = ".$_GET['idobra']." " ;
-		$resobra = mysql_query($consultaobra);
-		while ($valor = mysql_fetch_array($resultado)) {
-			$nomObra = $valor['nombre'];
+		if(isset($_GET['Error'])){
+			$consultaobra = "SELECT nombre FROM obrasociales WHERE pac_obrasocial.idobra = ".$_GET['idobra']." " ;
+			$resobra = mysql_query($consultaobra);
+			while ($valor = mysql_fetch_array($resultado)) {
+				$nomObra = $valor['nombre'];
+			}
 		}
-	}
 	}else{
 		header('Location: AltaPacientes.php?Error=2');
 	}
