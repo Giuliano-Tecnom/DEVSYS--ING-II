@@ -55,7 +55,26 @@
 				</li>
 			</ul>
 		  	
-
+			<?php 
+		  
+				if(isset($_GET['Correcto'])){
+					if($_GET['Correcto'] == 1){
+						echo"<div class='alert alert-success'>
+							<h4>Exito!</h4>
+							La obra social se elimino correctamente.
+							</div>";
+					}
+				}
+				
+				if(isset($_GET['Error'])){
+					if($_GET['Error'] == 1)
+					echo"<div class='alert alert-error'>
+						<h4>Error!!</h4>
+						La obra social no se puede eliminar porque existen pacientes o medicos relacionados a ella. 
+						</div>";
+				}
+				
+			?>
 			
 			<button class="btn btn-primary" type="button" onclick="location.href='AltaObras.php'" 
 			style="margin-top: 25px;margin-left: 300px;">Agregar Obra Social</button>
