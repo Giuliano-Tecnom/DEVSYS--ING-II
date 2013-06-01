@@ -63,21 +63,23 @@
 			</ul>
             <?php
             if(isset($_GET['Error'])){
-					if($_GET['Error'] == 1)
-					echo"<div class='alert alert-error'>
-						<h4>Error!! </h4>
-						No se puede ya existe un paciente con ese dni.
-						</div>";
+					if($_GET['Error'] == 1) {
+						echo	"<div class='alert alert-error'>
+									<h4>Error!! </h4>
+								No se puede agregar el paciente, ya existe uno con ese dni.
+								</div>";
+					}
 				}
 			
 			?>
 			<?php
 
 	
-				if(isset($_GET['dni'])){
-					$consulta = "SELECT * FROM pacientes WHERE dni= ".$_GET['dni']."";
+				if(isset($_GET['idpaciente'])){
+					$consulta = "SELECT * FROM pacientes WHERE idpaciente = ".$_GET['idpaciente']."";
 					$resultado = mysql_query($consulta);
 					$datospaciente = mysql_fetch_array($resultado);
+				
 			
 		   ?>
 			<div id="form-modificacion-pacientes"> 
@@ -116,9 +118,12 @@
 						<label>Obra Social</label>
 						<select multiple="multiple" id="obra" name="obra[]">
 						<?php
-							$consulta = "SELECT nombre,obrasociales.idobra FROM pac_obrasocial
-							              INNER JOIN obrasociales on obrasociales.idobra=pac_obrasocial.idobra
-										 WHERE  dni=".$_GET['dni']." ";
+							$consulta = "SELECT o.nombre, 
+												o.idobra 
+										 FROM pac_obrasocial as po
+							             INNER JOIN obrasociales as o on o.idobra = po.idobra
+										 INNER JOIN pacientes as p on p.dni = po.dni
+										 WHERE  p.idpaciente=".$_GET['idpaciente']." ";
 							$resultado = mysql_query($consulta);
 						
 							while ($valor = mysql_fetch_array($resultado)) {
@@ -129,11 +134,13 @@
 						
 							$consulta = "SELECT o.nombre, o.idobra  
 										 FROM obrasociales as o
-                                         WHERE nombre not in   (SELECT nombre
-																FROM pac_obrasocial
-																INNER JOIN obrasociales
-																ON obrasociales.idobra = pac_obrasocial.idobra
-																WHERE dni=".$_GET['dni'].")";
+                                         WHERE o.nombre not in   (SELECT o.nombre
+																  FROM pac_obrasocial as po
+																  INNER JOIN obrasociales as o
+																  ON o.idobra = po.idobra
+																  INNER JOIN pacientes as p
+																  ON p.dni = po.dni
+																  WHERE p.idpaciente=".$_GET['idpaciente'].")";
 							$resultado = mysql_query($consulta);
 						
 							while ($valor = mysql_fetch_array($resultado)) {

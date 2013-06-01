@@ -6,11 +6,19 @@ $(document).ready(function () {
             $(".nomm").focus().after("<span class='error'>Ingrese el nombre del paciente</span>");
             return false;
         } else {
+			if ( $.trim( $(".nomm").val() ) == '' ) {
+				$(".nomm").focus().after("<span class='error'>Ingrese un nombre valido</span>");
+				return false;	
+			}
 			if( $("apee").val() == "" ){
 				$(".apee").focus().after("<span class='error'>Ingrese el apellido del paciente</span>");
 				return false;
 		//FIN VALIDACION APELLIDO Y NOMBRE
 			} else {
+				if ( $.trim( $(".apee").val() ) == '' ) {
+					$(".apee").focus().after("<span class='error'>Ingrese un apellido valido</span>");
+					return false;	
+				}
 				//INICIO VALIDACION DNI
 				if( $(".dnii").val() == "" ){
 					$(".dnii").focus().after("<span class='error'>Ingrese el dni del paciente</span>");
@@ -52,6 +60,10 @@ $(document).ready(function () {
 								return false;
 							//FIN VALIDACION DIRECCION
 							} else {
+								if ( $.trim( $(".dirr").val() ) == '' ) {
+									$(".dirr").focus().after("<span class='error'>Ingrese una direccion valida</span>");
+									return false;	
+								}
 								if( $(".fecnacc").val() == "" ){
 									$(".fecnacc").focus().after("<span class='error'>Ingrese la fecha de nacimiento del paciente</span>");
 									return false;

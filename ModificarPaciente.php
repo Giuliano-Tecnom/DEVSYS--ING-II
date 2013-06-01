@@ -52,7 +52,7 @@
 	 	Header ("Location: ModNroAfiliado.php?dni=".$dni."&obras=".$obrasSeleccionadasString."&oaborrar=".$obrasBorrarString."");
 	
 	} else {
-	  Header ("Location: Pacientes.php?Error=1");
+	  Header ("Location: Pacientes.php?Error=1&dni=".$dni."&idpaciente=".$_POST['idpaciente']."");
 	
 	}
 ?>

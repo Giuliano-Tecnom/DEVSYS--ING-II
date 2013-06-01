@@ -132,8 +132,8 @@
 				<li> 
 					<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
 					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button"> Atras </button>
-						<button class="btn btn-inverse" type="button"> Salir </button>
+						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
+						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
 					</div>
 				</li>
 			</ul>

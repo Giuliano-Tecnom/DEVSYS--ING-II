@@ -82,7 +82,7 @@
 				}
 				
 			?>
-			
+			<!--
 			<div id="form-gestion-medicos"> 
 		   
 				<form class="form-horizontal">
@@ -139,6 +139,13 @@
 					style="margin-top: 25px;margin-left: 300px;">Medico Nuevo</button>
 				</form>
 			</div>
+			-->
+			
+			<!-- una vez que se descomente lo de arriba borrar estas dos lineas de aca abajo -->
+			<button class="btn btn-primary" type="button" onclick="location.href='AltaMedicos.php'"
+					style="margin-top: 25px;margin-left: 425px;">Medico Nuevo</button>
+					
+					
 			<div id="tabla-gestion-medicos">
 
 				<table class="table table-striped">

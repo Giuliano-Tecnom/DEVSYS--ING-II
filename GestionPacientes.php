@@ -195,14 +195,18 @@
 						<td><?php
 						
 						
-						$query= "SELECT  * from pac_obrasocial 
-	                             inner join obrasociales on obrasociales.idobra=pac_obrasocial.idobra 
-								 where dni ='" .$valor["dni"]. "'";
+						$query= "SELECT  o.nombre as nombreobra										 
+								 FROM pac_obrasocial as po
+	                             INNER join obrasociales as o 
+								 ON o.idobra= po.idobra
+								 INNER join pacientes as p
+								 ON p.dni = po.dni
+								 where po.dni ='" .$valor["dni"]. "'";
 
 						
 						$res = mysql_query($query);
 						while ($obra=mysql_fetch_array($res)) {
-						echo "&nbsp;".$obra["nombre"]."";
+							echo "&nbsp;".$obra["nombreobra"]."";
 						}
 						
 						
@@ -224,9 +228,11 @@
 							    echo "<td>No</td>";
 								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarPaciente.php?dni=".$dni."'>Habilitar </a></button> </td>";
 							}  
+							
+							$idpaciente = $valor['idpaciente'];
 						?>
 						
-						<td><button class="btn btn-danger" onclick="location.href='Pacientes.php?dni=<?php echo $dni; ?> '" type="button">Modif</button> </td>
+						<td><button class="btn btn-danger" onclick="location.href='Pacientes.php?idpaciente=<?php echo $idpaciente; ?> '" type="button">Modif</button> </td>
 
 					</tr>
 				<?php

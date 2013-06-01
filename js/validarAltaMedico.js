@@ -5,12 +5,20 @@ $(document).ready(function () {
         if( $(".namee").val() == "" ){
             $(".namee").focus().after("<span class='error'>Ingrese el nombre del medico</span>");
             return false;
-        } else { 
+        } else {
+			if ( $.trim( $(".namee").val() ) == "" ) {
+				$(".namee").focus().after("<span class='error'>Ingrese un nombre valido</span>");
+				return false;	
+			}
 			if( $(".apellidoo").val() == "" ){
 				$(".apellidoo").focus().after("<span class='error'>Ingrese el apellido del medico</span>");
 				return false;
 		//FIN VALIDACION APELLIDO Y NOMBRE
 			} else {
+				if ( $.trim( $(".apellidoo").val() ) == "" ) {
+					$(".apellidoo").focus().after("<span class='error'>Ingrese un apellido valido</span>");
+					return false;	
+				}
 				var dnimatreg = /^(\d{7,9})$/
 				//INICIO VALIDACION MATRICULA
 				if($(".nrolicenciaa").val() == "" ) {
@@ -30,6 +38,10 @@ $(document).ready(function () {
 				}
 				//FIN VALIDACION DIRECCION
 				else {
+					if ( $.trim( $(".dirr").val() ) == "" ) {
+									$(".dirr").focus().after("<span class='error'>Ingrese una direccion valida</span>");
+									return false;	
+					}
 					//INICIO VALIDACION TELEFONO
 					if( $(".tell").val() == "" ){
 						$(".tell").focus().after("<span class='error'>Ingrese el telefono del medico</span>");
