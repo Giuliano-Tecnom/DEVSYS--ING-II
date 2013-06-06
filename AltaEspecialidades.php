@@ -20,28 +20,12 @@ include_once('mysqlconnect.php');
     <!-- Fin de HEAD-->
 	
 <body style="background-image:url('images/bg.png')">
- 
+ 	
+	<?php include_once('header.php'); ?>
+	
 	<div class="encapsulador">
 	
-		<table style="margin-top: 40px; ">
-			<tr>
-			<td>
-				<h3 style="font-size: 76PX;margin-top: 30px; color: #00CCFF;">CLIMED</h3>   	
-			</td>
-			<td> 
-				<div class="menu">
-					<table>
-						<tr>
-							<td><a href="index.php"><button class="btn btn-large" type="button">Home</button></a></td>
-							<td><a href="GestionPacientes.php"><button class="btn btn-large" type="button">Pacientes</button></a></td>
-							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
-						</tr>
-					</table>
-				</div>
-			</td>
-			</tr>
-		</table> 	<!-- Fin de Menú-->
+
 
 		<div class="contenedor">
 

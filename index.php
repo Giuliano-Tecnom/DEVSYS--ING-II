@@ -14,45 +14,22 @@
     
 <body style="background-image:url('images/bg.png')">
  
-	<div class="encapsulador">
 	
-		<table style="margin-top: 40px; ">
-			<tr>
-			<td>
-				<h3 style="font-size: 76px;margin-top: 30px; color: #00CCFF;">CLIMED</h3>   	
-			</td>
-			<td> 
-				<div class="menu">
-					<table>
-						<tr>
-							<td><a href="index.php"><button class="btn btn-large btn-info" type="button">Home</button></a></td>
-							<td><a href="GestionPacientes.php"><button class="btn btn-large" type="button">Pacientes</button></a></td>
-							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
-						</tr>
-					</table>
-				</div>
-			</td>
-			</tr>
-		</table>	<!-- Fin de Menú-->
+	<?php include_once('header.php'); ?>
+	
+	<div class="encapsulador">
 		
 		<div id="imagenhome"> 
 			<img src="images/homeclinic.jpg" class="img-polaroid">
 		</div>
+		
 		<div style="margin-top: 72PX;">
-		<a href="GestionObras.php"><button class="btn btn-large" type="button">Obras Soc</button></a>
-		<a href="GestionEspecialidades.php"><button class="btn btn-large" type="button">Especialidades</button></a>
+			<a href="GestionObras.php"><button class="btn btn-large" type="button">Obras Soc</button></a>
+			<a href="GestionEspecialidades.php"><button class="btn btn-large" type="button">Especialidades</button></a>
 		</div>
-		<!-- BOTON DE SALIR Y ATRAS-->
-		<ul class="breadcrumb" style="margin-top: 600px;">
-			<li> 
-				<div style="margin-left: 800px;">
-					<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
-				</div>
-			</li>
-		</ul>
 
 	</div>  <!-- FIN ENCAPSULADOR-->
+	
 	
 </body>
 </html>

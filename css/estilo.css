@@ -1,10 +1,16 @@
 
+.header{
+	width:950px;
+	height:auto;
+	margin: auto;
+}
 
 .encapsulador{
 	width:950px;
 	height:auto;
 	margin: auto;
 }
+
 
 #form-logeo{
 	width: 500px;
@@ -17,13 +23,12 @@
 
 .menu{
 	margin-top:27px;
-	margin-left:241px;
+	margin-left:160px;
 
 }
 
 #imagenhome{
 	float: right; 
-	margin-top: 75px;
 }
 
 .contenedor{
