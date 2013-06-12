@@ -136,9 +136,18 @@
 				</form>
 			</div>
 			-->
-			<button class="btn btn-primary" type="button" onclick="location.href='AltaPacientes.php'"
-					style="margin-top: 25px;margin-left: 420px;">Paciente Nuevo</button>
-					
+			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
+			        <button class="btn btn-info" type="button" onclick="location.href='AltaPacientes.php'">Paciente Nuevo</button>
+                    <button class="btn btn-info" type="button">Generar Reporte</button>
+				    <button class="btn btn-info" type="button"
+					<?php	if($ojito == 1){ ?>
+								onclick="location.href='GestionPacientes.php?ojito=0'"> Mostrar Inactivos <i class="icon-eye-close" style="margin-left: 3px;"></i>
+					<?php	} else { ?>			
+								onclick="location.href='GestionPacientes.php?ojito=1'"> Ocultar Inactivos <i class="icon-eye-open" style="margin-left: 3px;"></i>
+					<?php	} ?>
+					</button>
+			</div>
+			
 			<div id="tabla-gestion-pacientes">
 
 				<table class="table table-striped">
@@ -151,15 +160,6 @@
 						<td><b>Obra Social</b></td>
 						<td><b>Dni</b></td>
 						<td><b>Fecha de Nacimiento</b></td>
-						<td><b>Activo</b>
-						<?php
-							if($ojito == 1){
-								echo "<a href='GestionPacientes.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
-							} else {
-								echo "<a href='GestionPacientes.php?ojito=1'><i class='icon-eye-open' style='margin-left: 3px; margin-top: 3px;'></i></a>";
-							}
-						?>
-						</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -197,18 +197,27 @@
 						<td><?php echo $valor["dni"]; ?></td>
 						<td><?php echo $valor["fechaNac"]; ?></td>
 						<?php 
-							$dni = $valor['dni'];
+								$dni = $valor['dni'];
 							
-							if( $valor["activo"] == 1 ){
-								echo "<td>  Si </td>";
-								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarPaciente.php?dni=".$dni."'>Borrar </a></button> </td>";
-							}     
-						    else {
-							    echo "<td>No</td>";
-								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarPaciente.php?dni=".$dni."'>Habilitar </a></button> </td>";
-							}  
+								if( $valor["activo"] == 1 ){
+						?>	
+									<td><a data-toggle="modal" role="button" href="#borrar" class="btn btn-warning">Borrar</a></td>
+									<!-- MODAL DE CANCELAR -->
+									<div id="borrar" class="modal hide fade in" style="display: none; ">
+										<div class="modal-body">
+											<h4>Aviso</h4>	      
+											<p> Esta seguro que desea Borrar al paciente? </p>
+										</div>
+										<div class="modal-footer">
+											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+											<a class="btn btn-warning"  href="BorrarPaciente.php?dni=<?php echo $dni; ?>">Aceptar</a>
+										</div>
+									</div>
+						<?php	}else{ ?>
+									<td><button class="btn btn-success" type="button" onclick="location.href='HabilitarPaciente.php?dni=<?php echo $dni; ?> '">Habilitar</button></td>
+						<?php	}  
 							
-							$idpaciente = $valor['idpaciente'];
+								$idpaciente = $valor['idpaciente'];
 						?>
 						
 						<td><button class="btn btn-danger" onclick="location.href='CargaPaciente.php?idpaciente=<?php echo $idpaciente; ?> '" type="button">Modif</button> </td>
@@ -220,17 +229,7 @@
 				</table>
 			</div>
 
-						<!-- BOTON DE SALIR, ATRAS y REPORTE-->
-			<ul class="breadcrumb">
-				<li> 
-					<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
-					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
-						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
-					</div>
-				</li>
-			</ul>
-
+					
 		</div>      <!-- FIN DIV CONTENDOR -->
 
 

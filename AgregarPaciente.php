@@ -22,7 +22,7 @@ include_once('mysqlconnect.php');
 								";
 		mysql_query($queryAgregarPaciente);
 		if (count($obras)==0) {
-			Header ('Location: AltaPacientes.php?Correcto=1');
+			Header ('Location: GestionPacientes.php?Correcto=1');
 	    } else {
 			$obrasString = implode(",",$obras);
 			$queryIdPaciente = " 	SELECT 

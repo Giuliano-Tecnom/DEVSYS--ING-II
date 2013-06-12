@@ -123,8 +123,38 @@
 					<button class="btn btn-mini" type="button" onclick="location.href='GestionObras.php'">Editar</button>
 				</div>
 				<div style="margin-left:300px;margin-top: 90px;">
-					<button class="btnsubmit btn-success" type="submit">Modificar</button>
-					<button class="btn btn-danger" type="button" onclick="location.href='GestionPacientes.php' ">Cancelar </button>
+					
+					
+				
+					<a data-toggle="modal" role="button" href="#modificar" class="btnsubmit btn-success">Modificar</a>
+						<!-- MODAL DE modificar -->
+							<div id="modificar" class="modal hide fade in" style="display: none; ">
+								<div class="modal-body">
+									<h4>Aviso</h4>	      
+									<p> Esta seguro que desea Modificar al paciente? </p>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+									<button class="btn btn-success" type="submit" onclick="location.href='ModificarPaciente.php'">Aceptar</button>
+								</div>
+							</div>
+							
+							
+					<a data-toggle="modal" role="button" href="#cancelar" class="btn btn-danger">Cancelar</a>
+						<!-- MODAL DE CANCELAR -->
+							<div id="cancelar" class="modal hide fade in" style="display: none; ">
+								<div class="modal-body">
+									<h4>Aviso</h4>	      
+									<p> Esta seguro que desea Cancelar? </p>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+									<a class="btn btn-danger"  href="GestionPacientes.php">Aceptar</a>
+								</div>
+							</div>
+				
+				
+				
 				</div>
 				<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
 				

@@ -12,8 +12,7 @@
 </head>
     
 <body style="background-image:url('images/bg.png')">
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap-modal.js"></script>
+
 	
 	<?php include_once('header.php'); ?>
 	

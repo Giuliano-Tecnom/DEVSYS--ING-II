@@ -101,26 +101,47 @@
 						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 					</div>
 					<div style="margin-left: 550px;margin-top: -77px;">
-						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Editar</button>
+						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Editar Obra Social</button>
 					</div>
 					<div style="margin-left:300px;margin-top: 90px;">
-						<button class="btnsubmit btn-success" type="submit">Agregar</button>
-						<button class="btn btn-danger" type="button" onclick="location.href='GestionPacientes.php'">Cancelar </button>
+					
+							
+						<a data-toggle="modal" role="button" href="#agregar" class="btnsubmit btn-success">Agregar</a>
+						<!-- MODAL DE AGREGAR -->
+							<div id="agregar" class="modal hide fade in" style="display: none; ">
+								<div class="modal-body">
+									<h4>Aviso</h4>	      
+									<p> Esta seguro que desea Agregar al paciente nuevo? </p>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+									<button class="btn btn-success" type="submit" onclick="location.href='AgregarPaciente.php'">Aceptar</button>
+								</div>
+							</div>
+							
+						<a data-toggle="modal" role="button" href="#cancelar" class="btn btn-danger">Cancelar</a>
+							<!-- MODAL DE CANCELAR -->
+							<div id="cancelar" class="modal hide fade in" style="display: none; ">
+								<div class="modal-body">
+									<h4>Aviso</h4>	      
+									<p> Esta seguro que desea Cancelar? </p>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+									<a class="btn btn-danger"  href="GestionPacientes.php">Aceptar</a>
+								</div>
+							</div>
+							
 					</div>
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
+					
+					
+					
+					
+
+					
 				</form>
 			</div>
-			
-
-			<!-- BOTON DE SALIR Y ATRAS-->
-			<ul class="breadcrumb" style="margin-top: 600px;">
-				<li> 
-					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
-						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
-					</div>
-				</li>
-			</ul>
 			
 		</div>     <!-- FIN DIV CONTENDOR -->
 	
