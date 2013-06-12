@@ -4,25 +4,22 @@
 	$consulta = "SELECT idobra, nombre FROM obrasociales where activo = 1 ORDER BY nombre";
     $resultado = mysql_query($consulta);			
 	
-?>      <!-- Fin de CONSULTAS-->
+?> 
 
 <head>
 
 <meta charset="UTF-8">
 <title>ClinicSystem - Pacientes</title>
-
 <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 
-<!--JQuery-->
-<script src='js/jquery.min.js'></script>
-<script src='js/validarAltaPaciente.js'></script>
-
 </head>
-    <!-- Fin de HEAD-->
 	
 <body style="background-image:url('images/bg.png')">
+<!--JQuery-->
+<script src='js/jquery.min.js'></script>
+<script src='js/validarFormularioPaciente.js'></script>
  	
 	<?php include_once('header.php'); ?>
 	
@@ -38,12 +35,6 @@
 			</ul>   <!-- Fin del titulo de pagina-->
             
 			<?php
-				
-				if(isset($_GET['Correcto'])){
-					echo "	<div class='alert alert-success' style='margin-left: 10px; margin-right: 10px;' >
-							<h4>Paciente Agregado Correctamente</h4>
-							</div> ";
-				}
 					
 				if(isset($_GET['Error'])){
 					if( $_GET['Error'] == 1 ){

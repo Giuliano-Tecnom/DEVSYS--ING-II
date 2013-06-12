@@ -2,7 +2,7 @@
 	
 	if (!isset($_GET['ojito'])) {
 		$ojito=1;
-	}else{
+	} else {
 		$ojito=$_GET['ojito'];
 	}
 	
@@ -143,17 +143,16 @@
 
 				<table class="table table-striped">
 					<tr>
-						<td><b>Nombre</b> </td> 
+						<td><b>Nombre</b></td> 
 						<td><b>Apellido</b></td>
 						<td><b>Direccion</b></td>
 						<td><b>Telefono</b></td>
 						<td><b>Email</b></td>
 						<td><b>Obra Social</b></td>
 						<td><b>Dni</b></td>
-						<td><b>F.Nac</b></td>
-						<td><b>Activo</b></b>
+						<td><b>Fecha de Nacimiento</b></td>
+						<td><b>Activo</b>
 						<?php
-
 							if($ojito == 1){
 								echo "<a href='GestionPacientes.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
 							} else {
@@ -179,11 +178,9 @@
 						
 						$query= "SELECT  o.nombre as nombreobra										 
 								 FROM pac_obrasocial as po
-	                             INNER join obrasociales as o 
-								 ON o.idobra= po.idobra
-								 INNER join pacientes as p
-								 ON p.dni = po.dni
-								 where po.dni ='" .$valor["dni"]. "'";
+	                             INNER join obrasociales as o ON o.idobra= po.idobra
+								 INNER join pacientes as p ON p.idpaciente = po.idpaciente
+								 where po.idpaciente ='" .$valor["idpaciente"]. "'";
 
 						
 						$res = mysql_query($query);
@@ -214,7 +211,7 @@
 							$idpaciente = $valor['idpaciente'];
 						?>
 						
-						<td><button class="btn btn-danger" onclick="location.href='Pacientes.php?idpaciente=<?php echo $idpaciente; ?> '" type="button">Modif</button> </td>
+						<td><button class="btn btn-danger" onclick="location.href='CargaPaciente.php?idpaciente=<?php echo $idpaciente; ?> '" type="button">Modif</button> </td>
 
 					</tr>
 				<?php

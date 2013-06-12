@@ -2,21 +2,36 @@
  
 	include_once('mysqlconnect.php');
 	
-	if(isset($_GET['dni'])){
-		$consulta = "SELECT nombre,obrasociales.idobra
-					FROM pac_obrasocial 
-					INNER JOIN obrasociales on pac_obrasocial.idobra = obrasociales.idobra
-					WHERE dni= ".$_GET['dni']." ";
+	if(isset($_GET['idpaciente'])){
+		
+		$obrasString = $_GET['obras'];
+		
+		$consulta = " 	SELECT 
+								idobra, 
+								nombre
+						FROM	
+								obrasociales
+						WHERE 	
+								idobra IN (".$obrasString.") 
+						AND		activo = 1";
 					
-		$resultado = mysql_query($consulta);	
+		$obrasDeBase = mysql_query($consulta);	
 		if(isset($_GET['Error'])){
-			$consultaobra = "SELECT nombre FROM obrasociales WHERE pac_obrasocial.idobra = ".$_GET['idobra']." " ;
+			$consultaobra = "	SELECT 
+										o.nombre 
+								FROM 
+										obrasociales AS o
+								INNER JOIN 
+										pac_obrasocial AS po ON po.idobra = o.idobra
+								WHERE 
+										po.idobra = ".$_GET['idobra']." " ;
+										
 			$resobra = mysql_query($consultaobra);
-			while ($valor = mysql_fetch_array($resultado)) {
+			while ($valor = mysql_fetch_array($obrasDeBase)) {
 				$nomObra = $valor['nombre'];
 			}
 		}
-	}else{
+	} else {
 		header('Location: AltaPacientes.php?Error=2');
 	}
 			
@@ -43,8 +58,6 @@
 	
 	<div class="encapsulador">
 	
-
-
 		<div class="contenedor">
 
 			<ul class="breadcrumb">
@@ -58,7 +71,7 @@
 					if($_GET['Error'] == 1){
 						echo"<div class='alert alert-error'>
 							<h4>Error!! </h4>
-							Ya existe un afiliado a ".$nomObra." con ese Nro de Afiliado. Por Favor vuelva ATRAS.
+							Ya existe un afiliado a ".$nomObra." con ese Numero de Afiliado. Por Favor verifique el numero.
 							</div>";
 					}
 				}else{
@@ -68,22 +81,21 @@
 			
 			<div id="form-alta-nroafiliado">
 			
-				<form class="form-horizontal" method="POST" action="AgregarNroAfiliado.php" enctype="multipart/form-data">
+				<form class="form-horizontal" method="POST" action="AgregarNroAfiliadoObras.php" enctype="multipart/form-data">
 				   
 					<?php
-						while ($valor = mysql_fetch_array($resultado)) {
+						while ($obra = mysql_fetch_array($obrasDeBase)) {
 					?>
-							<label class="label"> <?php echo $valor['nombre']?></label>
+							<label class="label"> <?php echo $obra['nombre']?></label>
 							<br>
-							<input name="<?php echo $valor['idobra'] ?>" type="text" maxlength="30" required placeholder="Nro Afiliado..">
+							<input name="<?php echo $obra['idobra'] ?>" type="text" maxlength="30" required placeholder="Nro Afiliado..">
 							<br>
 					<?php 
-						$obras[]= $valor['idobra'];
 						}
 						
 					?>
-						<input type="hidden" name="obras" value='<?php echo serialize($obras)?>' />	    
-						<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
+						<input type="hidden" name="obras" value="<?php echo $obrasString?>" />	    
+						<input type="hidden" name="idpaciente" value="<?php echo $_GET['idpaciente'] ?>" />
 					
 					<div style="margin-left:20px;margin-top: 50px;">
 								<button class="btnsubmit btn-success" type="submit">Agregar</button>

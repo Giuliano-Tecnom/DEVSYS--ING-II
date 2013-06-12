@@ -16,19 +16,13 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
 
-<!--JQuery -->
-<script src='js/jquery.min.js'></script>
-<script src='js/validarAltaMedico.js'></script>
-
-
-
-
-
 </head>
-    <!-- Fin de HEAD-->
-	
+
 <body style="background-image:url('images/bg.png')">
- 	
+	<!--JQuery -->
+	<script src='js/jquery.min.js'></script>
+	<script src='js/validarFormularioMedico.js'></script>
+		
 	<?php include_once('header.php'); ?>
 	
 	<div class="encapsulador">

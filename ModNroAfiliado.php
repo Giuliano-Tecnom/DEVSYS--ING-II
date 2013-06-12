@@ -14,14 +14,16 @@
 		$obrasSeleccionadasString = $_GET['obras'];
 
 		if (!($obrasSeleccionadasString == "")){
-			$obrasConIdNombreConsulta = "SELECT os.nombre, os.idobra, po.nroAfiliado
-											FROM obrasociales as os
-											LEFT JOIN pac_obrasocial as po 
-											ON po.idobra = os.idobra
+			$obrasConIdNombreConsulta = "	SELECT 
+													os.nombre, 
+													os.idobra, 
+													po.nroAfiliado
+											FROM 
+													obrasociales AS os
+											LEFT JOIN pac_obrasocial as po ON po.idobra = os.idobra
 											WHERE os.idobra IN (".$obrasSeleccionadasString.")";
 			$obrasConIdNombre = mysql_query($obrasConIdNombreConsulta);
-			
-			//$obrasSeleccionadas = explode(",",$obrasSeleccionadasString); 
+
 		}
 	} else {
 		$obrasSeleccionadasString;
@@ -86,14 +88,14 @@
 					?>		
 						<input type="hidden" name="obrasSoloIDS" value='<?php echo $obrasSoloIDS ?>' />	  
 						<input type="hidden" name="obrasABorrarString" value='<?php echo $obrasABorrarString ?>' />	  						
-						<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
+						<input type="hidden" name="idpaciente" value="<?php echo $_GET['idpaciente'] ?>" />
 						<?php
 						} else {
 						?>
 						
 						 
 						<input type="hidden" name="obrasABorrarString" value='<?php echo $obrasABorrarString ?>' />	  						
-						<input type="hidden" name="dni" value="<?php echo $_GET['dni'] ?>" />
+						<input type="hidden" name="idpaciente" value="<?php echo $_GET['idpaciente'] ?>" />
 						<script language="JavaScript">document.form.submit();</script>
 						<?php
 						}

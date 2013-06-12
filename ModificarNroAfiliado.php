@@ -3,7 +3,7 @@
 include_once('mysqlconnect.php');
 
 
-	if(isset($_POST['dni'])){ 
+	if(isset($_POST['idpaciente'])){ 
 
 		if (isset($_POST['obrasSoloIDS'])) {
 			$obrasSoloIDS = explode(",",$_POST['obrasSoloIDS']);
@@ -20,7 +20,7 @@ include_once('mysqlconnect.php');
 		for($i=0; $i < count($obrasABorrar); $i++){
 			$obrasABorrarViejasConsulta = " DELETE FROM pac_obrasocial 
 										   WHERE idobra = ".$obrasABorrar[$i]." 
-										   AND dni = ".$_POST['dni']."";
+										   AND idpaciente = ".$_POST['idpaciente']."";
 			mysql_query($obrasABorrarViejasConsulta);
 		}
 		for ($i=0; $i < count($obrasSoloIDS) ; $i++){
@@ -30,13 +30,13 @@ include_once('mysqlconnect.php');
 			$res = mysql_query($consulta);
 			
 			if ( mysql_num_rows($res) == 0 ){
-				$consulta = "INSERT INTO pac_obrasocial (dni, idobra, nroAfiliado)
-							 VALUES ('".$_POST['dni']."', '".$obrasSoloIDS[$i]."', '".$nro."')";
+				$consulta = "INSERT INTO pac_obrasocial (idpaciente, idobra, nroAfiliado)
+							 VALUES ('".$_POST['idpaciente']."', '".$obrasSoloIDS[$i]."', '".$nro."')";
 				mysql_query($consulta); 
 
 				Header ('Location: GestionPacientes.php?Correcto=3');	
 			} else {
-				Header ("Location: GestionPacientes.php?dni=" .$_POST['dni']. "&Error=4&idobra=" .$obrasSoloIDS[$i]. " ");
+				Header ("Location: GestionPacientes.php?idpaciente=" .$_POST['idpaciente']. "&Error=4&idobra=" .$obrasSoloIDS[$i]. " ");
 			}
 		
 		}

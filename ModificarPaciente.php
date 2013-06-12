@@ -1,58 +1,62 @@
 <?php
 	
-	if (empty($_POST['dni'])) {
+	if (empty($_POST['idpaciente'])) {
 		Header ('Location: Pacientes.php');
 	}
-	
 	include_once('mysqlconnect.php');
 	
-	$dni=trim($_POST['dni']);
-	$consulta = " SELECT * FROM pacientes where dni = '" . $dni . "' ";
-	$res=mysql_query($consulta);
+	$idpaciente=trim($_POST['idpaciente']);
+	$queryPaciente = " 	SELECT 
+								* 
+						FROM 
+								pacientes 
+						WHERE idpaciente = ".$idpaciente."";
+					
+	$resultadoPaciente=mysql_query($queryPaciente);
+	$paciente = mysql_fetch_array($resultadoPaciente);
 	
-	$valor = mysql_fetch_array($res);
+	if ( mysql_num_rows($res) == 0  ||  ($_POST['idpaciente'] == $paciente['idpaciente']  ) ){
 	
-	if ( mysql_num_rows($res) == 0  ||  ($_POST['idpaciente'] == $valor['idpaciente']  ) ){
-		
-		$consulta_modif = "UPDATE pacientes SET nombre = '" . $_POST['nom'] . "', apellido = '" . $_POST['ape'] . "',
-		dni = '" . $_POST['dni'] . "', email = '" . $_POST['email'] . "', telefono = '" . $_POST['tel'] . "', direccion = '" . $_POST['dir'] . "',
-		fechaNac = '" . $_POST['fecnac'] . "' WHERE idpaciente = '" . $_POST['idpaciente'] . "' ";
-		
-		$modif = mysql_query($consulta_modif);
+		$queryModificar = "	UPDATE pacientes 
+							SET 
+								nombre = '". $_POST['nombre']."', 
+								apellido = '".$_POST['apellido']."',
+								dni = '".$_POST['dni']."', 
+								email = '".$_POST['email']."', 
+								telefono = '".$_POST['tel']."', 
+								direccion = '".$_POST['dir']."',
+								fechaNac = '".$_POST['fecnac']."' 
+							WHERE idpaciente = '".$_POST['idpaciente']."' 
+						";	
+		mysql_query($queryModificar);
 		
 		//Obras sociales que tenías previo a la modificacion.
-		$obrasocialesPrevias = "SELECT nombre,obrasociales.idobra FROM pac_obrasocial
-							              INNER JOIN obrasociales on obrasociales.idobra=pac_obrasocial.idobra
-										 WHERE  dni=".$_POST['dni']." ";
-		$resultado = mysql_query($obrasocialesPrevias);
-		
+		$obrasocialesPrevias = "SELECT 
+										nombre,
+										obrasociales.idobra 
+								FROM 
+										pac_obrasocial
+								INNER JOIN obrasociales on obrasociales.idobra=pac_obrasocial.idobra
+								WHERE  idpaciente=".$_POST['idpaciente']." ";
+								
+		$resultadoObrasocialesPrevias = mysql_query($obrasocialesPrevias);
 		$obrasQuePosee = array();
-		while ($valor = mysql_fetch_array($resultado)) {
-			$obrasQuePosee[] = $valor['idobra'];
-		}
 		
-		if(isset($_POST['obra'])){
+		while ($obraPrevia = mysql_fetch_array($resultadoObrasocialesPrevias)) {
+			$obrasQuePosee[] = $obraPrevia['idobra'];
+		}	
+		
+		if(isset($_POST['obra'])) {
 			$obrasSeleccionadas = $_POST['obra']; //Obras Seleccionadas
 		} else{
 			$obrasSeleccionadas;
 		}
-		$obrasBorrar = array();
-		/*if(count($obrasQuePosee) > 0) {
-			if(count($obrasSeleccionadas) > 0) {
-				$obrasBorrar = array_diff($obrasQuePosee, $obrasSeleccionadas); // obras a borrar
-			} else {
-				$obrasBorrar = $obrasQuePosee;
-			}
-		}*/
-		$obrasBorrarString = implode(",",$obrasQuePosee);
 		
+		$obrasBorrarString = implode(",",$obrasQuePosee);
 		$obrasSeleccionadasString = implode(",",$obrasSeleccionadas);
-			
-		echo count($obrasBorrar);
-	 	Header ("Location: ModNroAfiliado.php?dni=".$dni."&obras=".$obrasSeleccionadasString."&oaborrar=".$obrasBorrarString."");
-	
+		
+	 	Header ("Location: ModNroAfiliado.php?idpaciente=".$idpaciente."&obras=".$obrasSeleccionadasString."&oaborrar=".$obrasBorrarString."");	
 	} else {
-	  Header ("Location: Pacientes.php?Error=1&dni=".$dni."&idpaciente=".$_POST['idpaciente']."");
-	
+	  Header ("Location: Pacientes.php?Error=1&idpaciente=".$_POST['idpaciente']."");
 	}
 ?>

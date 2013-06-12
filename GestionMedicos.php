@@ -45,13 +45,13 @@
 					if($_GET['Correcto'] == 1){
 						echo"<div class='alert alert-success'>
 							<h4>Exito!</h4>
-							El paciente se agrego correctamente.
+							El Medico se agrego correctamente.
 							</div>";
 					}
 					if($_GET['Correcto'] == 2){
 						echo"<div class='alert alert-success'>
 							<h4>Exito!</h4>
-							El paciente se borro correctamente.
+							El Medico se borro correctamente.
 							</div>";
 					}
 				}
@@ -134,14 +134,14 @@
 					<tr>
 						<td>Nombre </td> 
 						<td>Apellido</td>
-						<td>Nro Matricula </td>
+						<td>Matricula</td>
 						<td>Direccion</td>
 						<td>Telefono</td>
 						<td>Email</td>
-						<td>O.Sociales</td>
+						<td>Obras Sociales</td>
 						<td>Especialidades</td>
 						<td>Dni</td>
-						<td>F.Nac</td>
+						<td>Fecha de Nacimiento</td>
 						<td><b>Activo</b>
 						<?php
 
@@ -224,7 +224,7 @@
 							}  
 						?>
 						
-						<td><button class="btn btn-danger" onclick="location.href='Medicos.php?nrolicencia=<?php echo $nrolicencia; ?> '" type="button">Modif</button> </td>
+						<td><button class="btn btn-danger" onclick="location.href='Medicos.php?nrolicencia=<?php echo $nrolicencia; ?> '" type="button">Modificar</button> </td>
 
 					</tr>
 				<?php
