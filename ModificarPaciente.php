@@ -15,7 +15,7 @@
 	$resultadoPaciente=mysql_query($queryPaciente);
 	$paciente = mysql_fetch_array($resultadoPaciente);
 	
-	if ( mysql_num_rows($res) == 0  ||  ($_POST['idpaciente'] == $paciente['idpaciente']  ) ){
+	if ( mysql_num_rows($resultadoPaciente) == 0  ||  ($_POST['idpaciente'] == $paciente['idpaciente']  ) ){
 	
 		$queryModificar = "	UPDATE pacientes 
 							SET 

@@ -48,7 +48,7 @@
 					if( $_GET['Error'] == 1 ){
 						echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
 								<h4>Error!!</h4>
-								Ya existe un Medico con la misma licencia. Si no lo encuentra revise los Inactivos.
+								Ya existe un medico con la misma matricula. Si no lo encuentra revise los Inactivos.
 								</div> ";
 					}
 					
@@ -68,8 +68,8 @@
 						<input class="apellidoo" name="apellido" type="text" maxlength="50" placeholder="Apellido..">
 					</div>
 					<div class="control-group">
-						<input class="nrolicenciaa" name="nrolicencia" type="text" maxlength="9" placeholder="NroMatricula..">
-						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Sin puntos, Ej: 10999</span>
+						<input class="nromatriculaa" name="nromatricula" type="text" maxlength="9" placeholder="NroMatricula..">
+						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ej: 11111111</span>
 					</div>
 					<div class="control-group">
 						<input class="dirr" name="dir" type="text" maxlength="150" placeholder="Direccion..">

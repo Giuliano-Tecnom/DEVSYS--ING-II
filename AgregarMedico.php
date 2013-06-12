@@ -6,50 +6,55 @@ include_once('mysqlconnect.php');
 	$esp=$_POST['especialidad'];
 	
 	
-	$nrolicencia=(int)trim(($_POST['nrolicencia']));
+	$nromatricula=(int)trim(($_POST['nromatricula']));
 	
 	
-	$consulta = " SELECT nrolicencia FROM medicos where nrolicencia = " . $nrolicencia. " ";
-	$res=mysql_query($consulta);
-	echo $consulta;
+	$consultaExistente = " SELECT nromatricula FROM medicos where nromatricula = ".$nromatricula."";
+	$existente=mysql_query($consultaExistente);
 	
-	if ( mysql_num_rows($res) == 0 ){
+	if ( mysql_num_rows($existente) == 0 ){
 	    //Insertar pacientes
-		$consulta = "INSERT INTO medicos(nrolicencia,dni,apellido, nombre,email
-										   ,telefono,fechaNac,direccion)
-					VALUES ('" . $nrolicencia. "','" .$_POST['dni']. "','" .$_POST['apellido']. "','" .$_POST['nombre']. "',
-							'" .$_POST['email']. "','" .$_POST['tel']. "','" .$_POST['fecnac']. "',
-							'" .$_POST['dir']. "' )
+		$queryAgregarMedico = "INSERT INTO medicos(dni, apellido, nombre, email, telefono, fechaNac, direccion, nromatricula)
+					VALUES (
+							'".$_POST['dni']."',
+							'".$_POST['apellido']."',
+							'".$_POST['nombre']."',
+							'".$_POST['email']."',
+							'".$_POST['tel']."',
+							'".$_POST['fecnac']."',
+							'".$_POST['dir']."',
+							'".$nromatricula."'
+							)
 					";
-		mysql_query($consulta);
+		mysql_query($queryAgregarMedico);
 		
+		//Consulta idMedico
+		$queryIdMedico = "	SELECT idmedico 
+							FROM   medicos
+							WHERE  nromatricula = ".$nromatricula."";
+		
+		$result = mysql_query($queryIdMedico);
+		$rowMedico = mysql_fetch_assoc($result);
+		$idmedico = $rowMedico['idmedico'];
 		//Insertar obra
 		for ($i=0; $i < count($obras) ; $i++){
-	        $consulta = "INSERT INTO med_obrasocial (nrolicencia,idobra)
-						VALUES ('" .$nrolicencia. "','" .$obras[$i]. "')
+	        $queryRelacionObraMedico = "INSERT INTO med_obrasocial (idmedico, idobra)
+										VALUES ('".$idmedico."', '".$obras[$i]."')
 						";
 			
-			mysql_query($consulta);
+			mysql_query($queryRelacionObraMedico);
 		}
 		
 		for ($i=0; $i < count($esp) ; $i++){
-	        $consulta = "INSERT INTO med_esp (nrolicencia,idespecialidad)
-						VALUES ('" .$nrolicencia. "','" .$esp[$i]. "')
-						";
+	        $queryRelacionEspecialidadMedico = "INSERT INTO med_esp (idmedico, idespecialidad)
+												VALUES ('".$idmedico."', '".$esp[$i]."')
+												";
 			
-			mysql_query($consulta);
+			mysql_query($queryRelacionEspecialidadMedico);
 		}
-		Header ('Location: AltaMedicos.php?Correcto=1');
-	    
-		
-		
-
-	
-	}else{
-	    
-		Header ('Location: AltaMedicos.php?Error=1');
-	
+		Header ('Location: GestionMedicos.php?Correcto=1');    
+	} else {
+	    Header ('Location: AltaMedicos.php?Error=1');
 	}
-	
 ?>
 
