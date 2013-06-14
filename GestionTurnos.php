@@ -4,9 +4,19 @@
 	include_once('mysqlconnect.php');
 	
 	$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = 1";
-    $resultado = mysql_query($consulta);
+    $query_pac = mysql_query($consulta);
+	
+	$consulta = "SELECT * FROM medicos WHERE medicos.activo = 1";
+    $query_med = mysql_query($consulta);
+	
+	$consulta = "SELECT * FROM obrasociales WHERE obrasociales.activo = 1";
+    $query_obra = mysql_query($consulta);
+
+	$consulta = "SELECT * FROM especialidades WHERE especialidades.activo = 1";
+    $query_espec = mysql_query($consulta);
 	
 ?> 
+<html>
 <head>
 <meta charset="UTF-8">
 <title>ClinicSystem - Turnos</title>
@@ -14,121 +24,116 @@
 <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"/>
+<!-- Scripts para búsqueda y filtro-->
+<script type="text/javascript" src="sh/shCore.js"></script>
+<script type="text/javascript" src="sh/shBrushJScript.js"></script>
+<script type="text/javascript" src="./sh/jquery.min.js"></script>
+<script type="text/javascript" src="./sh/jquery.searchabledropdown-1.0.8.min.js"></script>
+
+	<!-- Scripts para búsqueda y filtro-->
+	
+<script type="text/javascript">
+		$(document).ready(function() {
+			$("select").searchable();
+		});
+	
+	
+		// demo functions
+		$(document).ready(function() {
+			$("#value").html($("#myselect :selected").text() + " (VALUE: " + $("#myselect").val() + ")");
+			$("select").change(function(){
+				$("#value").html(this.options[this.selectedIndex].text + " (VALUE: " + this.value + ")");
+			});
+		});
+	
+		function modifySelect() {
+			$("select").get(0).selectedIndex = 5;
+		}
+	
+		function appendSelectOption(str) {
+			$("select").append("<option value=\"" + str + "\">" + str + "</option>");
+		}
+	
+		function applyOptions() {			  
+			$("select").searchable({
+				maxListSize: $("#maxListSize").val(),
+				maxMultiMatch: $("#maxMultiMatch").val(),
+				latency: $("#latency").val(),
+				exactMatch: $("#exactMatch").get(0).checked,
+				wildcards: $("#wildcards").get(0).checked,
+				ignoreCase: $("#ignoreCase").get(0).checked
+			});
+	
+			alert(
+				"OPTIONS\n---------------------------\n" + 
+				"maxListSize: " + $("#maxListSize").val() + "\n" +
+				"maxMultiMatch: " + $("#maxMultiMatch").val() + "\n" +
+				"exactMatch: " + $("#exactMatch").get(0).checked + "\n"+
+				"wildcards: " + $("#wildcards").get(0).checked + "\n" +
+				"ignoreCase: " + $("#ignoreCase").get(0).checked + "\n" +
+				"latency: " + $("#latency").val()
+			);
+		}
+	</script>
+
 
 </head>
 		<!-- Fin de HEAD-->
     
 <body style="background-image:url('images/bg.png')">
  	
-	<?php include_once('header.php'); ?>
 	
-	<div class="encapsulador">
-
-		<div class="contenedor">
-			
-			<ul class="breadcrumb">
-				<li> 
-					<h5>Gestion de Turnos<a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
-														 <!-- ICONO DE AYUDA -->  
-				</li>
-			</ul>
-		  
-			
+	
+<div style="margin-top: 100px;margin-left: 100px;">
+	<label>Pacientes</label>		
+	<select id="myselect" >
+				<?php
+					while ($valor = mysql_fetch_array($query_pac)) {
+				?>
+				<option value="<?php echo $valor["idpaciente"];?>"><?php echo $valor["nombre"]; ?> <?php echo $valor["apellido"]; ?></option>
+				<?php	  
+					}
+			?>
+		</select>
 		
-			
-			<div id="form-gestion-turnos"> 
-			
-				<form class="form-horizontal">
-					
-					<div class="control-group">
-						<select >
-							<?php
-							while ($valor = mysql_fetch_array($resultado)) {
-						?>
-								<option value="<?php echo $valor["idobra"];?>"><?php echo $valor["nombre"]; ?></option>
-						<?php	  
-							}
-						?>
-						</select>
-					</div>
-					<div class="control-group">
-						<input type="text" placeholder="Buscar Medicos..">
-					</div>
-					<div class="control-group">
-						<select multiple="multiple">
-							
-						</select>
-					</div>
-					<div style="margin-left: 300px;margin-top: -268px;">
-						<label>Obra Social</label>
-							<select multiple="multiple">
-								
-							</select>
-					</div>
-					<div style="margin-left: 300px;margin-top: 45px;">
-						<label>Especialidad</label>
-							<select multiple="multiple">
-								
-							</select>
-					</div>
-					<div style="margin-left: 600px;margin-top: -250px;">
-						<label>Fecha</label>
-							<select>
-								
-							</select>
-					</div>
-					<div style="margin-left: 600px;margin-top: 24px;">
-						<label>Franja Horaria</label>
-							<select>
-								<option>Manana</option>
-								<option>Tarde</option>
-							</select>
-					</div>
-					<div style="margin-top: 40px; margin-left:600px;">
-						<button type="submit" class="btn btn-success">Siguiente</button>
-					</div>
-					<button class="btn btn-primary" type="button" style="margin-top: 15px;margin-left: 600px;">Turno Nuevo</button>
-				</form>
-			</div>
-
-	<!--		<div id="tabla-gestion-turnos">
-
-				<table class="table table-striped">
-					<tr>
-						<td>Medico</td>
-						<td>Hora</td>
-						<td>Fecha</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>Peter Brown</td>
-						<td>15:40 - 16:00</td>
-						<td>17/05/2013</td>
-						<td><button class="btn btn-danger" type="button">Borrar</button></td>
-					</tr>
-					<tr>
-						<td>Peter Brown</td>
-						<td>9:20 - 9:40</td>
-						<td>21/05/2013</td>
-						<td><button class="btn btn-danger" type="button">Borrar</button></td>
-					</tr>
-					<tr>
-						<td>Peter Brown</td>
-						<td>19:00 - 19:20</td>
-						<td>02/06/2013</td>
-						<td><button class="btn btn-danger" type="button">Borrar</button></td>
-					</tr>
-				</table>
-			</div> -->
-			
-		</div>      <!-- FIN DIV CONTENDOR -->
-	
-	</div>  <!-- FIN ENCAPSULADOR-->
-			
+   <label>Medicos</label>
+	<select id="myselect" >
+				<?php
+					while ($valor = mysql_fetch_array($query_med)) {
+				?>
+				<option value="<?php echo $valor["idmedico"];?>"><?php echo $valor["nombre"]; ?> <?php echo $valor["apellido"]; ?></option>
+				<?php	  
+					}
+			?>
+		</select>	
 
 
+</div>
+<div style="margin-top: -146px;margin-right: 300px;float: right;">
+	<label>Obras Sociales</label>		
+	<select id="myselect" >
+				<?php
+					while ($valor = mysql_fetch_array($query_obra)) {
+				?>
+				<option value="<?php echo $valor["idobra"];?>"><?php echo $valor["nombre"]; ?></option>
+				<?php	  
+					}
+			?>
+		</select>
+		
+   <label>Especialidades</label>
+	<select id="myselect" >
+				<?php
+					while ($valor = mysql_fetch_array($query_espec)) {
+				?>
+				<option value="<?php echo $valor["idespecialidad"];?>"><?php echo $valor["nombre"]; ?></option>
+				<?php	  
+					}
+			?>
+		</select>	
 
 
+</div>
 </body>
 </html>
   
