@@ -72,18 +72,18 @@ var parametros = {
 			</ul>
 		  
 			
-			
+			    <label><b>Medicos</b></label>
 				<form>
-                  <select name="users" onchange="realizaProceso(this.value)">
-                   <option value="">Médicos:</option>
-				   <option value="1">Orlando Piazzesi</option>
+				   <select name="users" onchange="realizaProceso(this.value)">
+                   <option value="1">Orlando Piazzesi</option>
 				   <option value="2">Lois Griffin</option>
 				   <option value="3">Glenn Quagmire</option>
 				   <option value="4">Joseph Swanson</option>
                   </select>
 				</form>
 
-			Resultado: <span id="resultado"></span>
+			 
+			<span id="resultado"></span>
 
 			<!-- BOTON DE SALIR y REPORTE-->
 			

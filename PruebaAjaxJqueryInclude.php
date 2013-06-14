@@ -6,38 +6,27 @@ include_once('mysqlconnect.php');
 			
 	
 
-$sql="SELECT * FROM medicos WHERE idmedico = ".$_POST['valorSelect']."";
 
 
 
-$result = mysql_query($sql);
+$obras="SELECT * FROM  med_obrasocial 
+                 inner join obrasociales obra on obra.idobra=med_obrasocial.idobra
+				 where med_obrasocial.idmedico=".$_POST['valorSelect']." 
+				 
+";
 
-echo "<table  border='1'>
-<tr>
-<th>Nombre</th>
-<th>Apellido</th>
-<th>Nro Matricula</th>
-<th>Email</th>
-<th>Telefono</th>
-<th>Fecha Nacimiento</th>
-<th>dni</th>
-</tr>";
-
-while($row = mysql_fetch_array($result))
+$query_obras=mysql_query($obras);
+while($row = mysql_fetch_array($query_obras))
   {
-  echo "<tr>";
-  echo "<td>" . $row['nombre'] . "</td>";
-  echo "<td>" . $row['apellido'] . "</td>";
-  echo "<td>" . $row['nromatricula'] . "</td>";
-  echo "<td>" . $row['email'] . "</td>";
-  echo "<td>" . $row['telefono'] . "</td>";
-  echo "<td>" . $row['fechaNac'] . "</td>";
-  echo "<td>" . $row['dni'] . "</td>";
-  echo "</tr>";
-  }
-echo "</table>";
+echo "
+     <label><b>Obras Sociales asociadas al Medico</label></b>
+     <select name='Obras'>
+                   <option value=". $row['idobra'] .">" . $row['nombre'] . "</option>
+				   
+     </select>
 
-  
+";
+  }
   
   
 ?>
