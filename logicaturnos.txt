@@ -2,8 +2,6 @@
 -Drop listas pacientes.
 
 1)Generar turno medico (orlando).
-
-   
    -Drop lista medicos.
    -Drop lista obras asociadas al medico (se carga segun la seleccion del medico)
    -Realizar la consulta y retornar los horarios disponibles.
@@ -11,15 +9,42 @@
    
    
 2)Generar turno segun especialidad.
- -Drop lista especialidades.
- -Drop lista medicos (se carga a partir de la especialidad seleccionada)
- -Drop lista obras asociadas al medico (se carga segun la seleccion del medico)
- -Realizar la consulta y retornar los horarios disponibles.
-  -Generar el turno.
+	-Drop lista especialidades.
+	-Drop lista medicos (se carga a partir de la especialidad seleccionada)
+	-Drop lista obras asociadas al medico (se carga segun la seleccion del medico)
+	-Realizar la consulta y retornar los horarios disponibles.
+	-Generar el turno.
 
  
 3)Generar turno a partir de obras sociales.
--Drop obras sociales y especialidades
--Drop lista medicos (trae los medicos asociados a la obra social y especialidades)
--Realizar la consulta y retornar los horarios disponibles.
--Generar el turno.
+	-Drop obras sociales y especialidades
+	-Drop lista medicos (trae los medicos asociados a la obra social y especialidades)
+	-Realizar la consulta y retornar los horarios disponibles.
+	-Generar el turno.
+	
+	
+	
+Script horarios:
+
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('08:00', '14:00', 'Lunes');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('14:00', '20:00', 'Lunes');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('08:00', '14:00', 'Martes');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('14:00', '20:00', 'Martes');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('08:00', '14:00', 'Miercoles');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('14:00', '20:00', 'Miercoles');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('08:00', '14:00', 'Jueves');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('14:00', '20:00', 'Jueves');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('08:00', '14:00', 'Viernes');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('14:00', '20:00', 'Viernes');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`) 
+VALUES ('08:00', '14:00', 'Sabado');

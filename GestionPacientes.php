@@ -204,9 +204,9 @@
 							
 								if( $valor["activo"] == 1 ){
 						?>	
-									<td><a data-toggle="modal" role="button" href="#borrar" class="btn btn-warning">Borrar</a></td>
+									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $dni; ?>" class="btn btn-warning">Borrar</a></td>
 									<!-- MODAL DE CANCELAR -->
-									<div id="borrar" class="modal hide fade in" style="display: none; ">
+									<div id="borrar<?php echo $dni; ?>" class="modal hide fade in" style="display: none; ">
 										<div class="modal-body">
 											<h4>Aviso</h4>	      
 											<p> Esta seguro que desea Borrar al paciente? </p>
@@ -216,6 +216,8 @@
 											<a class="btn btn-warning"  href="BorrarPaciente.php?dni=<?php echo $dni; ?>">Aceptar</a>
 										</div>
 									</div>
+									
+									
 						<?php	}else{ ?>
 									<td><button class="btn btn-success" type="button" onclick="location.href='HabilitarPaciente.php?dni=<?php echo $dni; ?> '">Habilitar</button></td>
 						<?php	}  
