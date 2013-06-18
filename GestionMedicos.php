@@ -229,7 +229,7 @@
 					?>
 					
 					<td><button class="btn btn-danger" onclick="location.href='CargaMedico.php?idmedico=<?php echo $idmedico; ?> '" type="button">Modificar</button> </td>
-
+					
 				</tr>
 			<?php
 			}

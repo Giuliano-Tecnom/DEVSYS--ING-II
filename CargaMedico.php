@@ -176,12 +176,52 @@
 				</select>
 				<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 				</div>
+				
+				<div style="margin-left: 550px;margin-top: -275px;";>
+					<label>Horarios</label>
+					<select multiple="multiple" id="horarios" name="horarios[]" size='11' style="width: 150px;">
+					<?php 
+						$queryMedicoHorario = "SELECT h.idhorario
+											   FROM horarios AS h
+											   INNER JOIN med_hor AS mh on mh.idhorario = h.idhorario
+											   WHERE  mh.idmedico=".$_GET['idmedico']." ";
+						$resultadoQueryMedicoHorario = mysql_query($queryMedicoHorario);
+					
+						$hor = array();
+						
+						while ($medicoHorario = mysql_fetch_array($resultadoQueryMedicoHorario)) {
+							$hor[] = $medicoHorario['idhorario'];
+						}		
+					
+						$queryHorariosResto = "SELECT h.idhorario, h.dia, TIME_FORMAT(h.horaIn,'%H:%m') as horaIn , TIME_FORMAT(h.horaOut,'%H:%m') as horaOut  
+											   FROM horarios as h
+											   WHERE h.idhorario ";
+						$resultadoQueryHorarioResto = mysql_query($queryHorariosResto);
+
+						while ($horarioResto = mysql_fetch_array($resultadoQueryHorarioResto)) {
+							if( in_array($horarioResto['idhorario'], $hor) ){
+					?>			<option selected="selected" value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]." ".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
+					<?php	}else{ ?>
+								<option value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]." ".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
+					<?php	  
+							}
+						}
+					?>
+
+					</select>
+						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
+				</div>
 	
 				
-				<div style="margin-left: 550px;margin-top: -77px;">
-					<button class="btn btn-mini" type="button" onclick="location.href='GestionObras.php'">Editar</button>
+				<div style="margin-left: 448px;margin-top: -250px;">
+					<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Adm. Obras</button>
 				</div>
-				<div style="margin-left:300px;margin-top: 90px;">
+				<div style="margin-left: 407px;margin-top: 120px;">
+					<button class="btn btn-mini" onclick="location.href='GestionEspecialidades.php'"type="button">Adm. Especialidades</button>
+				</div>
+				
+				
+				<div style="margin-left:300px;margin-top: 120px;">
 					<button class="btnsubmit btn-success" type="submit">Modificar</button>
 					<button class="btn btn-danger" type="button" onclick="location.href='GestionMedicos.php' ">Cancelar </button>
 				</div>		

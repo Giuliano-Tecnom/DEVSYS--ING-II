@@ -2,7 +2,9 @@
 	include_once('mysqlconnect.php');
 	
 	$consultaObras = "SELECT idobra, nombre FROM obrasociales where activo = 1 ORDER BY nombre";
-    $resultadoObras = mysql_query($consultaObras);
+	$resultadoObras = mysql_query($consultaObras);
+	$consultaHorarios = "SELECT idhorario, dia, TIME_FORMAT(horaIn,'%H:%m') as horaIn , TIME_FORMAT(horaOut,'%H:%m') as horaOut FROM horarios ORDER BY idhorario";
+	$resultadoHorarios = mysql_query($consultaHorarios);
     $consultaEsp= "SELECT idespecialidad, nombre FROM especialidades where activo = 1 ORDER BY nombre";	
 	$resultadoEsp = mysql_query($consultaEsp);
 ?>      <!-- Fin de CONSULTAS-->
@@ -93,9 +95,7 @@
 						<input class="fecnacc" name="fecnac" type="date" min="1900-01-01" max="2013-06-01" placeholder="Fecha de Nacimiento..">
 						<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD.MM.AAAA</span>
 					</div>
-				
-					
-					
+		
 					<div style="margin-left: 300px;margin-top: -325px;">
 						<label>Obra Social</label>
 						<select multiple="multiple" id="obra" name="obra[]">
@@ -125,34 +125,40 @@
 						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 					</div>
 					
-					
-					
-					
-					
-					
-					<div style="margin-left: 550px;margin-top: -191px;">
-						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Editar</button>
+					<div style="margin-left: 448px;margin-top: -281px;">
+						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Adm. Obras</button>
 					</div>
-					<div style="margin-left: 550px;margin-top: 118px;">
-						<button class="btn btn-mini" onclick="location.href='GestionEspecialidades.php'"type="button">Editar</button>
+					<div style="margin-left: 407px;margin-top: 125px;">
+						<button class="btn btn-mini" onclick="location.href='GestionEspecialidades.php'"type="button">Adm. Especialidades</button>
 					</div>
-					<div style="margin-left:300px;margin-top: 45px;">
+					<div style="margin-left:300px;margin-top: 150px;">
 						<button class="btnsubmit btn-success" type="submit">Agregar</button>
 						<button class="btn btn-danger" type="button" onclick="location.href='GestionMedicos.php'">Cancelar </button>
 					</div>
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
+				
+					
+					<div style="margin-left: 550px;margin-top: -367px;";>
+						<label>Horarios</label>
+						<select multiple="multiple" id="horarios" name="horarios[]" size='11' style="width: 150px;">
+						<?php
+							while ($horario = mysql_fetch_array($resultadoHorarios)) {
+						?>		
+								<option value="<?php echo $horario["idhorario"];?>"><?php echo $horario["dia"]." ".$horario["horaIn"]." - ".$horario["horaOut"]?></option>
+						<?php	  
+							}
+						?>
+						</select>
+						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
+					</div>
+				
+					
+				
+				
+				
 				</form>
 			</div>
-			
-
-			
-			
-			
-			
-			
-			
-			
-			
+				
 			
 			<!-- BOTON DE SALIR Y ATRAS-->
 			<ul class="breadcrumb" style="margin-top: 600px;">

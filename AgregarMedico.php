@@ -4,7 +4,7 @@ include_once('mysqlconnect.php');
 	
 	$obras=$_POST['obra'];
 	$esp=$_POST['especialidad'];
-	
+	$horarios=$_POST['horarios'];
 	
 	$nromatricula=(int)trim(($_POST['nromatricula']));
 	
@@ -43,6 +43,15 @@ include_once('mysqlconnect.php');
 						";
 			
 			mysql_query($queryRelacionObraMedico);
+		}
+		
+		//Insertar relacion hr - medico
+		for ($i=0; $i < count($horarios) ; $i++){
+	        $queryRelacionHorarioMedico = "INSERT INTO med_hor (idmedico, idhorario)
+										   VALUES ('".$idmedico."', '".$horarios[$i]."')
+										  ";
+			
+			mysql_query($queryRelacionHorarioMedico);
 		}
 		
 		for ($i=0; $i < count($esp) ; $i++){
