@@ -2,10 +2,10 @@
 -- version 3.5.8.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 31, 2013 at 10:36 PM
--- Server version: 5.6.11-log
--- PHP Version: 5.4.14
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 12-06-2013 a las 03:19:14
+-- Versión del servidor: 5.6.11-log
+-- Versión de PHP: 5.4.14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `clinicsystem`
+-- Base de datos: `clinicsystem`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `especialidades`
+-- Estructura de tabla para la tabla `especialidades`
 --
 
 CREATE TABLE IF NOT EXISTS `especialidades` (
@@ -33,23 +33,10 @@ CREATE TABLE IF NOT EXISTS `especialidades` (
   PRIMARY KEY (`idespecialidad`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
---
--- Dumping data for table `especialidades`
---
-
-INSERT INTO `especialidades` (`idespecialidad`, `nombre`, `activo`) VALUES
-(9, 'OdontologÃ­a', 1),
-(10, 'TraumatologÃ­a', 1),
-(11, 'DermatologÃ­a', 1),
-(13, 'Pediatria', 1),
-(14, 'RadiologiA', 1),
-(16, 'Radio', 0),
-(17, 'prueba', 1);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `horarios`
+-- Estructura de tabla para la tabla `horarios`
 --
 
 CREATE TABLE IF NOT EXISTS `horarios` (
@@ -63,29 +50,27 @@ CREATE TABLE IF NOT EXISTS `horarios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `medicos`
+-- Estructura de tabla para la tabla `medicos`
 --
 
 CREATE TABLE IF NOT EXISTS `medicos` (
-  `nrolicencia` int(11) NOT NULL,
+  `idmedico` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `apellido` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `nromatricula` int(11) NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` int(25) NOT NULL,
   `fechaNac` date NOT NULL,
   `dni` int(11) NOT NULL,
-  `calle` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `numerocasa` int(11) NOT NULL,
-  `piso` int(11) NOT NULL,
-  `depto` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`nrolicencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`idmedico`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `med_esp`
+-- Estructura de tabla para la tabla `med_esp`
 --
 
 CREATE TABLE IF NOT EXISTS `med_esp` (
@@ -97,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `med_esp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `med_hor`
+-- Estructura de tabla para la tabla `med_hor`
 --
 
 CREATE TABLE IF NOT EXISTS `med_hor` (
@@ -109,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `med_hor` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `med_obrasocial`
+-- Estructura de tabla para la tabla `med_obrasocial`
 --
 
 CREATE TABLE IF NOT EXISTS `med_obrasocial` (
@@ -121,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `med_obrasocial` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `obrasociales`
+-- Estructura de tabla para la tabla `obrasociales`
 --
 
 CREATE TABLE IF NOT EXISTS `obrasociales` (
@@ -129,25 +114,12 @@ CREATE TABLE IF NOT EXISTS `obrasociales` (
   `nombre` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idobra`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
-
---
--- Dumping data for table `obrasociales`
---
-
-INSERT INTO `obrasociales` (`idobra`, `nombre`, `activo`) VALUES
-(2, 'OSDE', 0),
-(3, 'GALENO  ', 1),
-(4, 'IOMA', 1),
-(6, 'OSECAg ', 1),
-(7, 'OBRAONE', 1),
-(8, 'no SE', 1),
-(9, 'UPCNN', 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pacientes`
+-- Estructura de tabla para la tabla `pacientes`
 --
 
 CREATE TABLE IF NOT EXISTS `pacientes` (
@@ -155,52 +127,31 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   `dni` int(11) NOT NULL,
   `apellido` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `telefono` int(11) NOT NULL,
   `fechaNac` date NOT NULL,
   `direccion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idpaciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=52 ;
-
---
--- Dumping data for table `pacientes`
---
-
-INSERT INTO `pacientes` (`idpaciente`, `dni`, `apellido`, `nombre`, `email`, `telefono`, `fechaNac`, `direccion`, `activo`) VALUES
-(7, 0, 'Rissito', 'Jorgue', '', 0, '0000-00-00', '', 1),
-(10, 31111113, 'Piazzese', 'Giuliano', 'giuly.tolosaa@hotmail.com', 1234565687, '2013-05-30', '12314', 1),
-(33, 36936534, '', 'Mora', '', 0, '2013-05-30', '', 0),
-(47, 36936535, 'Barovero', 'Marcelo', '', 0, '0000-00-00', '', 0),
-(51, 34567789, '', 'tebi', '', 0, '0000-00-00', '', 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=72 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pac_obrasocial`
+-- Estructura de tabla para la tabla `pac_obrasocial`
 --
 
 CREATE TABLE IF NOT EXISTS `pac_obrasocial` (
-  `dni` int(11) NOT NULL,
+  `idpaciente` int(11) NOT NULL,
   `idobra` int(11) NOT NULL,
   `nroAfiliado` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `activo` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`dni`,`idobra`)
+  PRIMARY KEY (`idpaciente`,`idobra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `pac_obrasocial`
---
-
-INSERT INTO `pac_obrasocial` (`dni`, `idobra`, `nroAfiliado`, `activo`) VALUES
-(2147483647, 4, '', 1),
-(2147483647, 7, '', 1),
-(2147483647, 8, '', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `turnos`
+-- Estructura de tabla para la tabla `turnos`
 --
 
 CREATE TABLE IF NOT EXISTS `turnos` (
@@ -213,17 +164,17 @@ CREATE TABLE IF NOT EXISTS `turnos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idusuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `apellido` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `usuario` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `tipo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`idusuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
