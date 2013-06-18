@@ -136,6 +136,8 @@
 				</form>
 			</div>
 			-->
+			
+			<!-- COMIENZA BARRA DE OPCIONES -->
 			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
 			        <button class="btn btn-info" type="button" onclick="location.href='AltaPacientes.php'">Paciente Nuevo</button>
                     <button class="btn btn-info" type="button">Generar Reporte</button>
@@ -147,6 +149,7 @@
 					<?php	} ?>
 					</button>
 			</div>
+			<!-- FIN BARRA DE OPCIONES -->
 			
 			<div id="tabla-gestion-pacientes">
 

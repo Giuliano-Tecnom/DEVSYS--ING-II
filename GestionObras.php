@@ -28,8 +28,6 @@
 	
 	<div class="encapsulador">
 	
-
-
 		<div class="contenedor">
 			
 			<ul class="breadcrumb">
@@ -60,28 +58,29 @@
 				
 			?>
 			
-			<button class="btn btn-primary" type="button" onclick="location.href='AltaObras.php'" 
-			style="margin-top: 25px;margin-left: 300px;">Agregar Obra Social</button>
+			<!-- COMIENZA BARRA DE OPCIONES -->
+			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
+			        <button class="btn btn-info" type="button" onclick="location.href='AltaObras.php'">Agregar Obra Social</button>
+                    <button class="btn btn-info" type="button">Generar Reporte</button>
+				    <button class="btn btn-info" type="button"
+					<?php	if($ojito == 1){ ?>
+								onclick="location.href='GestionObras.php?ojito=0'"> Mostrar Inactivos <i class="icon-eye-close" style="margin-left: 3px;"></i>
+					<?php	} else { ?>			
+								onclick="location.href='GestionObras.php?ojito=1'"> Ocultar Inactivos <i class="icon-eye-open" style="margin-left: 3px;"></i>
+					<?php	} ?>
+					</button>
+			</div>
+			<!-- FIN BARRA DE OPCIONES -->
 			
 		</div>
-			<div id="tabla-gestion-obrasociales" style="margin-top:20px;">
+		
+		<div id="tabla-gestion-obrasociales">
 
 				<table class="table table-striped">
 					<tr>
 						<td><b>Obra Social</b> </td>
-						<td><b>Activo</b>
-						<?php
-
-							if($ojito == 1){
-								echo "<a href='GestionObras.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
-							} else {
-								echo "<a href='GestionObras.php?ojito=1'><i class='icon-eye-open' style='margin-left: 3px; margin-top: 3px;'></i></a>";
-							}
-						?>
-						</td>
 						<td></td>
-						<td></td>
-						
+						<td></td>	
 					</tr>
 					<?php
 				while ($valor = mysql_fetch_array($resultado))
@@ -93,15 +92,16 @@
 							$id = $valor['idobra'];
 							
 							if( $valor["activo"] == 1 ){
-								echo "<td>  Si </td>";
+								
 								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarObra.php?idobra=".$id."'>Borrar </a></button> </td>";
 							}     
 						    else {
-							    echo "<td>No</td>";
+							   
 								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarObra.php?idobra=".$id."'>Habilitar </a></button> </td>";
 							}  
 						?>
 						
+			
 						<td><button class="btn btn-danger" onclick="location.href='ObraSocial.php?idobra=<?php echo $valor["idobra"]; ?>'" type="button">Modif</button> </td>
 						
 					</tr>
@@ -109,27 +109,9 @@
 				}
 				?>	
 				</table>
-			</div>
-
-						<!-- BOTON DE SALIR, ATRAS y REPORTE-->
-			<ul class="breadcrumb">
-				<li> 
-					<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
-					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
-						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
-					</div>
-				</li>
-			</ul>
-
-		</div>      <!-- FIN DIV CONTENDOR -->
-
+		</div>
 
 	</div>  <!-- FIN ENCAPSULADOR-->
-
-
-
-
 
 </body>
 </html>
