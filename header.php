@@ -15,7 +15,7 @@
 							<td><a href="index.php"><button class="btn btn-large btn-info" type="button">Inicio</button></a></td>
 							<td><a href="GestionPacientes.php"><button class="btn btn-large" type="button">Pacientes</button></a></td>
 							<td><a href="GestionMedicos.php"><button class="btn btn-large" type="button">Medicos</button></a></td>
-							<td><a href="#"><button class="btn btn-large" type="button">Turnos</button></a></td>
+							<td><a href="GestionTurnos.php"><button class="btn btn-large" type="button">Turnos</button></a></td>
 							<td><a data-toggle="modal" role="button" href="#exit" class="btn btn-inverse btn-large">Salir</a></td>
 						</tr>
 					</table>

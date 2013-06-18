@@ -1,4 +1,30 @@
 <?php
+if(isset($_GET['pre'])){
+    $opcionSeleccionada=$_GET['idsel'];
+    $html='<select name=\"idpresupuesto\" id=\"idpresupuesto\">';
+	include_once('mysqlconnect.php');
+	$consulta = "SELECT mo.idobra, os.nombre FROM med_obrasocial as mo INNER JOIN obrasociales as os ON mo.idobra = os.idobra WHERE idmedico =  ".$opcionSeleccionada;
+	$query_med = mysql_query($consulta);
+
+	    
+ 	 while ($valor = mysql_fetch_array($query_med)) {   
+	     if ($valor["idobra"] == $opcionSeleccionada) { $sel = " selected "; } else { $sel = " "; }
+	 
+	     $html.= "<option value='".$valor["idobra"]."' ".$sel." > ".$valor['nombre']."</option>";
+     }
+     $html.='</select>';
+echo 'document.getElementById("pp2").innerHTML="'.$html.'";';
+	
+exit;
+} 
+	
+					
+					
+			
+
+?>
+
+<?php
 	
 	
 	include_once('mysqlconnect.php');
@@ -97,7 +123,7 @@
 		</select>
 		
    <label>Medicos</label>
-	<select id="myselect" >
+	<select id="myselect" onChange="adjs('GestionTurnos.php?pre&idsel='+this.value)" >
 				<?php
 					while ($valor = mysql_fetch_array($query_med)) {
 				?>
@@ -134,7 +160,23 @@
 
 
 </div>
+<div id="pp2"><select name="idpresupuesto" id="idpresupuesto">
+
+
+
+</div>
 </body>
 </html>
   
-  
+<script>
+function adjs(url){
+//alert(url);
+oldsc=document.getElementById("old_sc");
+if(oldsc)
+document.getElementsByTagName('body')[0].removeChild(oldsc);
+sc=document.createElement('script');
+sc.id="old_sc";
+sc.src=url+'&'+Math.random();
+document.getElementsByTagName('body')[0].appendChild(sc);
+}
+</script>  
