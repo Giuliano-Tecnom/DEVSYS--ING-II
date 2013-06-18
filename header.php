@@ -1,6 +1,7 @@
+<?php if (!isset ($x)) { ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap-modal.js"></script>		
-		
+		<?php } ?>
 		
 		<div class="header">
 		<table style="margin-top: 40px; ">

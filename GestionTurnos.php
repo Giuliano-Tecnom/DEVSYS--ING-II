@@ -1,26 +1,55 @@
+
 <?php
+
 if(isset($_GET['pre'])){
     $opcionSeleccionada=$_GET['idsel'];
-    $html='<select name=\"idpresupuesto\" id=\"idpresupuesto\">';
+    $html='<select style=\"margin-left: 100px; margin-top: 20;\" name=\"idpresupuesto\" id=\"idpresupuesto\" >';
 	include_once('mysqlconnect.php');
 	$consulta = "SELECT mo.idobra, os.nombre FROM med_obrasocial as mo INNER JOIN obrasociales as os ON mo.idobra = os.idobra WHERE idmedico =  ".$opcionSeleccionada;
 	$query_med = mysql_query($consulta);
 
-	    
- 	 while ($valor = mysql_fetch_array($query_med)) {   
+	
+
+
+	while ($valor = mysql_fetch_array($query_med)) {   
 	     if ($valor["idobra"] == $opcionSeleccionada) { $sel = " selected "; } else { $sel = " "; }
 	 
 	     $html.= "<option value='".$valor["idobra"]."' ".$sel." > ".$valor['nombre']."</option>";
      }
-     $html.='</select>';
-echo 'document.getElementById("pp2").innerHTML="'.$html.'";';
+     $html.='</select><br>';
+echo 'document.getElementById("idpresupuesto").innerHTML="'.$html.'";';
+
+
+//horarios
+
+    $html_hor='<br></br><select style=\"margin-left: 100px; margin-top: 20;\" name=\"idhorario\" id=\"idhorario\" >';
+	include_once('mysqlconnect.php');
+	$consulta_hor = "select * from med_hor inner join horarios on horarios.idhorario=med_hor.idhorario where med_hor.idmedico= ".$opcionSeleccionada;
+	$query_hor = mysql_query($consulta_hor);
+
 	
+
+
+	while ($valor = mysql_fetch_array($query_hor)) {   
+	     
+	 
+	     $html_hor.= "<option value='".$valor["idhorario"]."'  > ".$valor['horaIn']."</option>";
+     }
+     $html_hor.='</select><br>';
+echo 'document.getElementById("idhorario").innerHTML="'.$html_hor.'";';
+
+
+
+
+
+
 exit;
+
+
+
 } 
 	
-					
-					
-			
+						
 
 ?>
 
@@ -53,7 +82,7 @@ exit;
 <!-- Scripts para búsqueda y filtro-->
 <script type="text/javascript" src="sh/shCore.js"></script>
 <script type="text/javascript" src="sh/shBrushJScript.js"></script>
-<script type="text/javascript" src="./sh/jquery.min.js"></script>
+<script type="text/javascript" src="./sh/jquery.min.js"></script> 
 <script type="text/javascript" src="./sh/jquery.searchabledropdown-1.0.8.min.js"></script>
 
 	<!-- Scripts para búsqueda y filtro-->
@@ -107,7 +136,8 @@ exit;
 		<!-- Fin de HEAD-->
     
 <body style="background-image:url('images/bg.png')">
- 	
+ 	<?php $x=1; ?>
+	<?php include_once('header.php'); ?>
 	
 	
 <div style="margin-top: 100px;margin-left: 100px;">
@@ -132,39 +162,15 @@ exit;
 					}
 			?>
 		</select>	
-
-
-</div>
-<div style="margin-top: -146px;margin-right: 300px;float: right;">
-	<label>Obras Sociales</label>		
-	<select id="myselect" >
-				<?php
-					while ($valor = mysql_fetch_array($query_obra)) {
-				?>
-				<option value="<?php echo $valor["idobra"];?>"><?php echo $valor["nombre"]; ?></option>
-				<?php	  
-					}
-			?>
-		</select>
 		
-   <label>Especialidades</label>
-	<select id="myselect" >
-				<?php
-					while ($valor = mysql_fetch_array($query_espec)) {
-				?>
-				<option value="<?php echo $valor["idespecialidad"];?>"><?php echo $valor["nombre"]; ?></option>
-				<?php	  
-					}
-			?>
-		</select>	
+<label> Obra Social del Medico </label>
+<select  name="idpresupuesto" id="idpresupuesto">
 
+<label> Horarios </label>
+<select  name="idhorario" id="idhorario">
 
 </div>
-<div id="pp2"><select name="idpresupuesto" id="idpresupuesto">
 
-
-
-</div>
 </body>
 </html>
   
