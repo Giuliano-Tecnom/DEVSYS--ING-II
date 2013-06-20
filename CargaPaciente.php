@@ -119,10 +119,7 @@
 					</select>
 					<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 				</div>
-				<div style="margin-left: 550px;margin-top: -77px;">
-					<button class="btn btn-mini" type="button" onclick="location.href='GestionObras.php'">Editar</button>
-				</div>
-				<div style="margin-left:300px;margin-top: 90px;">
+				<div style="margin-left:300px;margin-top: 180px;">
 					
 					<a data-toggle="modal" role="button" href="#modificar" class="btnsubmit btn-success">Modificar</a>
 						<!-- MODAL DE MODIFICAR -->
@@ -158,15 +155,6 @@
 		<?php
 			}
 		?>
-		<!-- BOTON DE SALIR-->
-		<ul class="breadcrumb" style="margin-top: 600px;">
-			<li>
-				<div style="margin-left: 800px;">
-					<button class="btn btn-primary"type="button"> Atras </button>
-					<button class="btn btn-inverse" type="button"> Salir </button>
-				</div>
-			</li>
-		</ul>
 		
 	</div>  <!-- FIN ENCAPSULADOR-->
 

@@ -100,10 +100,8 @@
 						</select>
 						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 					</div>
-					<div style="margin-left: 550px;margin-top: -77px;">
-						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Editar Obra Social</button>
-					</div>
-					<div style="margin-left:300px;margin-top: 90px;">
+
+					<div style="margin-left:300px;margin-top: 180px;">
 					
 							
 						<a data-toggle="modal" role="button" href="#agregar" class="btnsubmit btn-success">Agregar</a>

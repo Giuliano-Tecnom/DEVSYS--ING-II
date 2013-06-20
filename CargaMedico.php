@@ -95,7 +95,7 @@
 				
 				
 				<!-- Obras Sociales -->
-				<div style="margin-left: 300px;margin-top: -285px;">
+				<div style="margin-left: 300px;margin-top: -320px;">
 					<label>Obra Social</label>
 					<select multiple="multiple" id="obra" name="obra[]">
 					<?php
@@ -218,15 +218,7 @@
 					</select>
 						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 				</div>
-	
-				
-				<div style="margin-left: 448px;margin-top: -250px;">
-					<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Adm. Obras</button>
-				</div>
-				<div style="margin-left: 407px;margin-top: 120px;">
-					<button class="btn btn-mini" onclick="location.href='GestionEspecialidades.php'"type="button">Adm. Especialidades</button>
-				</div>
-				
+		
 				
 				<div style="margin-left:300px;margin-top: 120px;">
 					

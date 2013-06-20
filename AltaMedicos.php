@@ -125,12 +125,6 @@
 						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 					</div>
 					
-					<div style="margin-left: 448px;margin-top: -281px;">
-						<button class="btn btn-mini" onclick="location.href='GestionObras.php'"type="button">Adm. Obras</button>
-					</div>
-					<div style="margin-left: 407px;margin-top: 125px;">
-						<button class="btn btn-mini" onclick="location.href='GestionEspecialidades.php'"type="button">Adm. Especialidades</button>
-					</div>
 					<div style="margin-left:300px;margin-top: 150px;">
 						<button class="btnsubmit btn-success" type="submit">Agregar</button>
 						<button class="btn btn-danger" type="button" onclick="location.href='GestionMedicos.php'">Cancelar </button>
@@ -138,9 +132,9 @@
 					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
 				
 					
-					<div style="margin-left: 550px;margin-top: -367px;";>
+					<div style="margin-left: 550px;margin-top: -481px;";>
 						<label>Horarios</label>
-						<select multiple="multiple" id="horarios" name="horarios[]" size='11' style="width: 150px;">
+						<select multiple="multiple" id="horarios" name="horarios[]" size='11' style="width: 200px;">
 						<?php
 							while ($horario = mysql_fetch_array($resultadoHorarios)) {
 						?>		
