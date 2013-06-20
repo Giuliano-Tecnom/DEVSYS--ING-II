@@ -160,7 +160,7 @@
 						<td><b>Direccion</b></td>
 						<td><b>Telefono</b></td>
 						<td><b>Email</b></td>
-						<td><b>Obra Social</b></td>
+						<td><b>Obras Sociales</b></td>
 						<td><b>Dni</b></td>
 						<td><b>Fecha de Nacimiento</b></td>
 						<td></td>
@@ -176,40 +176,52 @@
 						<td><?php echo $valor["direccion"]; ?></td>
 						<td><?php echo $valor["telefono"]; ?></td>
 						<td><?php echo $valor["email"]; ?></td>
-						<td><?php
 						
-						
-						$query= "SELECT  o.nombre as nombreobra										 
-								 FROM pac_obrasocial as po
-	                             INNER join obrasociales as o ON o.idobra= po.idobra
-								 INNER join pacientes as p ON p.idpaciente = po.idpaciente
-								 where po.idpaciente ='" .$valor["idpaciente"]. "'";
-
-						
-						$res = mysql_query($query);
-						while ($obra=mysql_fetch_array($res)) {
-							echo "&nbsp;".$obra["nombreobra"]."";
-						}
-						
-						
+						<?php
+						$idpaciente = $valor['idpaciente']; //¡Ojo tocando esta variable, se usa en varios lados durante la iteracion del while!.
+						$consultaObras= "SELECT  o.nombre										 
+										 FROM pac_obrasocial as po
+										 INNER join obrasociales as o ON o.idobra= po.idobra
+										 INNER join pacientes as p ON p.idpaciente = po.idpaciente
+										 where po.idpaciente ='" .$valor["idpaciente"]. "'";
+						$resultadoConsultaObras = mysql_query($consultaObras);
 						?>
-						
-						
-						
-						</td>
+						<td><a data-toggle="modal" role="button" href="#obrasSocialesPaciente<?php echo $idpaciente; ?>" class="btn">Ver</a></td>
+						<!-- MODAL DE VER OBRAS SOCIALES -->
+						<div id="obrasSocialesPaciente<?php echo $idpaciente; ?>" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<center><h3>Obras Sociales del Paciente</h4></center>	
+								<ul>
+								<?php 
+								if (mysql_num_rows($resultadoConsultaObras) > 0) {
+									while ($obra = mysql_fetch_array($resultadoConsultaObras)) { ?>
+										<li><?php echo $obra['nombre'] ?></li>
+							<?php	}
+								} else {
+									?>
+										<li><?php echo 'No se registran obras sociales asignadas al paciente.' ?></li>
+									<?php 
+								}
+									?>
+								</ul> 
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Volver</a>
+							</div>
+						</div>
+
 						<td><?php echo $valor["dni"]; ?></td>
 						<td><?php echo $valor["fechaNac"]; ?></td>
 						<?php 
-								$idpaciente = $valor['idpaciente'];
 							
 								if( $valor["activo"] == 1 ){
 						?>	
-									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idpaciente; ?>" class="btn btn-warning">Borrar</a></td>
-									<!-- MODAL DE CANCELAR -->
+									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idpaciente; ?>" class="btn btn-danger">Borrar</a></td>
+									<!-- MODAL DE BORRAR -->
 									<div id="borrar<?php echo $idpaciente; ?>" class="modal hide fade in" style="display: none; ">
 										<div class="modal-body">
 											<h4>Aviso</h4>	      
-											<p> Esta seguro que desea Borrar al paciente? </p>
+											<p> Esta seguro que desea dar de baja el paciente? </p>
 										</div>
 										<div class="modal-footer">
 											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
@@ -220,12 +232,9 @@
 									
 						<?php	}else{ ?>
 									<td><button class="btn btn-success" type="button" onclick="location.href='HabilitarPaciente.php?idpaciente=<?php echo $idpaciente; ?> '">Habilitar</button></td>
-						<?php	}  
-							
-								$idpaciente = $valor['idpaciente'];
-						?>
+						<?php	}  	?>
 						
-						<td><button class="btn btn-danger" onclick="location.href='CargaPaciente.php?idpaciente=<?php echo $idpaciente; ?> '" type="button">Modif</button> </td>
+						<td><button class="btn btn-warning" onclick="location.href='CargaPaciente.php?idpaciente=<?php echo $idpaciente; ?> '" type="button">Modificar</button> </td>
 
 					</tr>
 				<?php
