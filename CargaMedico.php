@@ -179,7 +179,7 @@
 				
 				<div style="margin-left: 550px;margin-top: -275px;";>
 					<label>Horarios</label>
-					<select multiple="multiple" id="horarios" name="horarios[]" size='11' style="width: 150px;">
+					<select multiple="multiple" id="horarios" name="horarios[]" size='11' style="width: 200px;">
 					<?php 
 						$queryMedicoHorario = "SELECT h.idhorario
 											   FROM horarios AS h
@@ -200,10 +200,17 @@
 
 						while ($horarioResto = mysql_fetch_array($resultadoQueryHorarioResto)) {
 							if( in_array($horarioResto['idhorario'], $hor) ){
-					?>			<option selected="selected" value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]." ".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
-					<?php	}else{ ?>
-								<option value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]." ".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
-					<?php	  
+								if ($horarioResto["dia"] == 'Miercoles'){ ?>
+									<option selected="selected" value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]."&nbsp&nbsp&nbsp&nbsp".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
+						<?php	}else{ ?>
+									<option selected="selected" value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
+						<?php	 } 
+							}else{ 
+								if ($horarioResto["dia"] == 'Miercoles'){ ?>
+									<option value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]."&nbsp&nbsp&nbsp&nbsp".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
+						<?php   } else { ?>
+									<option value="<?php echo $horarioResto["idhorario"];?>"><?php echo $horarioResto["dia"]."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$horarioResto["horaIn"]." - ".$horarioResto["horaOut"]?></option>
+						<?php   } 
 							}
 						}
 					?>

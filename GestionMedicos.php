@@ -136,16 +136,17 @@
 
 			<table class="table table-striped">
 				<tr>
-					<td>Nombre </td> 
-					<td>Apellido</td>
-					<td>Matricula</td>
-					<td>Direccion</td>
-					<td>Telefono</td>
-					<td>Email</td>
-					<td>Obras Sociales</td>
-					<td>Especialidades</td>
-					<td>Dni</td>
-					<td>Fecha de Nacimiento</td>
+					<td><b>Nombre</b></td> 
+					<td><b>Apellido</b></td>
+					<td><b>Matricula</b></td>
+					<td><b>Direccion</b></td>
+					<td><b>Telefono</b></td>
+					<td><b>Email</b></td>
+					<td><b>Obras Sociales</b></td>
+					<td><b>Especialidades</b></td>
+					<td><b>Dni</b></td>
+					<td><b>Fecha de Nacimiento</b></td>
+					<td><b>Horarios</b></td>
 					<td><b>Activo</b>
 					<?php
 
@@ -160,8 +161,7 @@
 					<td></td>
 				</tr>
 				<?php
-			while ($valor = mysql_fetch_array($resultado))
-			{
+			while ($valor = mysql_fetch_array($resultado)) {
 			?>
 				<tr>
 					<td><?php echo $valor["nombre"]; ?></td>
@@ -215,12 +215,55 @@
 					
 					<td><?php echo $valor["dni"]; ?></td>
 					<td><?php echo $valor["fechaNac"]; ?></td>
+					
+					<?php 
+						$idmedico = $valor['idmedico'];
+						$consultaHorarios = "SELECT h.dia, h.horaIn, h.horaOut 
+											 FROM horarios as h
+											 INNER JOIN med_hor as mh
+											 ON h.idhorario = mh.idhorario
+											 WHERE mh.idmedico = ".$idmedico."";
+						$resultadoConsultaHorarios = mysql_query($consultaHorarios);
+					?>	
+									<td><a data-toggle="modal" role="button" href="#horariosMedico<?php echo $idmedico; ?>" class="btn">Ver</a></td>
+									<!-- MODAL DE VER HORARIOS -->
+									<div id="horariosMedico<?php echo $idmedico; ?>" class="modal hide fade in" style="display: none; ">
+										<div class="modal-body">
+											<center><h3>Horarios del Medico</h4></center>	
+											<?php 
+											if (mysql_num_rows($resultadoConsultaHorarios) > 0) {
+											?>											
+												<p><b>&nbsp&nbsp&nbsp&nbsp&nbsp Dia &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Horario Entrada &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Horario Salida </b></p>
+												<ul>
+												<?php 
+													while ($horario = mysql_fetch_array($resultadoConsultaHorarios)) {
+														if ($horario['dia'] == 'Miercoles') { ?>
+														<li><?php echo $horario['dia']."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$horario['horaIn']."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$horario['horaOut'] ?></li>
+												<?php	} else { ?>
+															<li><?php echo $horario['dia']."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$horario['horaIn']."&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$horario['horaOut'] ?></li>
+												<?php	}
+													}
+											} else {
+												?>
+													<li><?php echo 'No se registran horarios asignados al medico.' ?></li>
+												<?php 
+											}
+												?>
+												</ul> 
+										</div>
+										<div class="modal-footer">
+											<a href="#" class="btn" data-dismiss="modal">Volver</a>
+										</div>
+									</div>
+									
+					
+					
 					<?php 
 						$idmedico = $valor['idmedico'];
 						
 						if( $valor["activo"] == 1 ){
 							echo "<td>  Si </td>";
-							echo "<td><button class='btn btn-warning' type='button'><a href='BorrarMedico.php?idmedico=".$idmedico."'>Borrar </a></button> </td>";
+							echo "<td><button class='btn btn-danger' type='button'><a href='BorrarMedico.php?idmedico=".$idmedico."' style='text-decoration:none;color:white;'>Borrar </a></button> </td>";
 						}     
 						else {
 							echo "<td>No</td>";
@@ -228,7 +271,7 @@
 						}  
 					?>
 					
-					<td><button class="btn btn-danger" onclick="location.href='CargaMedico.php?idmedico=<?php echo $idmedico; ?> '" type="button">Modificar</button> </td>
+					<td><button class="btn btn-warning" onclick="location.href='CargaMedico.php?idmedico=<?php echo $idmedico; ?> '" type="button">Modificar</button> </td>
 					
 				</tr>
 			<?php

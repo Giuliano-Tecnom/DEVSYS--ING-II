@@ -200,26 +200,26 @@
 						<td><?php echo $valor["dni"]; ?></td>
 						<td><?php echo $valor["fechaNac"]; ?></td>
 						<?php 
-								$dni = $valor['dni'];
+								$idpaciente = $valor['idpaciente'];
 							
 								if( $valor["activo"] == 1 ){
 						?>	
-									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $dni; ?>" class="btn btn-warning">Borrar</a></td>
+									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idpaciente; ?>" class="btn btn-warning">Borrar</a></td>
 									<!-- MODAL DE CANCELAR -->
-									<div id="borrar<?php echo $dni; ?>" class="modal hide fade in" style="display: none; ">
+									<div id="borrar<?php echo $idpaciente; ?>" class="modal hide fade in" style="display: none; ">
 										<div class="modal-body">
 											<h4>Aviso</h4>	      
 											<p> Esta seguro que desea Borrar al paciente? </p>
 										</div>
 										<div class="modal-footer">
 											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-											<a class="btn btn-warning"  href="BorrarPaciente.php?dni=<?php echo $dni; ?>">Aceptar</a>
+											<a class="btn btn-warning"  href="BorrarPaciente.php?idpaciente=<?php echo $idpaciente; ?>">Aceptar</a>
 										</div>
 									</div>
 									
 									
 						<?php	}else{ ?>
-									<td><button class="btn btn-success" type="button" onclick="location.href='HabilitarPaciente.php?dni=<?php echo $dni; ?> '">Habilitar</button></td>
+									<td><button class="btn btn-success" type="button" onclick="location.href='HabilitarPaciente.php?idpaciente=<?php echo $idpaciente; ?> '">Habilitar</button></td>
 						<?php	}  
 							
 								$idpaciente = $valor['idpaciente'];
