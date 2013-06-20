@@ -81,7 +81,29 @@
 		$especialidadesSeleccionadasString = implode(",",$especialidadesSeleccionadas);
 		
 		
-		//// INICIO DELETE E INSERT OBRAS Y ESPECIALIDADES ////
+		//Horarios que tenías previo a la modificacion.
+		$horariosPrevios = "SELECT 
+										h.idhorario
+								FROM 
+										horarios as h
+								INNER JOIN med_hor as mh on h.idhorario = mh.idhorario
+								WHERE  mh.idmedico=".$_POST['idmedico']." ";
+								
+		$ResultadoHorariosPrevios = mysql_query($horariosPrevios);
+		$horariosQuePosee = array();
+		
+		while ($horarioPrevio = mysql_fetch_array($ResultadoHorariosPrevios)) {
+			$horariosQuePosee[] = $horarioPrevio['idhorario'];
+		}	
+		
+		if(isset($_POST['horarios'])) {
+			$horariosSeleccionados = $_POST['horarios']; //Horarios Seleccionados
+		} else{
+			$horariosSeleccionados = array();
+		}
+		
+		
+		//// INICIO DELETE E INSERT OBRAS, ESPECIALIDADES Y HORARIOS ////
 			
 		//Borro Relaciones obras
 		for($i=0; $i < count($obrasQuePosee); $i++){
@@ -117,7 +139,24 @@
 			mysql_query($consultaRelacionEspecialidadesMedicos); 
 		}
 		
-		//// FIN DELETE E INSERT OBRAS Y ESPECIALIDADES ////
+		//Borro Relaciones horarios
+		for($i=0; $i < count($horariosQuePosee); $i++){
+			$horariosABorrarViejasConsulta = " DELETE FROM med_hor
+											   WHERE idhorario = ".$horariosQuePosee[$i]." 
+										       AND idmedico = ".$_POST['idmedico']."";
+			mysql_query($horariosABorrarViejasConsulta);
+		}
+		
+		//Inserto relaciones horarios		
+		for ($i=0; $i < count($horariosSeleccionados) ; $i++){			
+			$consultaRelacionHorariosMedicos = 	"	
+												INSERT INTO med_hor (idmedico, idhorario)
+												VALUES ('".$_POST['idmedico']."', '".$horariosSeleccionados[$i]."')
+												";
+			mysql_query($consultaRelacionHorariosMedicos); 
+		}
+		
+		//// FIN DELETE E INSERT OBRAS, ESPECIALIDADES Y HORARIOS ////
 				
 	 Header ("Location: GestionMedicos.php?Correcto=3");	
 	} else {
