@@ -77,7 +77,7 @@
 		<div id="tabla-gestion-obrasociales">
 
 				<table class="table table-striped">
-					<tr>
+					<tr class="info">
 						<td><b>Obra Social</b> </td>
 						<td></td>
 						<td></td>	

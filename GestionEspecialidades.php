@@ -47,11 +47,21 @@
 						</div>";
 				}
 			?>
-			<div style="margin-left: 15px;">
-			<button class="btn btn-primary" type="button" onclick="location.href='AltaEspecialidades.php'">
-			   Agregar Especialidad
-			</button>
+			
+			<!-- COMIENZA BARRA DE OPCIONES -->
+			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
+			        <button class="btn btn-info" type="button" onclick="location.href='AltaEspecialidades.php'">Agregar Especialidad</button>
+                    <button class="btn btn-info" type="button">Generar Reporte</button>
+				    <button class="btn btn-info" type="button"
+					<?php	if($ojito == 1){ ?>
+								onclick="location.href='GestionEspecialidades.php?ojito=0'"> Mostrar Inactivos <i class="icon-eye-close" style="margin-left: 3px;"></i>
+					<?php	} else { ?>			
+								onclick="location.href='GestionEspecialidades.php?ojito=1'"> Ocultar Inactivos <i class="icon-eye-open" style="margin-left: 3px;"></i>
+					<?php	} ?>
+					</button>
 			</div>
+			<!-- FIN BARRA DE OPCIONES -->
+
 			
 			<div id="tabla-gestion-especialidades" style="margin-top: 25px; margin-left: 15px; margin-right: 15px;">
 
@@ -59,18 +69,8 @@
 					<tr class="info">
 						
 						<td><b>Especialidad</b></td>
-						<td><b>Activo</b>
-						<?php
-							if($ojito == 1){
-								echo "<a href='GestionEspecialidades.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
-							} else {
-								echo "<a href='GestionEspecialidades.php?ojito=1'><i class='icon-eye-open' style='margin-left: 3px; margin-top: 3px;'></i></a>";
-							}
-						?>
-						</td>
 						<td></td>
 						<td></td>
-					
 					</tr>
 					<?php
 				while ($valor = mysql_fetch_array($resultado))
@@ -80,19 +80,26 @@
 						
 						<td><?php echo $valor["nombre"]; ?></td>
 						<?php 
-							$id = $valor['idespecialidad'];
-							
-							if( $valor["activo"] == 1 ){
-								echo "<td>  Si </td>";
-								echo "<td><button class='btn btn-warning' type='button' ><a href='BorrarEspecialidad.php?idespecialidad=".$id."'> Borrar </a></button> </td>";
-							}     
-						    else {
-							    echo "<td>No</td>";
-								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarEspecialidad.php?idespecialidad=".$id."'>Habilitar </a></button> </td>";
-							}  
-						?>
+								$idespecialidad = $valor["idespecialidad"];
+								if( $valor["activo"] == 1 ){
+						?>	
+									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idespecialidad; ?>" class="btn btn-danger">Borrar</a></td>
+									<!-- MODAL DE BORRAR -->
+									<div id="borrar<?php echo $idespecialidad; ?>" class="modal hide fade in" style="display: none; ">
+										<div class="modal-body">
+											<h4>Aviso</h4>	      
+											<p> Esta seguro que desea dar de baja la especialidad? </p>
+										</div>
+										<div class="modal-footer">
+											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+											<a class="btn btn-warning"  href="BorrarEspecialidad.php?idespecialidad=<?php echo $idespecialidad; ?>">Aceptar</a>
+										</div>
+									</div>
+						<?php	}else{ ?>
+									<td><button class="btn btn-success" type="button" onclick="location.href='HabilitarEspecialidad.php?idespecialidad=<?php echo $idespecialidad; ?> '">Habilitar</button></td>
+						<?php	}  	?>		
 						
-						<td><button class="btn btn-danger" onclick="location.href='Especialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>'"type="button">Modif</button> </td>
+						<td><button class="btn btn-warning" onclick="location.href='Especialidad.php?idespecialidad=<?php echo $valor["idespecialidad"]; ?>'"type="button">Modificar</button> </td>
 					</tr>
 				<?php
 				}
