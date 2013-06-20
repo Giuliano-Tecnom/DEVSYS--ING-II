@@ -124,21 +124,18 @@
 				</div>
 				<div style="margin-left:300px;margin-top: 90px;">
 					
-					
-				
 					<a data-toggle="modal" role="button" href="#modificar" class="btnsubmit btn-success">Modificar</a>
-						<!-- MODAL DE modificar -->
+						<!-- MODAL DE MODIFICAR -->
 							<div id="modificar" class="modal hide fade in" style="display: none; ">
 								<div class="modal-body">
 									<h4>Aviso</h4>	      
-									<p> Esta seguro que desea Modificar al paciente? </p>
+									<p> Esta seguro que desea Modificar el paciente? </p>
 								</div>
 								<div class="modal-footer">
-									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+									<a href="#" class="btn" data-dismiss="modal">Volver</a>
 									<button class="btn btn-success" type="submit" onclick="location.href='ModificarPaciente.php'">Aceptar</button>
 								</div>
 							</div>
-							
 							
 					<a data-toggle="modal" role="button" href="#cancelar" class="btn btn-danger">Cancelar</a>
 						<!-- MODAL DE CANCELAR -->
@@ -148,18 +145,14 @@
 									<p> Esta seguro que desea Cancelar? </p>
 								</div>
 								<div class="modal-footer">
-									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-									<a class="btn btn-danger"  href="GestionPacientes.php">Aceptar</a>
+									<a href="#" class="btn" data-dismiss="modal">Volver</a>
+									<a class="btn btn-success"  href="GestionPacientes.php">Aceptar</a>
 								</div>
 							</div>
 				
-				
-				
 				</div>
 				<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Todos los campos son obligatorios, salvo el Email.</span>
-				
-				
-				
+			
 			</form>
 		</div>
 		<?php

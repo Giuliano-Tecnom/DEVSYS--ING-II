@@ -229,8 +229,33 @@
 				
 				
 				<div style="margin-left:300px;margin-top: 120px;">
-					<button class="btnsubmit btn-success" type="submit">Modificar</button>
-					<button class="btn btn-danger" type="button" onclick="location.href='GestionMedicos.php' ">Cancelar </button>
+					
+					<a data-toggle="modal" role="button" href="#modificar" class="btnsubmit btn-success">Modificar</a>
+						<!-- MODAL DE MODIFICAR -->
+							<div id="modificar" class="modal hide fade in" style="display: none; ">
+								<div class="modal-body">
+									<h4>Aviso</h4>	      
+									<p> Esta seguro que desea Modificar el medico? </p>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Volver</a>
+									<button class="btn btn-success" type="submit" onclick="location.href='ModificarMedico.php'">Aceptar</button>
+								</div>
+							</div>
+							
+					<a data-toggle="modal" role="button" href="#cancelar" class="btn btn-danger">Cancelar</a>
+						<!-- MODAL DE CANCELAR -->
+							<div id="cancelar" class="modal hide fade in" style="display: none; ">
+								<div class="modal-body">
+									<h4>Aviso</h4>	      
+									<p> Esta seguro que desea Cancelar? </p>
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Volver</a>
+									<a class="btn btn-success"  href="GestionMedicos.php">Aceptar</a>
+								</div>
+							</div>
+							
 				</div>		
 				
 				
