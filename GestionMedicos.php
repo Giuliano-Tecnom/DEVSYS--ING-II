@@ -275,7 +275,6 @@
 						</div>
 										
 						<?php 
-							
 								if( $valor["activo"] == 1 ){
 						?>	
 									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idmedico; ?>" class="btn btn-danger">Borrar</a></td>

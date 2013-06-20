@@ -23,7 +23,7 @@
 		</div>
 		
 		<div style="margin-top: 72PX;">
-			<a href="GestionObras.php"><button class="btn btn-large" type="button">Obras Soc</button></a>
+			<a href="GestionObras.php"><button class="btn btn-large" type="button">Obras Sociales</button></a>
 			<a href="GestionEspecialidades.php"><button class="btn btn-large" type="button">Especialidades</button></a>		
 		</div>
 	</div>  <!-- FIN ENCAPSULADOR-->

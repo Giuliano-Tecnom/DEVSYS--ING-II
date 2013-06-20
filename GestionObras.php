@@ -88,21 +88,28 @@
 				?>
 					<tr>
 						<td><?php echo $valor["nombre"]; ?></td>
+
 						<?php 
-							$id = $valor['idobra'];
-							
-							if( $valor["activo"] == 1 ){
-								
-								echo "<td><button class='btn btn-warning' type='button'><a href='BorrarObra.php?idobra=".$id."'>Borrar </a></button> </td>";
-							}     
-						    else {
-							   
-								echo "<td><button class='btn btn-success' type='button'><a href='HabilitarObra.php?idobra=".$id."'>Habilitar </a></button> </td>";
-							}  
-						?>
+								$idobra = $valor["idobra"];
+								if( $valor["activo"] == 1 ){
+						?>	
+									<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idobra; ?>" class="btn btn-danger">Borrar</a></td>
+									<!-- MODAL DE BORRAR -->
+									<div id="borrar<?php echo $idobra; ?>" class="modal hide fade in" style="display: none; ">
+										<div class="modal-body">
+											<h4>Aviso</h4>	      
+											<p> Esta seguro que desea dar de baja la obra social? </p>
+										</div>
+										<div class="modal-footer">
+											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+											<a class="btn btn-warning"  href="BorrarObra.php?idobra=<?php echo $idobra; ?>">Aceptar</a>
+										</div>
+									</div>
+						<?php	}else{ ?>
+									<td><button class="btn btn-success" type="button" onclick="location.href='HabilitarObra.php?idobra=<?php echo $idobra; ?> '">Habilitar</button></td>
+						<?php	}  	?>						
 						
-			
-						<td><button class="btn btn-danger" onclick="location.href='ObraSocial.php?idobra=<?php echo $valor["idobra"]; ?>'" type="button">Modif</button> </td>
+						<td><button class="btn btn-warning" onclick="location.href='ObraSocial.php?idobra=<?php echo $valor["idobra"]; ?>'" type="button">Modificar</button> </td>
 						
 					</tr>
 				<?php
