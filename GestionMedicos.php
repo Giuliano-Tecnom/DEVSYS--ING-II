@@ -159,15 +159,6 @@
 						<td><b>Dni</b></td>
 						<td><b>Fecha de Nacimiento</b></td>
 						<td><b>Horarios</b></td>
-						<td><b>Activo</b>
-						<?php
-							if($ojito == 1){
-								echo "<a href='GestionMedicos.php?ojito=0'><i class='icon-eye-close' style='margin-left: 3px; margin-top: 3px;'></i></a>"; 
-							} else {
-								echo "<a href='GestionMedicos.php?ojito=1'><i class='icon-eye-open' style='margin-left: 3px; margin-top: 3px;'></i></a>";
-							}
-						?>
-						</td>
 						<td></td>
 						<td></td>
 					</tr>
