@@ -96,7 +96,7 @@
 				
 				<!-- Obras Sociales -->
 				<div style="margin-left: 300px;margin-top: -320px;">
-					<label>Obra Social</label>
+					<label>Obras Sociales</label>
 					<select multiple="multiple" id="obra" name="obra[]">
 					<?php
 						$queryObrasMedico = "  SELECT 
@@ -138,7 +138,7 @@
 				
 				<!-- Especialidades -->
 				<div style="margin-left: 300px;margin-top: 10px;">
-				<label>Especialidad</label>
+				<label>Especialidades</label>
 				<select multiple="multiple" id="especialidad" name="especialidad[]">
 				<?php
 					$queryEspecialidadesMedico = "	SELECT 	e.nombre,

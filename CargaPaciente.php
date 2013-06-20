@@ -81,7 +81,7 @@
 					<span class="help-block" style= "margin-left: 10px; margin-top: 0px; font-size: 10px;margin-bottom: -20px;">Ingrese DD/MM/AAAA</span>
 				</div>
 				<div style="margin-left: 300px;margin-top: -285px;">
-					<label>Obra Social</label>
+					<label>Obras Sociales</label>
 					<select multiple="multiple" id="obra" name="obra[]">
 					<?php
 						$queryObrasPaciente = "  SELECT 

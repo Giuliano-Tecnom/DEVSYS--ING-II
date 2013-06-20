@@ -88,7 +88,7 @@
 					
 					
 					<div style="margin-left: 300px;margin-top: -285px;">
-						<label>Obra Social</label>
+						<label>Obras Sociales</label>
 						<select multiple="multiple" id="obra" name="obra[]">
 						<?php
 							while ($valor = mysql_fetch_array($resultado)) {

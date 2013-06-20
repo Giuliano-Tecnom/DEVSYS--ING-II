@@ -97,7 +97,7 @@
 					</div>
 		
 					<div style="margin-left: 300px;margin-top: -325px;">
-						<label>Obra Social</label>
+						<label>Obra Sociales</label>
 						<select multiple="multiple" id="obra" name="obra[]">
 						<?php
 							while ($valor = mysql_fetch_array($resultadoObras)) {
@@ -112,7 +112,7 @@
 					
 					
 					<div style="margin-left: 300px;margin-top: 15px;">
-						<label>Especialidad</label>
+						<label>Especialidades</label>
 						<select multiple="multiple" id="especialidad" name="especialidad[]">
 						<?php
 							while ($valor = mysql_fetch_array($resultadoEsp)) {
