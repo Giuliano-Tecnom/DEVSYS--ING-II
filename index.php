@@ -15,6 +15,72 @@
 
 	
 	<?php include_once('header.php'); ?>
+	<?php
+	
+	include_once('mysqlconnect.php');
+	//$fecha_act=date('d-m-Y');
+	//$dia_act=date('d');
+	//$mes_act=date('m');
+	//$ano_act=date('Y');
+	
+	//$diaSemana = diaSemana($ano_act, $mes_act, $dia_act);
+	//echo $diaSemana.'<br>';
+	
+	
+	
+	
+	
+	for ($i=0; $i<7; $i++) {
+		$fecha_a= date("Y/m/d",strtotime("+$i days"));
+	
+		$ano_act=substr ($fecha_a, 0, 4);
+		$mes_act=substr($fecha_a, 5, 2);
+		$dia_act=substr($fecha_a, 8, 2);
+	
+		$diaSemana = diaSemana($ano_act, $mes_act, $dia_act);
+		//echo $fecha_a.' '.$diaSemana.'<br>';
+		if( $diaSemana == 4 ) {
+			$qry= "UPDATE horarios SET fecha = '" .$fecha_a. "' WHERE idhorario = 7 or idhorario=8 ";
+			$query_mod = mysql_query($qry);
+		}
+		if( $diaSemana == 5 ) {
+			$qry= "UPDATE horarios SET fecha = '" .$fecha_a. "' WHERE idhorario = 9 or idhorario=10 ";
+			$query_mod = mysql_query($qry);
+		}
+		if( $diaSemana == 6 ) {
+			$qry= "UPDATE horarios SET fecha = '" .$fecha_a. "' WHERE idhorario = 11";
+			$query_mod = mysql_query($qry);
+		}
+		if( $diaSemana == 1 ) {
+		    $qry= "UPDATE horarios SET fecha = '" .$fecha_a. "' WHERE idhorario = 1 or idhorario=2 ";
+			$query_mod = mysql_query($qry);
+		}
+		if( $diaSemana == 2 ) {
+			$qry= "UPDATE horarios SET fecha = '" .$fecha_a. "' WHERE idhorario = 3 or idhorario=4 ";
+			$query_mod = mysql_query($qry);
+		}
+		if( $diaSemana == 3 ) {
+			$qry= "UPDATE horarios SET fecha = '" .$fecha_a. "' WHERE idhorario = 5 or idhorario=6 ";
+			$query_mod = mysql_query($qry);
+		}
+	}
+	function diaSemana($ano,$mes,$dia)
+	{	
+	
+	$dia= date("w",mktime(0, 0, 0, $mes, $dia, $ano));
+		return $dia;
+	}
+	
+	
+	
+	
+	?>
+	
+	
+	
+	
+	
+	
 	
 	<div class="encapsulador">
 		
