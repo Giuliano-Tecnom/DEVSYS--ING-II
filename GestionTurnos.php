@@ -399,16 +399,14 @@ $fecha = $_REQUEST['fecha'];
 					<td><?php echo $valor["horaIn"].' - '.$valor["horaOut"]; ?></td>
 					<?php 
 						$idmedico = $valor['idmedico'];
+						$idhorario = $valor['idhorario'];
+						$fecha = $valor['fecha'];
+						$idpac = $myselect1;
+					?>	
 						
-						if( $valor["activo"] == 1 ){
-						
-							echo "<td><button class='btn btn-warning' type='button'><a href='AltaTurno.php?idmedico=".$idmedico."'>Alta </a></button> </td>";
-						}     
-						else {
-						
-							echo "<td><button class='btn btn-success' type='button'><a href='HabilitarMedico.php?idmedico=".$idmedico."'>Habilitar </a></button> </td>";
-						}  
-					?>
+					<td><button class='btn btn-warning' type='button' onclick="location.href='AltaTurno.php?idmedico=<?php echo $idmedico;?>&idhorario=<?php echo $idhorario;?>&fecha=<?php echo $fecha;?>&idpaciente=<?php echo $idpac;?>'"> Alta </button> </td>
+	  
+					
 					
 					<td><button class="btn btn-danger" onclick="location.href='CargaMedico.php?idmedico=<?php echo $idmedico; ?> '" type="button">Modificar</button> </td>
 					
@@ -451,4 +449,4 @@ location.href='GestionTurnos.php?filtro=S&myselect1='+myselect1+'&myselect2='+my
 
 
 </script> 
-  
+ 
