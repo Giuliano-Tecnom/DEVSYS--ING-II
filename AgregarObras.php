@@ -2,7 +2,9 @@
 
 include_once('mysqlconnect.php');
 		
-	$nombre=trim($_POST['nombre']);	
+	$nombre=trim($_POST['nombre']);
+    
+     
 	$consulta = " SELECT nombre FROM obrasociales where UPPER(nombre) = UPPER('" .$nombre. "') ";
 	$res=mysql_query($consulta);
 	
@@ -23,4 +25,5 @@ include_once('mysqlconnect.php');
 	   {
 	     Header ('Location: AltaObras.php?Error=1');
 	   }
+	   
 ?>
