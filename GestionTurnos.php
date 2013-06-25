@@ -81,7 +81,7 @@ $fecha = $_REQUEST['fecha'];
 
 
 	
-    $consulta="SELECT distinct med.*, hor.*, mh.*
+    $consulta="SELECT distinct med.*, hor.idhorario, TIME_FORMAT(hor.horaIn,'%H:%m') as horaIn, TIME_FORMAT(hor.horaOut,'%H:%m') as horaOut, hor.dia, hor.dia_nro, hor.fecha, mh.*
 	FROM horarios as hor 
 	inner join med_hor as mh on hor.idhorario = mh.idhorario
 	inner join medicos as med on med.idmedico = mh.idmedico 
@@ -114,8 +114,10 @@ $fecha = $_REQUEST['fecha'];
 
 	$consulta = "SELECT * FROM especialidades WHERE especialidades.activo = 1";
     $query_espec = mysql_query($consulta);
-	
-	$consulta = "SELECT * FROM horarios group by horaIn";
+
+	$consulta = "SELECT idhorario, TIME_FORMAT(horaIn,'%H:%m') as horaIn, TIME_FORMAT(horaOut,'%H:%m') as horaOut
+				 FROM horarios
+				 GROUP BY horaIn";
     $query_hor = mysql_query($consulta);
 	
 	
@@ -186,151 +188,129 @@ $fecha = $_REQUEST['fecha'];
 		<!-- Fin de HEAD-->
     
 <body style="background-image:url('images/bg.png')">
+ 	
  	 <?php  $x=1; ?>
 	<?php include_once('header.php'); ?>
 	
-	
-<div id="tabla-gestion-medicos">
-	<?php echo "<td><button class='btn btn-warning' type='button'><a href='#' onclick='AceptarFiltro();'>Buscar </a></button> </td>";?>	
-	<table class="table table-striped">
-   <td>
-		<label>Pacientes</label>
-	</td>
-	 <td>
-		<label>Medicos</label>
-	</td>
-	<td>
-		<label>Especialidades</label>
-	</td>
-	<td>
-		<label>Obra Social</label>
-	</td>
-	<td>
-		<label>Fecha</label>
-	</td>
-	<td>
-		<label>Hora</label>
-	</td>
-	</tr>
-	<tr>
-	<td>
-	
-	
-	
+<div class="encapsulador" style="margin-top: 75px;">
+	<ul class="breadcrumb">
+		<li> 
+			<h5>Alta de Turno<a href="#" style="margin-left: 40px;"><i class="icon-question-sign"></i></a></h5>
+																				 <!-- ICONO DE AYUDA -->  
+		</li>
+	</ul>
+	<div id="form-turnos">
+		<form name="filtro" class="form-horizontal">
+			<div>
+				<!-- ***************************** SELECT DE PACIENTES ***************************** -->
+				<label>Paciente:</label>
+				<select id="myselect1" name="myselect1">
+					<option value=0>Seleccione paciente</option>
+					<?php
+						while ($valor = mysql_fetch_array($query_pac)) {
+							if ($myselect1 == $valor["idpaciente"]) {
+								$sel= " SELECTED ";
+							}else{
+								$sel= "";
+							}
+					?>
+							<option value="<?php echo $valor["idpaciente"];?>" <?php echo $sel;?>><?php echo $valor["nombre"]; ?> <?php echo $valor["apellido"]; ?></option>
+					<?php	  
+						}
+					?>
+				</select>
+				</br><!-- ***************************** SELECT DE MEDICOS ***************************** -->
+				<label>Medico:</label>
+				<select id="myselect2" name="myselect2" >
+					<option value=0>Todos</option>
+					<?php
+						while ($valor = mysql_fetch_array($query_med)) {
+						    if ($myselect2 == $valor["idmedico"]) {
+								$sel= " SELECTED ";
+							}else{
+								$sel= "";
+							} 
+					?>
+							<option value="<?php echo $valor["idmedico"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?> <?php echo $valor["apellido"]; ?></option>
+					<?php	  
+						}
+					?>
+				</select>
+			</div>	
+			<div style="margin-top: -150px; margin-left: 253px;">
+				<!-- ***************************** SELECT DE ESPECIALIDADES ***************************** -->		
+				<label>Especialidad:</label>
+				<select id="myselect3" name="myselect3">
+					<option value=0>Cualquiera</option>
+					<?php
+						while ($valor = mysql_fetch_array($query_espec)) {
+							if ($myselect3 == $valor["idespecialidad"]) {
+								$sel= " SELECTED ";
+							}else{
+								$sel= "";
+							}
+					?>
+							<option value="<?php echo $valor["idespecialidad"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?></option>
+					<?php	  
+						}
+					?>
+				</select>
+				</br><!-- ***************************** SELECT DE OBRAS SOCIALES ***************************** -->
+				<label>Obra Social:</label>
+				<select id="myselect4" name="myselect4">
+					<option value=0>Todas</option>
+					<?php
+						while ($valor = mysql_fetch_array($query_obra)) {
+							if ($myselect4 == $valor["idobra"]) {
+								$sel= " SELECTED ";
+							}else{
+								$sel= "";
+							}
+					?>
+							<option value="<?php echo $valor["idobra"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?></option>
+					<?php	  
+						}
+					?>
+				</select>	
+			</div>
+			<div style="margin-top: -112px; margin-left: 506px;">
+				<!-- ***************************** FECHAAAA ***************************** -->
+				<?php 
+					$min_fecha= date("d-m-Y");
+					$max_fecha= date("d-m-Y",strtotime("+7 days"));
+				?>
+				<label>Fecha:</label>
+				<input class="fecnacc" id="fecha" name="fecha" type="date" min="<?php echo $min_fecha;?>" max="<?php echo $max_fecha;?>" placeholder="Fecha" value="<?php //echo $fecha?>">
+				</br><!-- ***************************** SELECT DE HORA ***************************** -->
+				<label>Franja Horaria:</label>
+				<select id="myselect5" name="myselect5" >
+					<option value=0>Todas</option>
+					<?php
+						while ($valor = mysql_fetch_array($query_hor)) {
+							if ($myselect5 == $valor["idhorario"]) {
+								$sel= " SELECTED ";
+								}else{
+									$sel= "";
+								}
+								$horaIn=substr($valor["horaIn"],0,5);
+								$horaOut=substr($valor["horaOut"],0,5);
+								
+					?>
+							<option value="<?php echo $valor["idhorario"];?>"<?php echo $sel;?>> <?php echo $horaIn; ?><?php echo ' - '.$horaOut; ?></option>
+					<?php	  
+						}
+					?>
+				</select>	
+			</div>
+			</br>
+			<button class='btn btn-warning' type='button' onclick='AceptarFiltro();'> Buscar </button>
+		</form>
+	</div>
 
-<form name="filtro" class="form-horizontal">
-			
-	<select id="myselect1" name="myselect1">
-				<option value=0>TODOS</option>
-				<?php
-				   
-					while ($valor = mysql_fetch_array($query_pac)) {
-					   if ($myselect1 == $valor["idpaciente"]) {
-							$sel= " SELECTED ";
-						}else {$sel= "";}
-				?>
-				<option value="<?php echo $valor["idpaciente"];?>" <?php echo $sel;?>><?php echo $valor["nombre"]; ?> <?php echo $valor["apellido"]; ?></option>
-				<?php	  
-					}
-			?>
-		</select>
-	</td>	
-   <td>
-	<select id="myselect2" name="myselect2" >
-				<option value=0>TODOS</option>
-				<?php
-					while ($valor = mysql_fetch_array($query_med)) {
-				       if ($myselect2 == $valor["idmedico"]) {
-							$sel= " SELECTED ";
-						}else {$sel= "";} 
-				?>
-				<option value="<?php echo $valor["idmedico"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?> <?php echo $valor["apellido"]; ?></option>
-				<?php	  
-					}
-			?>
-		</select>	
-
-	</td>	
-    
-    <td>
-	
-			
-	<select id="myselect3" name="myselect3">
-				<option value=0>TODOS</option>
-				<?php
-					while ($valor = mysql_fetch_array($query_espec)) {
-						if ($myselect3 == $valor["idespecialidad"]) {
-							$sel= " SELECTED ";
-						}else {$sel= "";}
-				?>
-				<option value="<?php echo $valor["idespecialidad"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?></option>
-				<?php	  
-					}
-			?>
-		</select>
-	</td>	
-   <td>
-	<select id="myselect4" name="myselect4">
-				<option value=0>TODOS</option>
-				<?php
-					while ($valor = mysql_fetch_array($query_obra)) {
-						if ($myselect4 == $valor["idobra"]) {
-							$sel= " SELECTED ";
-						}else {$sel= "";}
-				?>
-				<option value="<?php echo $valor["idobra"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?></option>
-				<?php	  
-					}
-			?>
-		</select>	
-
-	</td>	
-    <td>
-	<?php 
-		$min_fecha= date("d-m-Y");
-		$max_fecha= date("d-m-Y",strtotime("+7 days"));
+	<div id="tabla-medicos">
+    <?php
+	  	if ($filtro == "S") {
 	?>
-	<input class="fecnacc" id="fecha" name="fecha" type="date" min="<?php echo $min_fecha;?>" max="<?php echo $max_fecha;?>" placeholder="Fecha" value="<?php //echo $fecha?>">
-	
-	
-	
-
-			
-	
-	</td>	
-   <td>
-	<select id="myselect5" name="myselect5" >
-				<option value=0>TODOS</option>
-				<?php
-					while ($valor = mysql_fetch_array($query_hor)) {
-						if ($myselect5 == $valor["idhorario"]) {
-							$sel= " SELECTED ";
-						}else {$sel= "";}
-					$horaIn=substr($valor["horaIn"],0,5);
-					$horaOut=substr($valor["horaOut"],0,5);
-					
-				?>
-				<option value="<?php echo $valor["idhorario"];?>"<?php echo $sel;?>> <?php echo $horaIn; ?><?php echo ' - '.$horaOut; ?></option>
-				<?php	  
-					}
-			?>
-		</select>	
-
-	</td>	
-	
-	</tr>
-</table>
-
-</form>
-</div>
-
-      <?php
-	  
-	    if ($filtro == "S") {
-		?>
-		
-		<div id="tabla-gestion-medicos">
-
 			<table class="table table-striped">
 				<tr>
 					<td>Medico </td> 
@@ -338,62 +318,36 @@ $fecha = $_REQUEST['fecha'];
 					<td>Obras Sociales</td>
 					<td>Dia</td>
 					<td>Fecha </td>
-					<td> Hora </td>
-										
-					
-					<td></td>
+					<td> Franja Hor. </td>
 					<td></td>
 				</tr>
-				<?php
-			while ($valor = mysql_fetch_array($query_busqueda))
-			{
-			?>
+	<?php
+			while ($valor = mysql_fetch_array($query_busqueda)) {
+	?>
 				<tr>
 					<td><?php echo $valor["apellido"].', '.$valor["nombre"]; ?></td>
-					<td><?php
-					
-					
-					$query= "SELECT  * from med_esp as me
-							 inner join especialidades as e on e.idespecialidad = me.idespecialidad 
-							 where me.idmedico = ".$valor["idmedico"]."";
-
-					
-					$res = mysql_query($query);
-					while ($esp=mysql_fetch_array($res)) {
-					echo "&nbsp;".$esp["nombre"]."";
-					}
-					
-					
-					?>
-					
-
-
+					<td>
+						<?php
+							$query= "SELECT * from med_esp as me
+							 		 INNER JOIN especialidades as e on e.idespecialidad = me.idespecialidad 
+							 		 WHERE me.idmedico = ".$valor["idmedico"]."";
+							$res = mysql_query($query);
+							while ($esp = mysql_fetch_array($res)) {
+								echo "&nbsp;".$esp["nombre"]."";
+							}
+						?>
 					</td>
-								
-					<td><?php
-										
-					$query= "SELECT  * from med_obrasocial as mo
-							 inner join obrasociales as o on o.idobra = mo.idobra 
-							 where mo.idmedico = ".$valor["idmedico"]."";
-
-					
-					$res = mysql_query($query);
-					while ($obra=mysql_fetch_array($res)) {
-					echo "&nbsp;".$obra["nombre"]."";
-					}
-					
-					
-					?>
-					
-
-
+					<td>
+						<?php				
+							$query= "SELECT  * from med_obrasocial as mo
+							 		 INNER JOIN obrasociales as o on o.idobra = mo.idobra 
+							 		 WHERE mo.idmedico = ".$valor["idmedico"]."";
+							$res = mysql_query($query);
+							while ($obra=mysql_fetch_array($res)) {
+								echo "&nbsp;".$obra["nombre"]."";
+							}
+						?>
 					</td>
-					
-					
-					
-
-					
-					
 					<td><?php echo $valor["dia"]; ?></td>
 					<td><?php echo $valor["fecha"]; ?></td>
 					<td><?php echo $valor["horaIn"].' - '.$valor["horaOut"]; ?></td>
@@ -405,25 +359,20 @@ $fecha = $_REQUEST['fecha'];
 					?>	
 						
 					<td><button class='btn btn-warning' type='button' onclick="location.href='AltaTurno.php?idmedico=<?php echo $idmedico;?>&idhorario=<?php echo $idhorario;?>&fecha=<?php echo $fecha;?>&idpaciente=<?php echo $idpac;?>'"> Alta </button> </td>
-	  
-					
-					
-					<td><button class="btn btn-danger" onclick="location.href='CargaMedico.php?idmedico=<?php echo $idmedico; ?> '" type="button">Modificar</button> </td>
-					
 				</tr>
-			<?php
+	<?php
 			}
-			?>	
+	?>	
 			</table>
-		</div>
-		<?php
+	</div>
+	<?php
 		 
 		}  // FIN DE  FILTRO == S
 		
-		?>
+	?>
 		
 		
-
+</div>  			<!-- FIN ENCAPSULADOR!!!!! -->
 </body>
 </html>
  <script>
