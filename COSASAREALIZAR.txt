@@ -1,0 +1,18 @@
+
+
+Bugs: 
+      -Gestión de turnos :   1) Cuando doy de alta un turno y vuelvo para atras me duplica el alta, es 
+	                         decir medeja dar de alta dos turnos la mismo paciente con el mismo medico y 
+							 la misma fecha y hora.
+							 2) No debería dejar modificar datos de nombre y apellido del medico y paciente,
+							 ni fecha.
+							 3)Al gestionar el turno debería forzar con javascript la selección del paciente.
+							 4)Botón de cancelar alta turno y botón generar.
+							 
+							 
+Cosas a desarrollar:
+
+	   -Licencias:      1)ABM
+	                    2)Actulizar referencias y cargas de médicos (en gestionde turnos, gestion de medicos,etc) 
+						yo debería ver los medicos con licencia activa.
+						
