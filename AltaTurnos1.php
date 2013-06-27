@@ -202,23 +202,6 @@ $fecha = $_REQUEST['fecha'];
 	<div id="form-turnos">
 		<form name="filtro" class="form-horizontal">
 			<div>
-				<!-- ***************************** SELECT DE PACIENTES ***************************** -->
-				<label>Paciente:</label>
-				<select id="myselect1" name="myselect1">
-					<option value=0>Seleccione paciente</option>
-					<?php
-						while ($valor = mysql_fetch_array($query_pac)) {
-							if ($myselect1 == $valor["idpaciente"]) {
-								$sel= " SELECTED ";
-							}else{
-								$sel= "";
-							}
-					?>
-							<option value="<?php echo $valor["idpaciente"];?>" <?php echo $sel;?>><?php echo $valor["nombre"]; ?> <?php echo $valor["apellido"]; ?></option>
-					<?php	  
-						}
-					?>
-				</select>
 				</br><!-- ***************************** SELECT DE MEDICOS ***************************** -->
 				<label>Medico:</label>
 				<select id="myselect2" name="myselect2" >
@@ -236,8 +219,7 @@ $fecha = $_REQUEST['fecha'];
 						}
 					?>
 				</select>
-			</div>	
-			<div style="margin-top: -150px; margin-left: 253px;">
+				</br>
 				<!-- ***************************** SELECT DE ESPECIALIDADES ***************************** -->		
 				<label>Especialidad:</label>
 				<select id="myselect3" name="myselect3">
@@ -255,7 +237,9 @@ $fecha = $_REQUEST['fecha'];
 						}
 					?>
 				</select>
-				</br><!-- ***************************** SELECT DE OBRAS SOCIALES ***************************** -->
+			</div>	
+			<div style="margin-left: 253px; margin-top: -150px;">
+				<!-- ***************************** SELECT DE OBRAS SOCIALES ***************************** -->
 				<label>Obra Social:</label>
 				<select id="myselect4" name="myselect4">
 					<option value=0>Todas</option>
@@ -272,16 +256,32 @@ $fecha = $_REQUEST['fecha'];
 						}
 					?>
 				</select>	
-			</div>
-			<div style="margin-top: -112px; margin-left: 506px;">
+				</br>
 				<!-- ***************************** FECHAAAA ***************************** -->
-				<?php 
-					$min_fecha= date("d-m-Y");
-					$max_fecha= date("d-m-Y",strtotime("+7 days"));
-				?>
+
 				<label>Fecha:</label>
-				<input class="fecnacc" id="fecha" name="fecha" type="date" min="<?php echo $min_fecha;?>" max="<?php echo $max_fecha;?>" placeholder="Fecha" value="<?php //echo $fecha?>">
-				</br><!-- ***************************** SELECT DE HORA ***************************** -->
+				<select id="fecha" name="fecha" >
+					<option value=>Todas</option>
+					<?php
+						$query= "SELECT DISTINCT fecha
+								 FROM horarios";
+						$res_fecha = mysql_query($query);
+
+						while ($valor = mysql_fetch_array($res_fecha)) {
+							if ($fecha == $valor["fecha"]) {
+								$sel= " SELECTED ";
+								}else{
+									$sel= "";
+								}
+					?>
+							<option value="<?php echo $valor["fecha"];?>"<?php echo $sel;?>> <?php echo $valor["fecha"]; ?></option>
+					<?php	  
+						}
+					?>
+				</select>	
+			</div>	
+			<div style="margin-left: 506px; margin-top: -150px;">
+				<!-- ***************************** SELECT DE HORA ***************************** -->
 				<label>Franja Horaria:</label>
 				<select id="myselect5" name="myselect5" >
 					<option value=0>Todas</option>
@@ -301,9 +301,9 @@ $fecha = $_REQUEST['fecha'];
 						}
 					?>
 				</select>	
+			
+				<button class='btn btn-warning' style="margin-top: 50px;" type='button' onclick='AceptarFiltro();'> Buscar </button>
 			</div>
-			</br>
-			<button class='btn btn-warning' type='button' onclick='AceptarFiltro();'> Buscar </button>
 		</form>
 	</div>
 
@@ -355,10 +355,9 @@ $fecha = $_REQUEST['fecha'];
 						$idmedico = $valor['idmedico'];
 						$idhorario = $valor['idhorario'];
 						$fecha = $valor['fecha'];
-						$idpac = $myselect1;
 					?>	
 						
-					<td><button class='btn btn-warning' type='button' onclick="location.href='AltaTurno.php?idmedico=<?php echo $idmedico;?>&idhorario=<?php echo $idhorario;?>&fecha=<?php echo $fecha;?>&idpaciente=<?php echo $idpac;?>'"> Alta </button> </td>
+					<td><button class='btn btn-success' type='button' onclick="location.href='AltaTurno.php?idmedico=<?php echo $idmedico;?>&idhorario=<?php echo $idhorario;?>&fecha=<?php echo $fecha;?>'"> Alta </button> </td>
 				</tr>
 	<?php
 			}
@@ -378,7 +377,7 @@ $fecha = $_REQUEST['fecha'];
  <script>
 function AceptarFiltro(){ 
 	
- var myselect1 = document.getElementsByName('myselect1')[0].value;
+
  var myselect2 = document.getElementsByName('myselect2')[0].value;
  var myselect3 = document.getElementsByName('myselect3')[0].value;
  var myselect4 = document.getElementsByName('myselect4')[0].value;
@@ -391,7 +390,7 @@ function AceptarFiltro(){
 //}
 //alert(miselect1);
 
-location.href='GestionTurnos.php?filtro=S&myselect1='+myselect1+'&myselect2='+myselect2+'&myselect3='+myselect3+'&myselect4='+myselect4+'&myselect5='+myselect5+'&fecha='+fecha;	
+location.href='AltaTurnos1.php?filtro=S&myselect2='+myselect2+'&myselect3='+myselect3+'&myselect4='+myselect4+'&myselect5='+myselect5+'&fecha='+fecha;	
 
 
 }

@@ -3,29 +3,26 @@
 //	if ((empty($_POST['idmedico'])) or (empty($_POST['idpaciente'])) or (empty($_POST['idhora'])) or (empty($_POST['idobra'])) or (empty($_POST['fecha'])))  {
 //		Header ('Location: AltaTurno.php');
 //	}
-	echo '------- ENTRO ';
 	
 	
-	$idmedico=trim($_REQUEST['idmedico']);
-	$idpaciente=trim($_POST['idpaciente']);
-	$idhora=trim($_POST['idhora']);
-	$idobra=trim($_POST['idobra']);
-	$fecha=trim($_POST['fecha']);
+	$idmedico= $_POST['idmedico'];
+	$idpaciente= $_POST['myselect1'];
+	$idhora= $_POST['idhora'];
+	$idobra= $_POST['idobra'];
+	$fecha= $_POST['fecha']; 
 	
-	
-	$queryInsertar = "INSERT INTO turnos(idmedico, idpaciente, idobra, idhora, fecha)
-					VALUES (
-							'".$idmedico."',
-							'".$idpaciente."',
-							'".$idobra."',
-							'".$idhora."',
-						    '".$fecha."'
-							)
-							";
-		echo $queryInsertar;
-		mysql_query($queryInsertar);
-		
+	$queryPacienteHorario = "SELECT h.idhora
+							 FROM hora AS h
+							 INNER JOIN turnos AS t ON h.idhora = t.idhora
+							 WHERE idpaciente = '$idpaciente' AND fecha = '$fecha' AND h.idhora = '$idhora' ";						
+	$puede = mysql_query($queryPacienteHorario);
+	if(	mysql_num_rows($puede) == 0){
+		$addturno = "INSERT INTO turnos (idmedico, idpaciente, idobra, idhora, fecha) VALUES ('".$idmedico."','".$idpaciente."', '".$idobra."', '".$idhora."', '".$fecha."' )";
+		mysql_query($addturno);
+	}
 					
-	 Header ("Location: GestionTurnos.php?Correcto=4");	
+	Header ("Location: GestionTurnos.php?Correcto=4"); 
+
+
 	
 ?>
