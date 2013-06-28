@@ -1,6 +1,23 @@
 <?php
 	include_once('mysqlconnect.php');
+	
+	
+	// CONFIGURACION DE HORA Y FECHA PARA CONSULTAS!!!...
+
+
+
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+setlocale(LC_TIME, 'spanish');
+$time = strftime("%H:%M");
+ 			
+
+ 
+//FIN DE CONFIGURACION DE HORA Y FECHA!!!..
+	
+	
 ?>
+
+
 
 <head>
 
@@ -170,17 +187,19 @@
 							if ($idhorario == 2) { $topeHora = ' AND h.idhora > 12 '; }						
 								$queryMedicoHorario = "SELECT *
 													   FROM hora AS h
-													   WHERE  idhora NOT IN (SELECT h.idhora
+													   WHERE idhora NOT IN (SELECT h.idhora
 																			FROM hora AS h
 																			INNER JOIN turnos AS t ON h.idhora = t.idhora
-																			WHERE idmedico = '$idmedico' AND fecha = '$fechaSel')";			
+																			WHERE idmedico = '$idmedico' AND fecha = '$fechaSel') ".$topeHora." ";	
 								
 								$hora = mysql_query($queryMedicoHorario);
 						
 							while ($medicoHorario = mysql_fetch_array($hora)) {
+								if($medicoHorario["hora"] > $time){
 						?>
-								<option  value="<?php echo $medicoHorario["idhora"]?>" > <?php echo $medicoHorario["hora"];?> </option>
+									<option  value="<?php echo $medicoHorario["idhora"]?>" > <?php echo $medicoHorario["hora"];?> </option>
 						<?php
+								}
 							}
 						?>
 						</select>	

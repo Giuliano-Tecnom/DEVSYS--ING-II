@@ -1,5 +1,17 @@
 
 <?php
+// CONFIGURACION DE HORA Y FECHA PARA CONSULTAS!!!...
+
+
+
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+setlocale(LC_TIME, 'spanish');
+$time = strftime("%H:%M");
+ 			
+$date = date("Y-m-d");
+
+ 
+//FIN DE CONFIGURACION DE HORA Y FECHA!!!..
 
 function diaSemana($ano,$mes,$dia)
 {
@@ -323,44 +335,84 @@ $fecha = $_REQUEST['fecha'];
 				</tr>
 	<?php
 			while ($valor = mysql_fetch_array($query_busqueda)) {
+				$idmedico = $valor['idmedico'];
+				$idhorario = $valor['idhorario'];
+				$fecha = $valor['fecha'];
+				$hora = $valor['horaOut'];
+					
+
+					
+				if($fecha == $date ) {
+					if($hora > $time){
 	?>
-				<tr>
-					<td><?php echo $valor["apellido"].', '.$valor["nombre"]; ?></td>
-					<td>
-						<?php
-							$query= "SELECT * from med_esp as me
-							 		 INNER JOIN especialidades as e on e.idespecialidad = me.idespecialidad 
-							 		 WHERE me.idmedico = ".$valor["idmedico"]."";
-							$res = mysql_query($query);
-							while ($esp = mysql_fetch_array($res)) {
-								echo "&nbsp;".$esp["nombre"]."";
-							}
-						?>
-					</td>
-					<td>
-						<?php				
-							$query= "SELECT  * from med_obrasocial as mo
-							 		 INNER JOIN obrasociales as o on o.idobra = mo.idobra 
-							 		 WHERE mo.idmedico = ".$valor["idmedico"]."";
-							$res = mysql_query($query);
-							while ($obra=mysql_fetch_array($res)) {
-								echo "&nbsp;".$obra["nombre"]."";
-							}
-						?>
-					</td>
-					<td><?php echo $valor["dia"]; ?></td>
-					<td><?php echo $valor["fecha"]; ?></td>
-					<td><?php echo $valor["horaIn"].' - '.$valor["horaOut"]; ?></td>
-					<?php 
-						$idmedico = $valor['idmedico'];
-						$idhorario = $valor['idhorario'];
-						$fecha = $valor['fecha'];
-					?>	
-						
-					<td><button class='btn btn-success' type='button' onclick="location.href='AltaTurno.php?idmedico=<?php echo $idmedico;?>&idhorario=<?php echo $idhorario;?>&fecha=<?php echo $fecha;?>'"> Alta </button> </td>
-				</tr>
+						<tr>
+							<td><?php echo $valor["apellido"].', '.$valor["nombre"]; ?></td>
+							<td>
+								<?php
+									$query= "SELECT * from med_esp as me
+											 INNER JOIN especialidades as e on e.idespecialidad = me.idespecialidad 
+											 WHERE me.idmedico = ".$valor["idmedico"]."";
+									$res = mysql_query($query);
+									while ($esp = mysql_fetch_array($res)) {
+										echo "&nbsp;".$esp["nombre"]."";
+									}
+								?>
+							</td>
+							<td>
+								<?php				
+									$query= "SELECT  * from med_obrasocial as mo
+											 INNER JOIN obrasociales as o on o.idobra = mo.idobra 
+											 WHERE mo.idmedico = ".$valor["idmedico"]."";
+									$res = mysql_query($query);
+									while ($obra=mysql_fetch_array($res)) {
+										echo "&nbsp;".$obra["nombre"]."";
+									}
+								?>
+							</td>
+							<td><?php echo $valor["dia"]; ?></td>
+							<td><?php echo $valor["fecha"]; ?></td>
+							<td><?php echo $valor["horaIn"].' - '.$valor["horaOut"]; ?></td>
+							
+							<td><button class='btn btn-success' type='button' onclick="location.href='AltaTurno.php?idmedico=<?php echo $idmedico;?>&idhorario=<?php echo $idhorario;?>&fecha=<?php echo $fecha;?>'"> Alta </button> </td>
+						</tr>
 	<?php
+					} 
+				}else{
+	?>
+						<tr>
+							<td><?php echo $valor["apellido"].', '.$valor["nombre"]; ?></td>
+							<td>
+								<?php
+									$query= "SELECT * from med_esp as me
+											 INNER JOIN especialidades as e on e.idespecialidad = me.idespecialidad 
+											 WHERE me.idmedico = ".$valor["idmedico"]."";
+									$res = mysql_query($query);
+									while ($esp = mysql_fetch_array($res)) {
+										echo "&nbsp;".$esp["nombre"]."";
+									}
+								?>
+							</td>
+							<td>
+								<?php				
+									$query= "SELECT  * from med_obrasocial as mo
+											 INNER JOIN obrasociales as o on o.idobra = mo.idobra 
+											 WHERE mo.idmedico = ".$valor["idmedico"]."";
+									$res = mysql_query($query);
+									while ($obra=mysql_fetch_array($res)) {
+										echo "&nbsp;".$obra["nombre"]."";
+									}
+								?>
+							</td>
+							<td><?php echo $valor["dia"]; ?></td>
+							<td><?php echo $valor["fecha"]; ?></td>
+							<td><?php echo $valor["horaIn"].' - '.$valor["horaOut"]; ?></td>
+							
+							<td><button class='btn btn-success' type='button' onclick="location.href='AltaTurno.php?idmedico=<?php echo $idmedico;?>&idhorario=<?php echo $idhorario;?>&fecha=<?php echo $fecha;?>'"> Alta </button> </td>
+						</tr>
+	<?php
+				}
 			}
+			
 	?>	
 			</table>
 	</div>
