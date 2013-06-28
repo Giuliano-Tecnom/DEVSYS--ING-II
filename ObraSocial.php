@@ -37,8 +37,8 @@ include_once('mysqlconnect.php');
 			<?php
 				if(isset($_GET['Error'])){
 					echo"<div class='alert alert-error'>
-						<h4>Error!</h4>
-						Ya existe una Obra Social con ese nombre. Verifique que la misma puede estar deshabilitada.
+						<h4>Ya existe una Obra Social con ese nombre.</h4>
+						 Verifique que la misma puede estar deshabilitada o ingrese un nombre diferente.
 					</div>";
 				}
 			?>
@@ -56,13 +56,23 @@ include_once('mysqlconnect.php');
 					<div class="control-group">
 						<input class="nombree" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?>">
 					    <input type="hidden" name="idobra" value="<?php echo $_GET['idobra']; ?>" />
-						<button class="btnsubmit btn-danger" type="submit">Modificar</button>
-						
+		
+						<a data-toggle="modal" role="button" href="#modificar" class="btn btn-warning">Modificar</a>
+									<!-- MODAL DE Modificar -->
+									<div id="modificar" class="modal hide fade in" style="display: none; ">
+										<div class="modal-body">
+											<h4>Aviso</h4>	      
+											<p> Esta seguro que desea modificar el nombre de la obra social? </p>
+										</div>
+										<div class="modal-footer">
+											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+											<button class="btnsubmit btn-warning" type="submit">Aceptar</button>
+										</div>
+									</div>
 					
 					</div>
-										
 						
-					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Campo Nombre obligatorio.</span>
+					<span class="help-block" style="margin-left: 2px; margin-top: -25px; font-size: 9px;"> Campo Nombre obligatorio.</span>
 				</form>
 			</div>
 			

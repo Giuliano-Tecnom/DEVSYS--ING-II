@@ -37,8 +37,8 @@ include_once('mysqlconnect.php');
 			<?php
 				if(isset($_GET['Error'])){
 					echo"<div class='alert alert-error'>
-						<h4>Error!</h4>
-						Ya existe una Obra Social con ese nombre. Verifique que la misma puede estar deshabilitada.
+						<h4>Ya existe una Obra Social con ese nombre.</h4>
+						 Verifique que la misma puede estar deshabilitada o Ingrese un nombre diferente para la nueva obra social.
 					</div>";
 				}
 			?>
@@ -48,28 +48,40 @@ include_once('mysqlconnect.php');
 				<form class="form-horizontal" method="POST" action="AgregarObras.php" enctype="multipart/form-data" > 
 		  
 					<div class="control-group">
-						<input class="nombree" name="nombre" type="text" maxlength="5" placeholder="Nombre..">
+						<input class="nombree" name="nombre" type="text" maxlength="50" placeholder="Nombre..">
+						<span class="help-block" style="margin-left: 4px; margin-top: -2px; font-size: 9px;"> Campo Nombre obligatorio.</span>
 					</div>
 										
-						<div style="margin-left:300px;margin-top: 90px;">
-						<button class="btnsubmit btn-success" type="submit">Agregar</button>
-						<button class="btn btn-danger" type="button">Cancelar </button>
-					</div>
-					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Campo Nombre obligatorio.</span>
+					<div style="margin-left: 225px; margin-top: -62px;">
+						<a data-toggle="modal" role="button" href="#agregar" class="btnsubmit btn-success">Agregar</a>
+						<!-- MODAL DE AGREGAR -->
+						<div id="agregar" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<h4>Aviso</h4>	      
+								<p> Esta seguro que desea Agregar la Obra nueva? </p>
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+								<button class="btn btn-success" type="submit" onclick="location.href='AgregarObras.php'">Aceptar</button>
+							</div>
+						</div>
+							
+						<a data-toggle="modal" role="button" href="#cancelar" class="btn btn-danger">Cancelar</a>
+						<!-- MODAL DE CANCELAR -->
+						<div id="cancelar" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<h4>Aviso</h4>	      
+								<p> Esta seguro que desea Cancelar? </p>
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+								<a class="btn btn-danger"  href="GestionObras.php">Aceptar</a>
+							</div>
+						</div>
+					</div>	
 				</form>
 			</div>
-			
 
-			<!-- BOTON DE SALIR Y ATRAS-->
-			<ul class="breadcrumb" style="margin-top: 600px;">
-				<li> 
-					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button"> Atras </button>
-						<button class="btn btn-inverse" type="button"> Salir </button>
-					</div>
-				</li>
-			</ul>
-			
 		</div>     <!-- FIN DIV CONTENDOR -->
 	
 	</div>  <!-- FIN ENCAPSULADOR-->

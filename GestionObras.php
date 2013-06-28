@@ -38,7 +38,8 @@
 			</ul>
 		  	
 			<?php 
-		  
+		  		// MANEJADOR DE ERRORES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 				if(isset($_GET['Correcto'])){
 					if($_GET['Correcto'] == 1){
 						echo"<div class='alert alert-success'>
@@ -51,8 +52,8 @@
 				if(isset($_GET['Error'])){
 					if($_GET['Error'] == 1)
 					echo"<div class='alert alert-error'>
-						<h4>Error!!</h4>
-						La obra social no se puede eliminar porque existen pacientes o medicos relacionados a ella. 
+						<h4>La obra social no se puede eliminar porque existen pacientes o medicos relacionados a ella.</h4>
+						 Revise este problema para luego poder borrar la obra social.
 						</div>";
 				}
 				
@@ -77,7 +78,7 @@
 		<div id="tabla-gestion-obrasociales">
 
 				<table class="table table-striped">
-					<tr class="info">
+					<tr>
 						<td><b>Obra Social</b> </td>
 						<td></td>
 						<td></td>	
