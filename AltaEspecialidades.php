@@ -38,7 +38,7 @@ include_once('mysqlconnect.php');
             <?php
 				if(isset($_GET['Error'])){
 					echo"<div class='alert alert-error'>
-						<h4>Error!</h4>
+						<h4>Aviso!</h4>
 						Ya existe una Especialidad con ese nombre. Verifique que la misma puede estar deshabilitada.
 					</div>";
 				}
