@@ -9,7 +9,7 @@
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 setlocale(LC_TIME, 'spanish');
 $time = strftime("%H:%M");
- 			
+$date = date("Y-m-d"); 			
 
  
 //FIN DE CONFIGURACION DE HORA Y FECHA!!!..
@@ -195,10 +195,17 @@ $time = strftime("%H:%M");
 								$hora = mysql_query($queryMedicoHorario);
 						
 							while ($medicoHorario = mysql_fetch_array($hora)) {
-								if($medicoHorario["hora"] > $time){
+								if ($_GET['fecha'] == $date) {
+									if($medicoHorario["hora"] > $time){
 						?>
-									<option  value="<?php echo $medicoHorario["idhora"]?>" > <?php echo $medicoHorario["hora"];?> </option>
+										<option  value="<?php echo $medicoHorario["idhora"]?>" > <?php echo $medicoHorario["hora"];?> </option>
 						<?php
+									}
+								}else {
+								?>
+									<option  value="<?php echo $medicoHorario["idhora"]?>" > <?php echo $medicoHorario["hora"];?> </option>
+							<?php	
+								
 								}
 							}
 						?>
