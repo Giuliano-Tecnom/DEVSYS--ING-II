@@ -53,9 +53,20 @@ include_once('mysqlconnect.php');
 				<form class="form-horizontal" method="POST" action="ModificarEspecialidad.php" enctype="multipart/form-data" > 
 		  
 					<div class="control-group">
-						<input class="nombree" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?> ">
+						<input class="nombree" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?>">
 					    <input type="hidden" name="idespecialidad" value="<?php echo $_GET['idespecialidad']; ?>" />
-						<button class="btnsubmit btn-danger" type="submit">Modificar</button>
+						<a data-toggle="modal" role="button" href="#modificar" class="btn btn-warning">Modificar</a>
+									<!-- MODAL DE Modificar -->
+									<div id="modificar" class="modal hide fade in" style="display: none; ">
+										<div class="modal-body">
+											<h4>Aviso</h4>	      
+											<p> Esta seguro que desea modificar el nombre de la especialidad? </p>
+										</div>
+										<div class="modal-footer">
+											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+											<button class="btnsubmit btn-warning" type="submit">Aceptar</button>
+										</div>
+									</div>
 						
 					
 					</div>
