@@ -66,7 +66,7 @@
 			<div id="tabla-gestion-especialidades" style="margin-top: 25px; margin-left: 15px; margin-right: 15px;">
 
 				<table class="table table-striped">
-					<tr class="info">
+					<tr>
 						
 						<td><b>Especialidad</b></td>
 						<td></td>
@@ -108,15 +108,7 @@
 			</div>
 
 						<!-- BOTON DE SALIR, ATRAS y REPORTE-->
-			<ul class="breadcrumb">
-				<li> 
-					<button class="btn btn-primary" style="margin-left:400px;" type="button">Generar Reporte</button>
-					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
-						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
-					</div>
-				</li>
-			</ul>
+			
 
 		</div>      <!-- FIN DIV CONTENDOR -->
 
