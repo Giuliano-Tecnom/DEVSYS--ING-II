@@ -14,7 +14,7 @@ include_once('mysqlconnect.php');
 		$idmed = $_GET['idmedico'];
 		$idhor = $_GET['idhorario'];
 		if($valor['fechaDesde'] <= $_GET['fecha'] && $valor['fechaHasta'] >= $_GET['fecha']){
-				Header ("Location: AltaTurnos1.php?filtro=S&myselect2=".$idmed."&myselect3=0&myselect4=0&myselect5=".$idhor."&fecha=".$fec."");
+				Header ("Location: AltaTurnos1.php?filtro=S&myselect2=".$idmed."&myselect3=0&myselect4=0&myselect5=".$idhor."&fecha=".$fec."&Error=5");
 		}
 	}
 

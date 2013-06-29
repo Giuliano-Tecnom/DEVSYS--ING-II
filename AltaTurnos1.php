@@ -204,6 +204,8 @@ $fecha = $_REQUEST['fecha'];
  	 <?php  $x=1; ?>
 	<?php include_once('header.php'); ?>
 	
+	
+	
 <div class="encapsulador" style="margin-top: 75px;">
 	<ul class="breadcrumb">
 		<li> 
@@ -211,6 +213,19 @@ $fecha = $_REQUEST['fecha'];
 																				 <!-- ICONO DE AYUDA -->  
 		</li>
 	</ul>
+	
+	<?php 
+	
+	if(isset($_GET['Error'])){
+					if( $_GET['Error'] == 5 ){
+						echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
+								<h4>Aviso!!</h4>
+								El medico con el que se desea dar el turno,en esa fecha estara de licencia.
+								</div> ";
+								}
+					}
+	
+	?>
 	<div id="form-turnos">
 		<form name="filtro" class="form-horizontal">
 			<div>
