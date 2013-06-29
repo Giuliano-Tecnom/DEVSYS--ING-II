@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2013 a las 02:11:31
+-- Tiempo de generación: 29-06-2013 a las 07:55:37
 -- Versión del servidor: 5.6.11-log
 -- Versión de PHP: 5.4.14
 
@@ -31,14 +31,7 @@ CREATE TABLE IF NOT EXISTS `especialidades` (
   `nombre` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idespecialidad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `especialidades`
---
-
-INSERT INTO `especialidades` (`idespecialidad`, `nombre`, `activo`) VALUES
-(3, 'ODONTOLOGIA', 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -148,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `medicos` (
   `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idmedico`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -197,15 +190,7 @@ CREATE TABLE IF NOT EXISTS `obrasociales` (
   `nombre` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idobra`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
-
---
--- Volcado de datos para la tabla `obrasociales`
---
-
-INSERT INTO `obrasociales` (`idobra`, `nombre`, `activo`) VALUES
-(6, 'IOMA', 1),
-(7, 'OSDE', 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -224,14 +209,7 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   `direccion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idpaciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=80 ;
-
---
--- Volcado de datos para la tabla `pacientes`
---
-
-INSERT INTO `pacientes` (`idpaciente`, `dni`, `apellido`, `nombre`, `email`, `telefono`, `fechaNac`, `direccion`, `activo`) VALUES
-(79, 36683252, 'Romero', 'Cristian', 'cristianromero@hotmail.com', 4710301, '1991-12-10', '501 y 27', 1);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=81 ;
 
 -- --------------------------------------------------------
 
@@ -246,13 +224,6 @@ CREATE TABLE IF NOT EXISTS `pac_obrasocial` (
   PRIMARY KEY (`idpaciente`,`idobra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `pac_obrasocial`
---
-
-INSERT INTO `pac_obrasocial` (`idpaciente`, `idobra`, `nroAfiliado`) VALUES
-(79, 7, '11112');
-
 -- --------------------------------------------------------
 
 --
@@ -266,8 +237,9 @@ CREATE TABLE IF NOT EXISTS `turnos` (
   `idobra` int(11) DEFAULT NULL,
   `idhora` int(11) NOT NULL,
   `fecha` date NOT NULL,
+  `idespecialidad` int(11) NOT NULL,
   PRIMARY KEY (`idturno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 

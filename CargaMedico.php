@@ -41,6 +41,24 @@
 							No se puede modificar el medico. Ya existe uno con esa matricula o dni.
 							</div>";
 				}
+				if($_GET['Error'] == 3) {
+					echo	"<div class='alert alert-error'>
+								<h4>Aviso! </h4>
+							El medico debe tener al menos una especialidad seleccionada.
+							</div>";
+				}
+				if($_GET['Error'] == 4) {
+					echo	"<div class='alert alert-error'>
+								<h4>Aviso! </h4>
+							No se puede quitar la especialidad deseada ya que esta asignada a un turno.
+							</div>";
+				}
+				if($_GET['Error'] == 5) {
+					echo	"<div class='alert alert-error'>
+								<h4>Aviso! </h4>
+							No se puede quitar la obra social deseada ya que esta asignada a un turno.
+							</div>";
+				}
 			}
 		
 		?>

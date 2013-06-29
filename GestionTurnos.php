@@ -1,16 +1,17 @@
 <?php
 	
 	include_once('mysqlconnect.php');
-	$consulta = "SELECT medicos.nombre as nommed,medicos.apellido as apemed ,pacientes.nombre as pacnom
+	$consulta = "SELECT medicos.nombre as nommed,medicos.apellido as apemed , e.nombre as area, pacientes.nombre as pacnom
 	            ,pacientes.apellido as pacape,
-                 hora.hora, obrasociales.nombre as nomobra, turnos.fecha, turnos.idturno
-               	FROM turnos 
-	             inner join medicos on medicos.idmedico=turnos.idmedico
-				 inner join pacientes on pacientes.idpaciente=turnos.idpaciente
-				 left join obrasociales on obrasociales.idobra=turnos.idobra
-				 inner join hora on hora.idhora=turnos.idhora
-				 WHERE ( turnos.fecha >= (SELECT CURRENT_DATE()) ) OR ( hora.hora >= (SELECT CURRENT_TIME()) )
-				 ORDER BY turnos.fecha,hora.hora
+                 hora.hora, obrasociales.nombre as nomobra, t.fecha, t.idturno
+               	FROM turnos as t
+	             inner join medicos on medicos.idmedico=t.idmedico
+				 inner join pacientes on pacientes.idpaciente=t.idpaciente
+				 left join obrasociales on obrasociales.idobra=t.idobra
+				 inner join hora on hora.idhora=t.idhora
+				 inner join especialidades as e on t.idespecialidad = e.idespecialidad
+				 WHERE ( t.fecha >= (SELECT CURRENT_DATE()) ) OR ( hora.hora >= (SELECT CURRENT_TIME()) )
+				 ORDER BY t.fecha,hora.hora
 				 ";
 	        
     $resultado = mysql_query($consulta);
@@ -83,6 +84,7 @@
 					<tr>
 						<td><b>Nro. Turno</b> </td>
 						<td><b>Medico</b></td>
+						<td><b>Area</b></td>
 						<td><b>Paciente</b></td>
 						<td><b>Obra Social</b></td>		
 						<td><b>Fecha</b></td>
@@ -97,6 +99,7 @@
 					<tr>
 						<td><?php echo $valor["idturno"]; ?></td>
 						<td><?php echo $valor["nommed"]; ?>&nbsp;<?php echo $valor["apemed"]; ?></td>
+						<td><?php echo $valor["area"]; ?></td>
 						<td><?php echo $valor["pacnom"]; ?>&nbsp;<?php echo $valor["pacape"]; ?></td>
 						
 						<?php

@@ -53,6 +53,12 @@
 								Ya existe un medico con la misma matricula o dni. Si no lo encuentra revise los Inactivos.
 								</div> ";
 					}
+					if($_GET['Error'] == 2) {
+					echo	"<div class='alert alert-error'>
+								<h4>Aviso! </h4>
+							El medico debe tener al menos una especialidad seleccionada.
+							</div>";
+					}
 					
 					
 					

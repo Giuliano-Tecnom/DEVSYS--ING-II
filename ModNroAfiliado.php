@@ -20,9 +20,8 @@
 													po.nroAfiliado
 											FROM 
 													obrasociales AS os
-											INNER JOIN pac_obrasocial as po ON po.idobra = os.idobra
-											WHERE os.idobra IN (".$obrasSeleccionadasString.")
-											AND idpaciente = ".$idpaciente."";
+											LEFT JOIN pac_obrasocial as po ON po.idobra = os.idobra AND idpaciente = ".$idpaciente."
+											WHERE os.idobra IN (".$obrasSeleccionadasString.")";
 			$obrasConIdNombre = mysql_query($obrasConIdNombreConsulta);
 
 		}
