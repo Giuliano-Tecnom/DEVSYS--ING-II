@@ -1,21 +1,28 @@
  <?php
-                 $licencias = "SELECT * 
-								FROM medicos
- 								inner join licencias on licencias.idmedico=medicos.idmedico
-								WHERE  medicos.idmedico=".$_GET['idmedico']." and licencias.estado=1 ";
-								
-				$reslicencias = mysql_query($licencias);
-				
-                if ( mysql_num_rows($reslicencias) !==  0) 
-				{
-				    Header ('Location: AltasTurno1.php?Error=4');
-				}
-				
+include_once('mysqlconnect.php');
+
+    $licencias = "SELECT fechaDesde, fechaHasta, estado
+			      FROM medicos as m
+				  INNER JOIN licencias as l ON l.idmedico=m.idmedico 
+				  WHERE l.estado = 1 AND m.idmedico = ".$_GET['idmedico']."";
+	
+							
+	$reslic = mysql_query($licencias);
+
+	while($valor = mysql_fetch_array($reslic)){
+		$fec = $_GET['fecha'];
+		$idmed = $_GET['idmedico'];
+		$idhor = $_GET['idhorario'];
+		if($valor['fechaDesde'] <= $_GET['fecha'] && $valor['fechaHasta'] >= $_GET['fecha']){
+				Header ("Location: AltaTurnos1.php?filtro=S&myselect2=".$idmed."&myselect3=0&myselect4=0&myselect5=".$idhor."&fecha=".$fec."");
+		}
+	}
+
 ?>
 
 
 <?php
-	include_once('mysqlconnect.php');
+	
 	
 	
 	// CONFIGURACION DE HORA Y FECHA PARA CONSULTAS!!!...
