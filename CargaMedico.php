@@ -121,7 +121,8 @@
 															  FROM med_obrasocial as mo
 															  INNER JOIN obrasociales as o ON o.idobra = mo.idobra
 															  INNER JOIN medicos as m ON m.idmedico = mo.idmedico
-															  WHERE m.idmedico=".$_GET['idmedico'].")";
+															  WHERE m.idmedico=".$_GET['idmedico'].")
+									o.activo = 1";
 						$resultadoQueryObrasResto = mysql_query($queryObrasResto);
 					
 						while ($obrasResto = mysql_fetch_array($resultadoQueryObrasResto)) {
