@@ -6,16 +6,18 @@
 	include_once('mysqlconnect.php');
 	
 	$idpaciente=trim($_POST['idpaciente']);
+	$dni=trim($_POST['dni']);
 	$queryPaciente = " 	SELECT 
 								* 
 						FROM 
 								pacientes 
-						WHERE idpaciente = ".$idpaciente."";
+						WHERE idpaciente <> ".$idpaciente."
+						AND dni = ".$dni."";
 					
 	$resultadoPaciente=mysql_query($queryPaciente);
 	$paciente = mysql_fetch_array($resultadoPaciente);
 	
-	if ( mysql_num_rows($resultadoPaciente) == 0  ||  ($_POST['idpaciente'] == $paciente['idpaciente']  ) ){
+	if ( mysql_num_rows($resultadoPaciente) == 0 ) {
 	
 		$queryModificar = "	UPDATE pacientes 
 							SET 

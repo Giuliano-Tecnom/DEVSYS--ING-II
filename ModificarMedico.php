@@ -6,16 +6,13 @@
 	include_once('mysqlconnect.php');
 	
 	$idmedico=trim($_POST['idmedico']);
-	$queryMedico = " 	SELECT 
-								* 
-						FROM 
-								medicos 
-						WHERE idmedico = ".$idmedico."";
-					
-	$resultadoMedico=mysql_query($queryMedico);
-	$medico = mysql_fetch_array($resultadoMedico);
+	$nromatricula=(int)trim(($_POST['nromatricula']));
+	$nrodni=(int)trim(($_POST['dni']));
+	$consultaExistente = " SELECT * FROM medicos where (nromatricula = ".$nromatricula." OR dni = ".$nrodni.") and idmedico <> ".$idmedico."";
+	$existente=mysql_query($consultaExistente);
+	$medico = mysql_fetch_array($existente);
 	
-	if ( mysql_num_rows($resultadoMedico) == 0  ||  ($_POST['idmedico'] == $medico['idmedico']  ) ){
+	if ( mysql_num_rows($existente) == 0 ){
 	
 		$queryModificar = "	UPDATE medicos
 							SET 

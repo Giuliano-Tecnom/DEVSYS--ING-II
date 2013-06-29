@@ -9,7 +9,7 @@
 		$obrasABorrar = array();
 		$obrasABorrarString;
 	}
-	
+	$idpaciente=trim($_GET['idpaciente']);
 	if(isset($_GET['obras'])){
 		$obrasSeleccionadasString = $_GET['obras'];
 
@@ -20,8 +20,9 @@
 													po.nroAfiliado
 											FROM 
 													obrasociales AS os
-											LEFT JOIN pac_obrasocial as po ON po.idobra = os.idobra
-											WHERE os.idobra IN (".$obrasSeleccionadasString.")";
+											INNER JOIN pac_obrasocial as po ON po.idobra = os.idobra
+											WHERE os.idobra IN (".$obrasSeleccionadasString.")
+											AND idpaciente = ".$idpaciente."";
 			$obrasConIdNombre = mysql_query($obrasConIdNombreConsulta);
 
 		}
@@ -112,16 +113,7 @@
 				
 				</form>
 				
-			</div>	
-				<!-- BOTON DE SALIR Y ATRAS-->
-				<ul class="breadcrumb" style="margin-top: 500px;">
-					<li> 
-						<div style="margin-left: 800px;">
-							<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
-							<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
-						</div>
-					</li>
-				</ul>
+			</div>
 				
 			</div>     <!-- FIN DIV CONTENDOR -->
 	

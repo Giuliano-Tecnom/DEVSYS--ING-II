@@ -49,8 +49,8 @@
 				if(isset($_GET['Error'])){
 					if( $_GET['Error'] == 1 ){
 						echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
-								<h4>Error!!</h4>
-								Ya existe un medico con la misma matricula. Si no lo encuentra revise los Inactivos.
+								<h4>Aviso!</h4>
+								Ya existe un medico con la misma matricula o dni. Si no lo encuentra revise los Inactivos.
 								</div> ";
 					}
 					

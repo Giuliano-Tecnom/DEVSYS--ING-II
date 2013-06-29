@@ -31,14 +31,14 @@
 		if(isset($_GET['Error'])){
 				if($_GET['Error'] == 1) {
 					echo	"<div class='alert alert-error'>
-								<h4>Error!! </h4>
+								<h4>Aviso! </h4>
 							No se puede agregar el Medico.
 							</div>";
 				}
 				if($_GET['Error'] == 2) {
 					echo	"<div class='alert alert-error'>
-								<h4>Error!! </h4>
-							No se puede modificar el Medico.
+								<h4>Aviso! </h4>
+							No se puede modificar el medico. Ya existe uno con esa matricula o dni.
 							</div>";
 				}
 			}

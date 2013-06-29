@@ -6,11 +6,13 @@ include_once('mysqlconnect.php');
 	$esp=$_POST['especialidad'];
 	$horarios=$_POST['horarios'];
 	
+	
 	$nromatricula=(int)trim(($_POST['nromatricula']));
-	
-	
-	$consultaExistente = " SELECT nromatricula FROM medicos where nromatricula = ".$nromatricula."";
+	$nrodni=(int)trim(($_POST['dni']));
+	$consultaExistente = " SELECT * FROM medicos where nromatricula = ".$nromatricula." OR dni = ".$nrodni."";
 	$existente=mysql_query($consultaExistente);
+	
+
 	
 	if ( mysql_num_rows($existente) == 0 ){
 	    //Insertar pacientes
