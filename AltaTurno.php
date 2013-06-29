@@ -245,8 +245,10 @@ $date = date("Y-m-d");
 								}
 							}
 						?>
-						</select>	
-					</div>
+						</select>
+					</div>	
+
+					<input type="hidden" id="idhorario" name="idhorario" value="<?php echo $_GET['idhorario'] ?>">
 					<button class="btn btn-success" type="submit"> Dar de Alta </button>
 				</form>
 			</div>

@@ -10,10 +10,10 @@
 	$idhora= $_POST['idhora'];
 	$idobra= $_POST['idobra'];
 	$fecha= $_POST['fecha']; 
-	
+	$idhorario = $_POST['idhorario'];
 	
 	if ($idpaciente == 0){
-			Header ("Location: AltaTurno.php?idmedico=".$idmedico."&idhorario=".$idhora."&fecha=".$fecha."&Error=7");
+			Header ("Location: AltaTurno.php?idmedico=".$idmedico."&idhorario=".$idhorario."&fecha=".$fecha."&Error=7");
 	
 	}
 	else {
