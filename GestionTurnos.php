@@ -7,15 +7,12 @@
                	FROM turnos 
 	             inner join medicos on medicos.idmedico=turnos.idmedico
 				 inner join pacientes on pacientes.idpaciente=turnos.idpaciente
-				 inner join obrasociales on obrasociales.idobra=turnos.idobra
+				 left join obrasociales on obrasociales.idobra=turnos.idobra
 				 inner join hora on hora.idhora=turnos.idhora
 				 WHERE ( turnos.fecha >= (SELECT CURRENT_DATE()) ) OR ( hora.hora >= (SELECT CURRENT_TIME()) )
 				 ORDER BY turnos.fecha,hora.hora
 				 ";
-	
 	        
-	
-	
     $resultado = mysql_query($consulta);
 	
 
@@ -99,7 +96,18 @@
 						<td><?php echo $valor["idturno"]; ?></td>
 						<td><?php echo $valor["nommed"]; ?>&nbsp;<?php echo $valor["apemed"]; ?></td>
 						<td><?php echo $valor["pacnom"]; ?>&nbsp;<?php echo $valor["pacape"]; ?></td>
-						<td><?php echo $valor["nomobra"];?></td>
+						
+						<?php
+						if(is_null($valor["nomobra"] )){
+						?>	
+							<td>Sin Obra Social</td>
+						<?php
+						}else{
+						?>	
+							<td><?php echo $valor["nomobra"];?></td>
+						<?php
+						}
+						?>
 						<td><?php echo $valor["fecha"];?></td>
 						<td><?php echo $valor["hora"];?></td>
 						<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idturno; ?>" class="btn btn-danger">Borrar</a></td>

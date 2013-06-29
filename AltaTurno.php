@@ -186,6 +186,7 @@ $date = date("Y-m-d");
 					<div class="control-group">
 						<label>Obras Sociales</label>
 						<select  id="idobra" name="idobra">
+							<option  value="999">Sin Obra Social</option>
 						<?php
 							$queryObrasMedico = "SELECT o.nombre, o.idobra 
 												 FROM med_obrasocial AS mo

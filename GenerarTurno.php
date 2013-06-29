@@ -21,7 +21,7 @@
 		mysql_query($addturno);
 	}
 					
-	Header ("Location: GestionTurnos.php?Correcto=4"); 
+	Header ("Location: GestionTurnos.php?Correcto=1"); 
 
 
 	
