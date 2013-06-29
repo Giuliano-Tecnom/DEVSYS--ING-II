@@ -1,3 +1,19 @@
+ <?php
+                 $licencias = "SELECT * 
+								FROM medicos
+ 								inner join licencias on licencias.idmedico=medicos.idmedico
+								WHERE  medicos.idmedico=".$_GET['idmedico']." and licencias.estado=1 ";
+								
+				$reslicencias = mysql_query($licencias);
+				
+                if ( mysql_num_rows($reslicencias) !==  0) 
+				{
+				    Header ('Location: AltasTurno1.php?Error=4');
+				}
+				
+?>
+
+
 <?php
 	include_once('mysqlconnect.php');
 	
@@ -121,6 +137,7 @@ $date = date("Y-m-d");
 			
 		   ?>
 		   
+		   	   
 		   
 		   <div id="form-turno"> 
 			   <form class="form-horizontal" name="filtro" method="POST" action="GenerarTurno.php" enctype="multipart/form-data" > 
