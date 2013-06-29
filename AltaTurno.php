@@ -192,7 +192,28 @@ $date = date("Y-m-d");
 						<label> Fecha: <?php echo $fechaSel;?> </label>
 						<input type="hidden" id="fecha" name="fecha" value="<?php echo $fechaSel ?>">
 					</div>
-								
+					<!-- ESPECIALIDADES -->
+					<div class="control-group">
+						<label>Especialidades</label>
+						<select  id="idespecialidad" name="idespecialidad">
+						<?php
+							$queryEspecialidades = "SELECT e.nombre, e.idespecialidad 
+												 	FROM med_esp AS me
+												 	INNER JOIN especialidades AS e on e.idespecialidad = me.idespecialidad
+												 	INNER JOIN medicos AS m on m.idmedico = me.idmedico
+												 	WHERE  m.idmedico=".$_GET['idmedico']." ";
+
+							$resultadoQueryEspecialidades = mysql_query($queryEspecialidades);
+						
+							while ($esp = mysql_fetch_array($resultadoQueryEspecialidades)) {
+						?>
+								<option  value="<?php echo $esp["idespecialidad"];?>"><?php echo $esp["nombre"]; ?></option>
+						<?php	  
+							}
+						?>
+						</select>
+
+					</div>		
 					<!-- Obras Sociales -->
 					<div class="control-group">
 						<label>Obras Sociales</label>
