@@ -63,7 +63,7 @@
 			<!-- FIN BARRA DE OPCIONES -->
 
 			
-			<div id="tabla-gestion-especialidades" style="margin-top: 25px; margin-left: 15px; margin-right: 15px;">
+			<div id="tabla-gestion-especialidades" style="margin-top: 45px; margin-left: 15px; margin-right: 15px;">
 
 				<table class="table table-striped">
 					<tr>
@@ -92,7 +92,7 @@
 										</div>
 										<div class="modal-footer">
 											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-											<a class="btn btn-warning"  href="BorrarEspecialidad.php?idespecialidad=<?php echo $idespecialidad; ?>">Aceptar</a>
+											<a class="btn btn-danger"  href="BorrarEspecialidad.php?idespecialidad=<?php echo $idespecialidad; ?>">Aceptar</a>
 										</div>
 									</div>
 						<?php	}else{ ?>

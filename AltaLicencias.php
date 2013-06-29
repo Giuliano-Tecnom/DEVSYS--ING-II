@@ -8,7 +8,7 @@ $query_med = mysql_query($consulta);
  
 <head>
 <meta charset="UTF-8">
-<title>ClinicSystem - Obras Sociales</title>
+<title>ClinicSystem - Licencias</title>
 
 <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
@@ -51,7 +51,7 @@ $query_med = mysql_query($consulta);
 		  
 					<div class="control-group" style="margin-top: -12px; margin-left: 50px;">
 						<label>Medico:</label>
-						<select id="myselect2" name="myselect2" >
+						<select id="myselect2" name="myselect2" required>
 							<option value=0>Seleccione un Medico...</option>
 							<?php
 								while ($valor = mysql_fetch_array($query_med)) {
@@ -88,7 +88,6 @@ $query_med = mysql_query($consulta);
 						<button class="btnsubmit btn-success" type="submit">Agregar</button>
 						<button class="btn btn-danger" type="button">Cancelar </button>
 					</div>
-					<span class="help-block" style="margin-left: 395px;font-size: 9px;"> Campo Nombre obligatorio.</span>
 				</form>
 			</div>
 		

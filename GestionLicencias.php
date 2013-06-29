@@ -83,7 +83,7 @@
 		<div id="tabla-gestion-licencias">
 
 				<table class="table table-striped">
-					<tr class="info">
+					<tr>
 						<td><b>Medico</b></b></td>
 						<td><b>Fecha Desde</b></td>
 						<td><b>Fecha Hasta</b></td>	

@@ -1,5 +1,5 @@
  <?php
-include_once('mysqlconnect.php');
+	include_once('mysqlconnect.php');
 
     $licencias = "SELECT fechaDesde, fechaHasta, estado
 			      FROM medicos as m
