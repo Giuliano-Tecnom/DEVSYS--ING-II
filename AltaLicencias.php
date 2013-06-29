@@ -2,9 +2,14 @@
 
 include_once('mysqlconnect.php');
 
-$consulta = "SELECT * FROM medicos WHERE medicos.activo = 1";
+$consulta = "SELECT medicos.idmedico as idmedico , medicos.nombre as nombre, medicos.apellido as apellido , licencias.estado FROM medicos 
+			left JOIN licencias on licencias.idmedico = medicos.idmedico			
+			WHERE medicos.activo = 1 
+			and (licencias.estado is null or licencias.estado=0)";
 $query_med = mysql_query($consulta);
 ?>
+
+
  
 <head>
 <meta charset="UTF-8">
@@ -38,11 +43,16 @@ $query_med = mysql_query($consulta);
 
 			<?php
 				if(isset($_GET['Error'])){
+					if($_GET['Error'] == 6){
 					echo"<div class='alert alert-error'>
-						<h4>Error!</h4>
-						Ya existe una Obra Social con ese nombre. Verifique que la misma puede estar deshabilitada.
+						<h4>Aviso!</h4>
+						Se debe ingresar un medico para darlo de licencia.
 					</div>";
+					
+					}
 				}
+				
+				
 			?>
 			
 			<div id="form-alta-pacientes"> 
@@ -51,7 +61,7 @@ $query_med = mysql_query($consulta);
 		  
 					<div class="control-group" style="margin-top: -12px; margin-left: 50px;">
 						<label>Medico:</label>
-						<select id="myselect2" name="myselect2" required>
+						<select  id="myselect2" name="myselect2" >
 							<option value=0>Seleccione un Medico...</option>
 							<?php
 								while ($valor = mysql_fetch_array($query_med)) {
@@ -85,7 +95,7 @@ $query_med = mysql_query($consulta);
 					</div>					
 									
 					<div style="margin-left:367px;margin-top: 55px;">
-						<button class="btnsubmit btn-success" type="submit">Agregar</button>
+						<button class="btnsubmit btn-success" onclick="agregarMedico()" type="submit">Agregar</button>
 						<button class="btn btn-danger" type="button">Cancelar </button>
 					</div>
 				</form>
@@ -97,4 +107,32 @@ $query_med = mysql_query($consulta);
 	</div>  <!-- FIN ENCAPSULADOR-->
 
 </body>
-</html>
+
+
+<html>
+
+<script>
+
+function agregarMedico(){ 
+	
+
+ var myselect2 = document.getElementsByName('myselect2')[0].value;
+ if(myselect2 == '0'){
+    //alert('Se debe seleccionar un medico');
+	location.href='AltaLicencias.php?Error=6'; 
+	 
+	 }
+  
+//if (denominacion == ''){ 
+// alert('Ingrese algun valor, verifique.');
+// return 	
+//}
+//alert(miselect1);
+
+	
+
+
+}
+
+
+</script> 
