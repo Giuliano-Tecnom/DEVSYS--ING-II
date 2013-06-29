@@ -47,6 +47,8 @@
 			<?php 
 		  		// MANEJADOR DE ERRORES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+			
+				
 				if(isset($_GET['Correcto'])){
 					if($_GET['Correcto'] == 1){
 						echo"<div class='alert alert-success'>

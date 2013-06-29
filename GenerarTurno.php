@@ -11,6 +11,12 @@
 	$idobra= $_POST['idobra'];
 	$fecha= $_POST['fecha']; 
 	
+	
+	if ($idpaciente == 0){
+			Header ("Location: AltaTurno.php?idmedico=".$idmedico."&idhorario=".$idhora."&fecha=".$fecha."&Error=7");
+	
+	}
+	else {
 	$queryPacienteHorario = "SELECT h.idhora
 							 FROM hora AS h
 							 INNER JOIN turnos AS t ON h.idhora = t.idhora
@@ -20,9 +26,13 @@
 		$addturno = "INSERT INTO turnos (idmedico, idpaciente, idobra, idhora, fecha) VALUES ('".$idmedico."','".$idpaciente."', '".$idobra."', '".$idhora."', '".$fecha."' )";
 		mysql_query($addturno);
 	}
-					
-	Header ("Location: GestionTurnos.php?Correcto=1"); 
-
-
+		
+		
+			
+		
 	
+	
+			Header ("Location: GestionTurnos.php?Correcto=1"); 
+		
+	}
 ?>

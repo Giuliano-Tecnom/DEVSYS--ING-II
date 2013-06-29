@@ -116,8 +116,19 @@ $date = date("Y-m-d");
 														 <!-- ICONO DE AYUDA -->  
 				</li>
 			</ul>
+			
 
 			<?php
+			
+			if(isset($_GET['Error'])){
+					if($_GET['Error'] == 7){
+						echo"<div class='alert alert-error'>
+							<h4>Aviso!</h4>
+							Se debe ingresar un paciente.
+							</div>";
+					}
+			}
+				
 
 				if(isset($_GET['idmedico'])){
 				    $idmedico = $_GET['idmedico'];
@@ -236,7 +247,7 @@ $date = date("Y-m-d");
 						?>
 						</select>	
 					</div>
-					<button class='btn btn-success' type='submit'> Dar de Alta </button>
+					<button class="btn btn-success" type="submit"> Dar de Alta </button>
 				</form>
 			</div>
 			<?php
@@ -247,3 +258,5 @@ $date = date("Y-m-d");
 
 </body>
 </html>
+
+
