@@ -1,0 +1,24 @@
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('08:00','14:00','Lunes',1,'2013-06-24');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('14:00','20:00','Lunes',1,'2013-06-24');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('08:00','14:00','Martes',2,'2013-06-25');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('14:00','20:00','Martes',2,'2013-06-25');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('08:00','14:00','Miercoles',3,'2013-06-26');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('14:00','20:00','Miercoles',3,'2013-06-26');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('08:00','14:00','Jueves',4,'2013-06-27');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('14:00','20:00','Jueves',4,'2013-06-27');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('08:00','14:00','Viernes',5,'2013-06-28');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('14:00','20:00','Viernes',5,'2013-06-28');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('08:00','14:00','Sabado',6,'2013-06-29');
+INSERT INTO `horarios`(`horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) 
+VALUES ('14:00','20:00','Sabado',6,'2013-06-29');

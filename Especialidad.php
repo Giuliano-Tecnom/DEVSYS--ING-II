@@ -55,24 +55,36 @@ include_once('mysqlconnect.php');
 					<div class="control-group">
 						<input class="nombree" type="text" placeholder="Nombre.." name="nombre" value="<?php echo $nombre['nombre'];?>">
 					    <input type="hidden" name="idespecialidad" value="<?php echo $_GET['idespecialidad']; ?>" />
-						<a data-toggle="modal" role="button" href="#modificar" class="btn btn-warning">Modificar</a>
-									<!-- MODAL DE Modificar -->
-									<div id="modificar" class="modal hide fade in" style="display: none; ">
-										<div class="modal-body">
-											<h4>Aviso</h4>	      
-											<p> Esta seguro que desea modificar el nombre de la especialidad? </p>
-										</div>
-										<div class="modal-footer">
-											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-											<button class="btnsubmit btn-warning" type="submit">Aceptar</button>
-										</div>
-									</div>
-						
-					
+						<span class="help-block" style="margin-left: 4px; margin-top: -2px; font-size: 9px;"> Campo Nombre obligatorio.</span>
 					</div>
-										
-						
-					<span class="help-block" style="margin-left: 300px;font-size: 9px;"> Campo Nombre obligatorio.</span>
+					
+					<div style="margin-left: 225px; margin-top: -62px;">
+						<a data-toggle="modal" role="button" href="#modificar" class="btn btn-warning">Modificar</a>
+						<!-- MODAL DE Modificar -->
+						<div id="modificar" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<h4>Aviso</h4>	      
+								<p> Esta seguro que desea modificar el nombre de la Especialidad social? </p>
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+								<button class="btnsubmit btn-warning" type="submit">Aceptar</button>
+							</div>
+						</div>
+					
+						<a data-toggle="modal" role="button" href="#cancelar" class="btn btn-danger">Cancelar</a>
+						<!-- MODAL DE CANCELAR -->
+						<div id="cancelar" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<h4>Aviso</h4>	      
+								<p> Esta seguro que desea Cancelar? </p>
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Volver</a>
+								<a class="btn btn-danger"  href="GestionEspecialidades.php">Aceptar</a>
+							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 			
@@ -81,15 +93,6 @@ include_once('mysqlconnect.php');
 			        }
 			?>
 
-			<!-- BOTON DE SALIR Y ATRAS-->
-			<ul class="breadcrumb" style="margin-top: 600px;">
-				<li> 
-					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button"> Atras </button>
-						<button class="btn btn-inverse" type="button"> Salir </button>
-					</div>
-				</li>
-			</ul>
 			
 		</div>     <!-- FIN DIV CONTENDOR -->
 	

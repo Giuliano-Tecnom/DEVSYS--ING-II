@@ -52,8 +52,8 @@
 				if(isset($_GET['Error'])){
 					if($_GET['Error'] == 1)
 					echo"<div class='alert alert-error'>
-						<h4>La obra social no se puede eliminar porque existen pacientes o medicos relacionados a ella.</h4>
-						 Revise este problema para luego poder borrar la obra social.
+						<h4>Aviso!</h4>
+						La obra social no se puede eliminar porque existen pacientes o medicos relacionados a ella.
 						</div>";
 				}
 				

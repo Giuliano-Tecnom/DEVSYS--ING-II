@@ -106,7 +106,8 @@
 															  FROM pac_obrasocial as po
 															  INNER JOIN obrasociales as o ON o.idobra = po.idobra
 															  INNER JOIN pacientes as p ON p.idpaciente = po.idpaciente
-															  WHERE p.idpaciente=".$_GET['idpaciente'].")";
+															  WHERE p.idpaciente=".$_GET['idpaciente'].")
+									 AND o.activo = 1";
 						$resultadoQueryObrasResto = mysql_query($queryObrasResto);
 					
 						while ($obrasResto = mysql_fetch_array($resultadoQueryObrasResto)) {

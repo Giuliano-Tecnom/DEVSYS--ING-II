@@ -58,7 +58,7 @@ include_once('mysqlconnect.php');
 						<div id="agregar" class="modal hide fade in" style="display: none; ">
 							<div class="modal-body">
 								<h4>Aviso</h4>	      
-								<p> Esta seguro que desea Agregar la Obra nueva? </p>
+								<p> Esta seguro que desea Agregar la Obra Social nueva? </p>
 							</div>
 							<div class="modal-footer">
 								<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
@@ -74,7 +74,7 @@ include_once('mysqlconnect.php');
 								<p> Esta seguro que desea Cancelar? </p>
 							</div>
 							<div class="modal-footer">
-								<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+								<a href="#" class="btn" data-dismiss="modal">Volver</a>
 								<a class="btn btn-danger"  href="GestionObras.php">Aceptar</a>
 							</div>
 						</div>
