@@ -87,7 +87,8 @@
 			//Se valida que si se cambio la obra, el medico no haya tenido cargado un turno.
 			$consultaTieneTurno2 = " SELECT idobra FROM medicos AS m 
 												  INNER JOIN turnos AS t ON t.idmedico = m.idmedico
-												  WHERE m.idmedico = ".$idmedico." ";
+												  WHERE m.idmedico = ".$idmedico." 
+												  AND idobra <> 999";
 			$resultadoConsultaTieneTurno2 = mysql_query($consultaTieneTurno2);
 			$obrasIDS = array();
 			while ($obrasROW = mysql_fetch_array($resultadoConsultaTieneTurno2)) {

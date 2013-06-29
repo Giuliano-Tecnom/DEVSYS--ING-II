@@ -200,7 +200,7 @@ $fecha = $_REQUEST['fecha'];
 		<!-- Fin de HEAD-->
     
 <body style="background-image:url('images/bg.png')">
- 	
+ 	<script src="js/bootstrap-modal.js"></script>
  	 <?php  $x=1; ?>
 	<?php include_once('header.php'); ?>
 	
@@ -396,28 +396,65 @@ $fecha = $_REQUEST['fecha'];
 	?>
 						<tr>
 							<td><?php echo $valor["apellido"].', '.$valor["nombre"]; ?></td>
-							<td>
-								<?php
-									$query= "SELECT * from med_esp as me
-											 INNER JOIN especialidades as e on e.idespecialidad = me.idespecialidad 
-											 WHERE me.idmedico = ".$valor["idmedico"]."";
-									$res = mysql_query($query);
-									while ($esp = mysql_fetch_array($res)) {
-										echo "&nbsp;".$esp["nombre"]."";
-									}
-								?>
-							</td>
-							<td>
-								<?php				
-									$query= "SELECT  * from med_obrasocial as mo
-											 INNER JOIN obrasociales as o on o.idobra = mo.idobra 
-											 WHERE mo.idmedico = ".$valor["idmedico"]."";
-									$res = mysql_query($query);
-									while ($obra=mysql_fetch_array($res)) {
-										echo "&nbsp;".$obra["nombre"]."";
-									}
-								?>
-							</td>
+<?php
+						$consultaEspecialidades= "SELECT  * from med_esp as me
+												  inner join especialidades as e on e.idespecialidad = me.idespecialidad 
+												  where me.idmedico = ".$valor["idmedico"]."";
+						$resultadoConsultaEspecialidades = mysql_query($consultaEspecialidades);
+						?>
+						<td><a data-toggle="modal" role="button" href="#especialidadesMedico<?php echo $idmedico; ?>" class="btn">Ver</a></td>
+						<!-- MODAL DE VER ESPECIALIDES-->
+						<div id="especialidadesMedico<?php echo $idmedico; ?>" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<center><h3>Especialidades del Medico</h4></center>	
+								<ul>
+								<?php 
+								if (mysql_num_rows($resultadoConsultaEspecialidades) > 0) {
+									while ($especialidad = mysql_fetch_array($resultadoConsultaEspecialidades)) { ?>
+										<li><?php echo $especialidad['nombre'] ?></li>
+							<?php	}
+								} else {
+									?>
+										<li><?php echo 'No se registran especialidades asignadas al medico.' ?></li>
+									<?php 
+								}
+									?>
+								</ul> 
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Volver</a>
+							</div>
+						</div>
+							<?php
+						$idmedico = $valor['idmedico']; //¡Ojo tocando esta variable, se usa en varios lados durante la iteracion del while!.
+						$consultaObras= "SELECT  * from med_obrasocial as mo
+								 inner join obrasociales as o on o.idobra = mo.idobra 
+								 where mo.idmedico = ".$valor["idmedico"]."";
+						$resultadoConsultaObras = mysql_query($consultaObras);
+						?>
+						<td><a data-toggle="modal" role="button" href="#obrasSocialesMedico<?php echo $idmedico; ?>" class="btn">Ver</a></td>
+						<!-- MODAL DE VER OBRAS SOCIALES -->
+						<div id="obrasSocialesMedico<?php echo $idmedico; ?>" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<center><h3>Obras Sociales del Medico</h4></center>	
+								<ul>
+								<?php 
+								if (mysql_num_rows($resultadoConsultaObras) > 0) {
+									while ($obra = mysql_fetch_array($resultadoConsultaObras)) { ?>
+										<li><?php echo $obra['nombre'] ?></li>
+							<?php	}
+								} else {
+									?>
+										<li><?php echo 'No se registran obras sociales asignadas al medico.' ?></li>
+									<?php 
+								}
+									?>
+								</ul> 
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Volver</a>
+							</div>
+						</div>
 							<td><?php echo $valor["dia"]; ?></td>
 							<td><?php echo $valor["fecha"]; ?></td>
 							<td><?php echo $valor["horaIn"].' - '.$valor["horaOut"]; ?></td>
