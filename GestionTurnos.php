@@ -3,14 +3,14 @@
 	include_once('mysqlconnect.php');
 	$consulta = "SELECT medicos.nombre as nommed,medicos.apellido as apemed , e.nombre as area, pacientes.nombre as pacnom
 	            ,pacientes.apellido as pacape,
-                 hora.hora, obrasociales.nombre as nomobra, t.fecha, t.idturno
+                 hora.hora, obrasociales.nombre as nomobra, t.fecha, t.idturno,t.estado
                	FROM turnos as t
 	             inner join medicos on medicos.idmedico=t.idmedico
 				 inner join pacientes on pacientes.idpaciente=t.idpaciente
 				 left join obrasociales on obrasociales.idobra=t.idobra
 				 inner join hora on hora.idhora=t.idhora
 				 inner join especialidades as e on t.idespecialidad = e.idespecialidad
-				 WHERE ( t.fecha >= (SELECT CURRENT_DATE()) ) AND ( hora.hora >= (SELECT CURRENT_TIME()) )
+				 WHERE t.estado='en espera'
 				 ORDER BY t.fecha,hora.hora
 				 ";
 	        
@@ -89,7 +89,9 @@
 						<td><b>Obra Social</b></td>		
 						<td><b>Fecha</b></td>
 						<td><b>Hora</b></td>	
+						<td><b>Estado</b></td>
 						<td></td>	
+						
 					</tr>
 					<?php
 				while ($valor = mysql_fetch_array($resultado))
@@ -115,18 +117,19 @@
 						?>
 						<td><?php echo $valor["fecha"];?></td>
 						<td><?php echo $valor["hora"];?></td>
-						<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idturno; ?>" class="btn btn-danger">Borrar</a></td>
+						<td><a data-toggle="modal" role="button" href="#borrar<?php echo $idturno; ?>" class="btn btn-danger"><?php echo $valor["estado"];?></a></td>
 									<!-- MODAL DE BORRAR -->
 									<div id="borrar<?php echo $idturno; ?>" class="modal hide fade in" style="display: none; ">
 										<div class="modal-body">
 											<h4>Aviso</h4>	      
-											<p> Esta seguro que desea dar de baja el turno? </p>
+											<p> Esta seguro que desea modificar el estado del turno? </p>
 										</div>
 										<div class="modal-footer">
 											<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-											<a class="btn btn-warning"  href="BorrarTurno.php?idturno=<?php echo $idturno; ?>">Aceptar</a>
+											<a class="btn btn-warning"  href="ModificarEstado.php?idturno=<?php echo $idturno; ?>">Aceptar</a>
 										</div>
 									</div>
+									
 			    <?php } ?>
 				</table>
 		</div>
