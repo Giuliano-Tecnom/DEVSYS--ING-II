@@ -6,24 +6,29 @@ include_once('mysqlconnect.php');
 	$fechaDesde=$_POST['fechaDesde'];
 	$fechaHasta=$_POST['fechaHasta'];
     
+	if( $fechaDesde < $fechaHasta ) {
      
-	$consulta = " SELECT * FROM licencias where idmedico = ".$idmedico." and fechaHasta < ".$fechaDesde." ";
-	$res=mysql_query($consulta);
-	
-	if ( mysql_num_rows($res) == 0 ) {
+		$consulta = " SELECT * FROM licencias where idmedico = ".$idmedico." and fechaHasta < ".$fechaDesde." ";
+		$res=mysql_query($consulta);
 		
-		
-	$consulta = "INSERT INTO licencias
-				(idmedico, fechaDesde, fechaHasta)
-				VALUES
-				( '".$idmedico."', '".$fechaDesde."', '".$fechaHasta."');";
+		if ( mysql_num_rows($res) == 0 ) {
 			
-	mysql_query($consulta);
+			
+			$consulta = "INSERT INTO licencias
+					(idmedico, fechaDesde, fechaHasta)
+					VALUES
+					( '".$idmedico."', '".$fechaDesde."', '".$fechaHasta."');";
+				
+			mysql_query($consulta);
+		
+		Header ('Location: GestionLicencias.php');
+		
+		} else {
+			 Header ('Location: AltaLicencias.php?Error=1');
+		}
+	}else{
 	
-	Header ('Location: GestionLicencias.php');
+		Header ('Location: AltaLicencias.php?Error=2');
 	
-    } else {
-	     Header ('Location: AltaLicencias.php?Error=1');
-    }
-	   
+	}
 ?>

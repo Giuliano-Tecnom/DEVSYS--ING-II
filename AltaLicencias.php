@@ -50,6 +50,13 @@ $query_med = mysql_query($consulta);
 					</div>";
 					
 					}
+					if($_GET['Error'] == 2){
+					echo"<div class='alert alert-error'>
+						<h4>Aviso!</h4>
+						La fecha desde no puede ser mayor a la fecha hasta.
+					</div>";
+					
+					}
 				}
 				
 				
