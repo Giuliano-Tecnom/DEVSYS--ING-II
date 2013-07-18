@@ -362,28 +362,67 @@ $fecha = $_REQUEST['fecha'];
 	?>
 						<tr>
 							<td><?php echo $valor["apellido"].', '.$valor["nombre"]; ?></td>
-							<td>
 								<?php
 									$query= "SELECT * from med_esp as me
 											 INNER JOIN especialidades as e on e.idespecialidad = me.idespecialidad 
 											 WHERE me.idmedico = ".$valor["idmedico"]."";
 									$res = mysql_query($query);
-									while ($esp = mysql_fetch_array($res)) {
-										echo "&nbsp;".$esp["nombre"]."";
-									}
 								?>
+							<td><a data-toggle="modal" role="button" href="#especialidadesMedico<?php echo $idmedico; ?>" class="btn">Ver</a></td>
+								<!-- MODAL DE VER ESPECIALIDES-->
+								<div id="especialidadesMedico<?php echo $idmedico; ?>" class="modal hide fade in" style="display: none; ">
+									<div class="modal-body">
+										<center><h3>Especialidades del Medico</h4></center>	
+										<ul>
+										<?php 
+										if (mysql_num_rows($res) > 0) {
+											while ($especialidad = mysql_fetch_array($res)) { ?>
+												<li><?php echo $especialidad['nombre'] ?></li>
+										<?php	
+											}
+										} else {
+										?>
+											<li><?php echo 'No se registran especialidades asignadas al medico.' ?></li>
+										<?php 
+										} ?>
+										</ul> 
+									</div>
+									<div class="modal-footer">
+										<a href="#" class="btn" data-dismiss="modal">Volver</a>
+									</div>
+								</div>
 							</td>
-							<td>
+							
 								<?php				
 									$query= "SELECT  * from med_obrasocial as mo
 											 INNER JOIN obrasociales as o on o.idobra = mo.idobra 
 											 WHERE mo.idmedico = ".$valor["idmedico"]."";
 									$res = mysql_query($query);
-									while ($obra=mysql_fetch_array($res)) {
-										echo "&nbsp;".$obra["nombre"]."";
-									}
 								?>
-							</td>
+								<td><a data-toggle="modal" role="button" href="#obrasSocialesMedico<?php echo $idmedico; ?>" class="btn">Ver</a></td>
+								<!-- MODAL DE VER OBRAS SOCIALES -->
+								<div id="obrasSocialesMedico<?php echo $idmedico; ?>" class="modal hide fade in" style="display: none; ">
+									<div class="modal-body">
+										<center><h3>Obras Sociales del Medico</h4></center>	
+									<ul>
+									<?php 
+									if (mysql_num_rows($res) > 0) {
+										while ($obra = mysql_fetch_array($res)) { ?>
+											<li><?php echo $obra['nombre'] ?></li>
+									<?php	
+										}
+									} else {
+									?>
+										<li><?php echo 'No se registran obras sociales asignadas al medico.' ?></li>
+									<?php 
+									}
+									?>
+									</ul> 
+								</div>
+								<div class="modal-footer">
+									<a href="#" class="btn" data-dismiss="modal">Volver</a>
+								</div>
+								</div>
 							<td><?php echo $valor["dia"]; ?></td>
 							<td><?php echo $valor["fecha"]; ?></td>
 							<td><?php echo $valor["horaIn"].' - '.$valor["horaOut"]; ?></td>
