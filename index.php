@@ -14,10 +14,11 @@
 <body style="background-image:url('images/bg.png')">
 
 	
-	<?php include_once('header.php'); ?>
+	
 	<?php
 	
 	include_once('mysqlconnect.php');
+
 
 	$queryLicenciasBorrar = "SELECT idlicencia FROM licencias WHERE fechaHasta < CURDATE()";
 	$resultadoLicenciasBorrar = mysql_query($queryLicenciasBorrar);
@@ -83,7 +84,12 @@
 	
 	?>
 	
+
+
+
 	
+	
+	<?php include_once('header.php'); ?>
 	
 	
 	

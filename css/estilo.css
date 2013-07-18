@@ -132,7 +132,12 @@ margin-right: 15px;
 }
 
 
-
+.panelUsuario {
+	width: 950px;
+	height: auto;
+	margin: auto;
+	margin-top: 10px;
+}
 
 
 

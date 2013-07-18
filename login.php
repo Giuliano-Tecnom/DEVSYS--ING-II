@@ -22,17 +22,36 @@
 
 		<div id="form-logeo">
 
-			<form class="form-horizontal" style="margin-top: 20px;" action="func/logeo.php" method="post">
+
+		<?php
+			if(isset($_GET['Error'])){
+				if( $_GET['Error'] == 1 ){
+					echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
+							<h4>Ingrese un Usuario y Contraseña Correctos.</h4>
+							</div> ";
+				}	
+			}
+
+
+			// INICIO DE CONTROL DE LOGEO!!!!!!!!!!!!
+
+    		session_start();
+    		if (isset($_SESSION['usuario']))
+       			 header("location:index.php");
+			// fin de control de logeo!!!!!!!
+		?>
+
+			<form class="form-horizontal" style="margin-top: 20px;" action="verificarCuenta.php" method="post">
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Usuario</label>
 					<div class="controls">
-						<input type="text" id="inputUser" placeholder="Usuario">
+						<input type="text" name="user" id="user" placeholder="Usuario">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">Contraseña</label>
 					<div class="controls">
-						<input type="password" id="inputPassword" placeholder="Contraseña">
+						<input type="password" name="pass" id="pass" placeholder="Contraseña">
 					</div>
 				</div>
 				<div class="control-group">

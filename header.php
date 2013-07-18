@@ -1,8 +1,14 @@
 <?php if (!isset ($x)) { ?>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap-modal.js"></script>		
-		<?php } ?>
+		<?php }
 		
+
+		include_once('seguridadSesion.php');
+		include('panelUsuario.php');
+
+		 ?>
+		 
 		<div class="header">
 		<table style="margin-top: 40px; ">
 			<tr>
