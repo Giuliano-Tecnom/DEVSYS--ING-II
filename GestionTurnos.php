@@ -10,7 +10,7 @@
 				 left join obrasociales on obrasociales.idobra=t.idobra
 				 inner join hora on hora.idhora=t.idhora
 				 inner join especialidades as e on t.idespecialidad = e.idespecialidad
-				 WHERE ( t.fecha >= (SELECT CURRENT_DATE()) ) OR ( hora.hora >= (SELECT CURRENT_TIME()) )
+				 WHERE ( t.fecha >= (SELECT CURRENT_DATE()) ) AND ( hora.hora >= (SELECT CURRENT_TIME()) )
 				 ORDER BY t.fecha,hora.hora
 				 ";
 	        

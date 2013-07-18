@@ -2,16 +2,10 @@
 
 Bugs: 
       -Gestión de turnos :   
-							 1)Al gestionar el turno debería forzar con javascript la selección del paciente. 
-							 2)Idem 3 a licencia medicos.
-							 3)Botón de cancelar alta turno y botón generar.
-							 4)Revisar mensajes de error (cambiar por aviso).
-							 5)Sacar botones de atras y salir.
-							 6)TESTEAR TODO!!! Y GENERAR BASE DE DATOS PIOLA.
-							 7)Crear Gestión turnos.
-							 8)Validación de medicos con licencia en alta de turnos.
-							 9)Revisar dar de bajas relaciones de obra sociales, tanto para pacientes y medicos.
+							  
 							 
+							 
+							 10)PARA EL PROXIMO SPRINT AGREGARLE UN ESTADO DEL TURNO
 							 
 							 
 
