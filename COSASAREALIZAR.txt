@@ -1,16 +1,20 @@
 
 
 Bugs: 
-      -Gestión de turnos :   1) Cuando doy de alta un turno y vuelvo para atras me duplica el alta, es 
-	                         decir medeja dar de alta dos turnos la mismo paciente con el mismo medico y 
-							 la misma fecha y hora.
-							 2) No debería dejar modificar datos de nombre y apellido del medico y paciente,
-							 ni fecha.
-							 3)Al gestionar el turno debería forzar con javascript la selección del paciente.
-							 4)Botón de cancelar alta turno y botón generar.
+      -Gestión de turnos :   
+							 1)Al gestionar el turno debería forzar con javascript la selección del paciente. 
+							 2)Idem 3 a licencia medicos.
+							 3)Botón de cancelar alta turno y botón generar.
+							 4)Revisar mensajes de error (cambiar por aviso).
+							 5)Sacar botones de atras y salir.
+							 6)TESTEAR TODO!!! Y GENERAR BASE DE DATOS PIOLA.
+							 7)Crear Gestión turnos.
+							 8)Validación de medicos con licencia en alta de turnos.
+							 9)Revisar dar de bajas relaciones de obra sociales, tanto para pacientes y medicos.
+							 
 							 
 							 
 
 
-VALIDAR QUE AL BORRAR PACIENTE / MEDICO NO TENGAN TURNOS ASIGNADOS
+
 
