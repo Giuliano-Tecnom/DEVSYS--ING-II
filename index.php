@@ -18,15 +18,22 @@
 	<?php
 	
 	include_once('mysqlconnect.php');
-	//$fecha_act=date('d-m-Y');
-	//$dia_act=date('d');
-	//$mes_act=date('m');
-	//$ano_act=date('Y');
+
+	$queryLicenciasBorrar = "SELECT idlicencia FROM licencias WHERE fechaHasta < CURDATE()";
+	$resultadoLicenciasBorrar = mysql_query($queryLicenciasBorrar);
 	
-	//$diaSemana = diaSemana($ano_act, $mes_act, $dia_act);
-	//echo $diaSemana.'<br>';
-	
-	
+	if ( mysql_num_rows($resultadoLicenciasBorrar) > 0 ) {
+		$licencias = Array();
+		while ($row = mysql_fetch_array($resultadoLicenciasBorrar)) {
+			$licencias[] = $row['idlicencia'];
+		}
+		
+		$licenciasString = implode(",",$licencias);
+		$queryDarDeBajaLicencias = "UPDATE licencias
+									set estado = 0
+									where idlicencia in (".$licenciasString.")";
+		mysql_query($queryDarDeBajaLicencias);
+	}
 	
 	
 	

@@ -62,19 +62,26 @@
 					}
 				}
 				
-				if(isset($_GET['Error'])){
-					if($_GET['Error'] == 1)
+				if(isset($_GET['Error'])){<
+					if($_GET['Error'] == 1){
 					echo"<div class='alert alert-error'>
 						<h4>Error!! </h4>
 						</div>";
-				}
-				
-				if(isset($_GET['Error'])){
-					if($_GET['Error'] == 2)
+					}
+					
+					if($_GET['Error'] == 2) {
 					echo"<div class='alert alert-error'>
 						<h4>Error!! </h4>
 	
 						</div>";
+					}
+					
+					if($_GET['Error'] == 3) {
+					echo"<div class='alert alert-error'>
+						<h4>Aviso!</h4>
+						No se puede dar de baja el paciente ya que tiene un turno asignado.
+						</div>";
+					}
 				}
 				
 			?>

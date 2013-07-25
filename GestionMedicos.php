@@ -62,10 +62,16 @@
 					}				
 				}
 				
-				if(isset($_GET['Error'])){
+				if(isset($_GET['Error'])) {
 					if($_GET['Error'] == 1)
 					echo"<div class='alert alert-error'>
 						<h4>Error!! </h4>
+						</div>";
+				
+					if($_GET['Error'] == 3)
+					echo"<div class='alert alert-error'>
+						<h4>Aviso!</h4>
+						No se puede dar de baja el medico ya que tiene un turno asignado.
 						</div>";
 				}
 				
@@ -133,6 +139,7 @@
 			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
 					<button class="btn btn-info" type="button" onclick="location.href='AltaMedicos.php'">Medico Nuevo</button>
 					<button class="btn btn-info" type="button">Generar Reporte</button>
+					<button class="btn btn-info" type="button" onclick="location.href='GestionLicencias.php'">Licencias</button>
 					<button class="btn btn-info" type="button"
 					<?php	if($ojito == 1){ ?>
 								onclick="location.href='GestionMedicos.php?ojito=0'"> Mostrar Inactivos <i class="icon-eye-close" style="margin-left: 3px;"></i>

@@ -2,10 +2,10 @@
 -- version 3.5.8.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2013 a las 02:35:36
--- Versión del servidor: 5.6.11-log
--- Versión de PHP: 5.4.14
+-- Host: 127.0.0.1
+-- Generation Time: Jul 26, 2013 at 12:41 AM
+-- Server version: 5.6.11-log
+-- PHP Version: 5.4.14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `clinicsystem`
+-- Database: `clinicsystem`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `especialidades`
+-- Table structure for table `especialidades`
 --
 
 CREATE TABLE IF NOT EXISTS `especialidades` (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `especialidades` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Volcado de datos para la tabla `especialidades`
+-- Dumping data for table `especialidades`
 --
 
 INSERT INTO `especialidades` (`idespecialidad`, `nombre`, `activo`) VALUES
@@ -44,7 +44,7 @@ INSERT INTO `especialidades` (`idespecialidad`, `nombre`, `activo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `hora`
+-- Table structure for table `hora`
 --
 
 CREATE TABLE IF NOT EXISTS `hora` (
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `hora` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
 
 --
--- Volcado de datos para la tabla `hora`
+-- Dumping data for table `hora`
 --
 
 INSERT INTO `hora` (`idhora`, `hora`) VALUES
@@ -86,7 +86,7 @@ INSERT INTO `hora` (`idhora`, `hora`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `horarios`
+-- Table structure for table `horarios`
 --
 
 CREATE TABLE IF NOT EXISTS `horarios` (
@@ -100,26 +100,49 @@ CREATE TABLE IF NOT EXISTS `horarios` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
--- Volcado de datos para la tabla `horarios`
+-- Dumping data for table `horarios`
 --
 
 INSERT INTO `horarios` (`idhorario`, `horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) VALUES
-(1, '08:00:00', '14:00:00', 'Lunes', 1, '2013-07-01'),
-(2, '14:00:00', '20:00:00', 'Lunes', 1, '2013-07-01'),
-(3, '08:00:00', '14:00:00', 'Martes', 2, '2013-06-25'),
-(4, '14:00:00', '20:00:00', 'Martes', 2, '2013-06-25'),
-(5, '08:00:00', '14:00:00', 'Miercoles', 3, '2013-06-26'),
-(6, '14:00:00', '20:00:00', 'Miercoles', 3, '2013-06-26'),
-(7, '08:00:00', '14:00:00', 'Jueves', 4, '2013-06-27'),
-(8, '14:00:00', '20:00:00', 'Jueves', 4, '2013-06-27'),
-(9, '08:00:00', '14:00:00', 'Viernes', 5, '2013-06-28'),
-(10, '14:00:00', '20:00:00', 'Viernes', 5, '2013-06-28'),
-(11, '08:00:00', '14:00:00', 'Sabado', 6, '2013-06-29');
+(1, '08:00:00', '14:00:00', 'Lunes', 1, '2013-07-29'),
+(2, '14:00:00', '20:00:00', 'Lunes', 1, '2013-07-29'),
+(3, '08:00:00', '14:00:00', 'Martes', 2, '2013-07-30'),
+(4, '14:00:00', '20:00:00', 'Martes', 2, '2013-07-30'),
+(5, '08:00:00', '14:00:00', 'Miercoles', 3, '2013-07-31'),
+(6, '14:00:00', '20:00:00', 'Miercoles', 3, '2013-07-31'),
+(7, '08:00:00', '14:00:00', 'Jueves', 4, '2013-07-25'),
+(8, '14:00:00', '20:00:00', 'Jueves', 4, '2013-07-25'),
+(9, '08:00:00', '14:00:00', 'Viernes', 5, '2013-07-26'),
+(10, '14:00:00', '20:00:00', 'Viernes', 5, '2013-07-26'),
+(11, '08:00:00', '14:00:00', 'Sabado', 6, '2013-07-27');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `medicos`
+-- Table structure for table `licencias`
+--
+
+CREATE TABLE IF NOT EXISTS `licencias` (
+  `idlicencia` int(11) NOT NULL AUTO_INCREMENT,
+  `idmedico` int(11) NOT NULL,
+  `fechaDesde` date NOT NULL,
+  `fechaHasta` date NOT NULL,
+  `estado` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`idlicencia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `licencias`
+--
+
+INSERT INTO `licencias` (`idlicencia`, `idmedico`, `fechaDesde`, `fechaHasta`, `estado`) VALUES
+(1, 1, '2013-06-27', '2013-07-04', 0),
+(3, 4, '2013-06-27', '2013-06-28', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medicos`
 --
 
 CREATE TABLE IF NOT EXISTS `medicos` (
@@ -137,19 +160,19 @@ CREATE TABLE IF NOT EXISTS `medicos` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `medicos`
+-- Dumping data for table `medicos`
 --
 
 INSERT INTO `medicos` (`idmedico`, `nombre`, `apellido`, `nromatricula`, `email`, `telefono`, `fechaNac`, `dni`, `direccion`, `activo`) VALUES
 (1, 'Orlando', 'Piazzesi', 123456645, 'osvaldo@gmail.com', 123456789, '1992-09-01', 123456789, '123456789', 1),
-(2, 'Javier', 'Mascherano', 12345633, '', 4356789, '2013-06-01', 12345678, '60 N 1009', 1),
+(2, 'Javier', 'Mascherano', 12345633, '', 4356789, '2013-06-01', 12345678, '60 N 1009', 0),
 (3, 'esteban', 'salinas', 1324342, '', 4847273, '2013-06-01', 364355435, '3434 nÂ° 343', 1),
 (4, 'pep', 'lalal', 1234568, '', 4838131, '2013-06-01', 345242342, '50 127', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `med_esp`
+-- Table structure for table `med_esp`
 --
 
 CREATE TABLE IF NOT EXISTS `med_esp` (
@@ -159,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `med_esp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `med_esp`
+-- Dumping data for table `med_esp`
 --
 
 INSERT INTO `med_esp` (`idmedico`, `idespecialidad`) VALUES
@@ -173,7 +196,7 @@ INSERT INTO `med_esp` (`idmedico`, `idespecialidad`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `med_hor`
+-- Table structure for table `med_hor`
 --
 
 CREATE TABLE IF NOT EXISTS `med_hor` (
@@ -183,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `med_hor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `med_hor`
+-- Dumping data for table `med_hor`
 --
 
 INSERT INTO `med_hor` (`idmedico`, `idhorario`) VALUES
@@ -199,7 +222,7 @@ INSERT INTO `med_hor` (`idmedico`, `idhorario`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `med_obrasocial`
+-- Table structure for table `med_obrasocial`
 --
 
 CREATE TABLE IF NOT EXISTS `med_obrasocial` (
@@ -209,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `med_obrasocial` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `med_obrasocial`
+-- Dumping data for table `med_obrasocial`
 --
 
 INSERT INTO `med_obrasocial` (`idmedico`, `idobra`) VALUES
@@ -225,7 +248,7 @@ INSERT INTO `med_obrasocial` (`idmedico`, `idobra`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `obrasociales`
+-- Table structure for table `obrasociales`
 --
 
 CREATE TABLE IF NOT EXISTS `obrasociales` (
@@ -236,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `obrasociales` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `obrasociales`
+-- Dumping data for table `obrasociales`
 --
 
 INSERT INTO `obrasociales` (`idobra`, `nombre`, `activo`) VALUES
@@ -248,7 +271,7 @@ INSERT INTO `obrasociales` (`idobra`, `nombre`, `activo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pacientes`
+-- Table structure for table `pacientes`
 --
 
 CREATE TABLE IF NOT EXISTS `pacientes` (
@@ -265,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=79 ;
 
 --
--- Volcado de datos para la tabla `pacientes`
+-- Dumping data for table `pacientes`
 --
 
 INSERT INTO `pacientes` (`idpaciente`, `dni`, `apellido`, `nombre`, `email`, `telefono`, `fechaNac`, `direccion`, `activo`) VALUES
@@ -279,7 +302,7 @@ INSERT INTO `pacientes` (`idpaciente`, `dni`, `apellido`, `nombre`, `email`, `te
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pac_obrasocial`
+-- Table structure for table `pac_obrasocial`
 --
 
 CREATE TABLE IF NOT EXISTS `pac_obrasocial` (
@@ -290,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `pac_obrasocial` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `pac_obrasocial`
+-- Dumping data for table `pac_obrasocial`
 --
 
 INSERT INTO `pac_obrasocial` (`idpaciente`, `idobra`, `nroAfiliado`) VALUES
@@ -301,7 +324,7 @@ INSERT INTO `pac_obrasocial` (`idpaciente`, `idobra`, `nroAfiliado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `turnos`
+-- Table structure for table `turnos`
 --
 
 CREATE TABLE IF NOT EXISTS `turnos` (
@@ -312,10 +335,10 @@ CREATE TABLE IF NOT EXISTS `turnos` (
   `idhora` int(11) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`idturno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
--- Volcado de datos para la tabla `turnos`
+-- Dumping data for table `turnos`
 --
 
 INSERT INTO `turnos` (`idturno`, `idmedico`, `idpaciente`, `idobra`, `idhora`, `fecha`) VALUES
@@ -328,12 +351,16 @@ INSERT INTO `turnos` (`idturno`, `idmedico`, `idpaciente`, `idobra`, `idhora`, `
 (8, 1, 73, 2, 3, '2013-06-24'),
 (9, 4, 73, 1, 2, '2013-06-24'),
 (10, 4, 73, 2, 4, '2013-06-24'),
-(11, 3, 76, 1, 1, '2013-06-25');
+(11, 3, 76, 1, 1, '2013-06-25'),
+(12, 3, 0, 1, 3, '2013-06-25'),
+(13, 3, 0, 1, 4, '2013-06-25'),
+(14, 4, 77, 1, 19, '2013-06-25'),
+(16, 4, 77, 1, 19, '2013-06-25');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (

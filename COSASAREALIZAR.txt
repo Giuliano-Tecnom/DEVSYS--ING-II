@@ -10,9 +10,7 @@ Bugs:
 							 4)Botón de cancelar alta turno y botón generar.
 							 
 							 
-Cosas a desarrollar:
 
-	   -Licencias:      1)ABM
-	                    2)Actulizar referencias y cargas de médicos (en gestionde turnos, gestion de medicos,etc) 
-						yo debería ver los medicos con licencia activa.
-						
+
+VALIDAR QUE AL BORRAR PACIENTE / MEDICO NO TENGAN TURNOS ASIGNADOS
+
