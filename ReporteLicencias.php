@@ -74,7 +74,7 @@ $porc = Array("40","40","40","40");  // Tamaño de las COLUMNAS para "A4"   // Ma
  
 // Encabezado del Reporte
 $titulo_listado='LISTADO DE LICENCIAS '.$nombre;
-$subtitulo_listado='Subtitulos '.$estado;
+$subtitulo_listado=' '.$estado;
 $bgcolor = $bgcolor_tit; 
  $_SESSION['repor_enc'] = '';
  

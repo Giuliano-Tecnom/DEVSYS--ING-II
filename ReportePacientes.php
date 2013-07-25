@@ -60,7 +60,7 @@ $porc = Array("30","30","20","20","40","20","25");  // Tamaño de las COLUMNAS pa
  
 // Encabezado del Reporte
 $titulo_listado='LISTADO DE PACIENTES '.$nombre;
-$subtitulo_listado='Subtitulos '.$estado;
+$subtitulo_listado=' '.$estado;
 $bgcolor = $bgcolor_tit; 
  $_SESSION['repor_enc'] = '';
  

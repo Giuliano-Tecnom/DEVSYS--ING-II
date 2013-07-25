@@ -61,7 +61,7 @@ $porc = Array("20","20","20","20","20","50","50","15","15","45");  // Tamaño de 
 // Encabezado del Reporte
 
 $titulo_listado='LISTADO DE MEDICOS '.$nombre;
-$subtitulo_listado='Subtitulos '.$estado;
+$subtitulo_listado=' '.$estado;
 $bgcolor = $bgcolor_tit; 
  $_SESSION['repor_enc'] = '';
  

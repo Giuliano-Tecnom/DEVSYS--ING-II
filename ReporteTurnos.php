@@ -14,9 +14,17 @@ if ($filtro=='S') {
 		
 		if (isset($_REQUEST['myselect1'])) {
 		$myselect1 = $_REQUEST['myselect1'];
+		// $consulta= "SELECT nombre,apellido FROM pacientes where idpaciente = ".$_REQUEST['myselect1']." ";
+		
+		// $qry= mysql_query($consulta);
+		// while ($valor = mysql_fetch_array($qry)){
+			// $nom_pac= " PARA EL PACIENTE: ".$valor['nombre'].' '.$valor['apellido'];
+
+		// }
 		}
 		if (isset($_REQUEST['myselect2'])) {
 		$myselect2 = $_REQUEST['myselect2'];
+		
 		}
 		if (isset($_REQUEST['myselect3'])) {
 		$myselect3 = $_REQUEST['myselect3'];
@@ -145,8 +153,8 @@ $porc = Array("20","30","30","30","20","20","20","15");  // Tamaño de las COLUMN
 
  
 // Encabezado del Reporte
-$titulo_listado='LISTADO DE TURNOS';
-$subtitulo_listado='Subtitulos '.$estado;
+$titulo_listado='LISTADO DE TURNOS ';
+$subtitulo_listado=' '.$estado;
 $bgcolor = $bgcolor_tit; 
  $_SESSION['repor_enc'] = '';
  

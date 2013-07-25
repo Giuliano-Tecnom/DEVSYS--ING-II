@@ -85,9 +85,9 @@ if($_SESSION['orientacion'] == 'P' and $_SESSION['hoja'] == 'A4')  {
 	 
 	 
 //Logo 1
-  $this->Image('images/logo2.jpg',$celda1,5,40); //col desde, fila desde, ancho imagen, alto imagen
+  $this->Image('images/Climed.jpg',$celda1,15,60,15); //col desde, fila desde, ancho imagen, alto imagen
 //Logo 2
-  $this->Image('images/logo2.jpg',$celda2,15,20);
+  //$this->Image('images/logo2.jpg',$celda2,15,20);
 
   $this->SetFont('Arial','B',10);
   $this->Cell(0,10,'              ',0,0,'L');
@@ -119,10 +119,26 @@ if($_SESSION['orientacion'] == 'P' and $_SESSION['hoja'] == 'A4')  {
   $celda4 = 80;  
 } 
 	//Posición: a 1,5 cm del final
-$fecha = date("d-m-Y");
-$hora = date("h:i");
+	
+$consulta_dia = "SELECT CURRENT_DATE as fecha";
+$qry_dia = mysql_query($consulta_dia);
 
-$direccion='SECCIÓN DE TÍTULO AL PIE DE PÁGINA';
+while ($valor = mysql_fetch_array($qry_dia)){
+	$fecha= $valor['fecha'];
+
+}
+
+$consulta_dia = "SELECT CURRENT_TIME as hora";
+$qry_hora = mysql_query($consulta_dia);
+
+while ($valor = mysql_fetch_array($qry_hora)){
+	$hora= $valor['hora'];
+
+}	
+// $fecha = date("d-m-Y");
+//$hora = date("h:i");
+// $hora = strftime("%H:%M");
+$direccion='CLINICA CLIMED';
    	
 //Posición: a 1,5 cm del final
    $this->SetY(-18);
