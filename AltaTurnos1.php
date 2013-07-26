@@ -300,6 +300,7 @@ $fecha = $_REQUEST['fecha'];
 								}else{
 									$sel= "";
 								}
+						}
 					?>
 					
 					<label>Fecha:</label>
