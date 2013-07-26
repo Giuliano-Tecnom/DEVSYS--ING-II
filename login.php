@@ -61,14 +61,7 @@
 				</div>
 			</form>
 		</div>
-		<!-- BOTON DE SALIR-->
-		<ul class="breadcrumb" style="margin-top: 100px;">
-			<li> 
-				<div style="margin-left: 800px;">
-					<button class="btn btn-inverse" type="button"> Salir </button>
-				</div>
-			</li>
-		</ul>
+
 		
 	</div>  <!-- FIN ENCAPSULADOR-->
 	

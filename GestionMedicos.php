@@ -139,7 +139,23 @@
 			<!-- COMIENZA BARRA DE OPCIONES -->
 			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
 					<button class="btn btn-info" type="button" onclick="location.href='AltaMedicos.php'">Medico Nuevo</button>
-					<button class="btn btn-info" type="button" onclick="location.href='ReporteMedicos.php?ojito=<?php echo $ojito;?>'">Generar Reporte</button>
+					
+					
+					
+				    <!-- HABILITA O DESHABILITA EL BOTON REPORTES DEPENDIENDO SI ES ADMIN O NO!!!! -->
+                    <?php
+                    if ($_SESSION['tipo'] != "administrador") {
+                    ?>
+                    	<button class="btn btn-info" type="button" disabled>Generar Reporte</button>
+				   	<?php
+				   	}else{
+				   	?>
+				   		<button class="btn btn-info" type="button" onclick="location.href='ReporteMedicos.php?ojito=<?php echo $ojito;?>'">Generar Reporte</button>
+				   	<?php
+				   	}
+				   	?>
+
+
 					<button class="btn btn-info" type="button" onclick="location.href='GestionLicencias.php'">Licencias</button>
 					<button class="btn btn-info" type="button"
 					<?php	if($ojito == 1){ ?>

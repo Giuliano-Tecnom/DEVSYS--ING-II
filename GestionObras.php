@@ -62,7 +62,20 @@
 			<!-- COMIENZA BARRA DE OPCIONES -->
 			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
 			        <button class="btn btn-info" type="button" onclick="location.href='AltaObras.php'">Agregar Obra Social</button>
-                    <button class="btn btn-info" type="button">Generar Reporte</button>
+                   
+                   <!-- HABILITA O DESHABILITA EL BOTON REPORTES DEPENDIENDO SI ES ADMIN O NO!!!! -->
+                    <?php
+                    if ($_SESSION['tipo'] != "administrador") {
+                    ?>
+                    	<button class="btn btn-info" type="button" disabled>Generar Reporte</button>
+                    <?php
+				    }else{
+				    ?>
+				    	<button class="btn btn-info" type="button">Generar Reporte</button>
+				    <?php
+				    }
+				    ?>
+
 				    <button class="btn btn-info" type="button"
 					<?php	if($ojito == 1){ ?>
 								onclick="location.href='GestionObras.php?ojito=0'"> Mostrar Inactivos <i class="icon-eye-close" style="margin-left: 3px;"></i>

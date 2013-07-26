@@ -40,6 +40,11 @@
 	margin-left: 15px;
 }
 
+#form-alta-usuarios{
+	float: left; 
+	margin-left: 15px;
+}
+
 #form-alta-turnos{
 	float: left; 
 	margin-left: 15px;
@@ -140,5 +145,13 @@ margin-right: 15px;
 }
 
 
+#tabla-gestion-usuarios{
+	margin-top: 45px; 
+	margin-left: 15px; 
+	margin-right: 15px;
+}
 
-
+#form-modificacion-usuarios{
+	float: left;  
+	margin-left: 15px;"
+}

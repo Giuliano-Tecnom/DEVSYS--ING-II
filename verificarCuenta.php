@@ -5,8 +5,10 @@ include_once('mysqlconnect.php');
 
 
 if (isset($_POST['user']) && isset($_POST['pass'])) {
-    $usuario = $_POST['user'];
-    $consulta = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND password = ".$_POST['pass']." ";
+    $usuario =strtoupper($_POST['user']);
+    $pas = strtoupper($_POST['pass']);
+
+    $consulta = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND password = '$pass' ";
     $res = mysql_query($consulta);
     
     echo $consulta;

@@ -398,7 +398,21 @@ $myselect6 = $_REQUEST['myselect6'];
 			<!-- COMIENZA BARRA DE OPCIONES -->
 			<div class="btn-group" style="margin-top: -13px; margin-left: 270;">
 			        <button class="btn btn-info" type="button" onclick="location.href='AltaTurnos1.php'">Generar Turno</button>
-                    <button class="btn btn-info" type="button" onclick="location.href='ReporteTurnos.php?filtro=<?php echo $filtro?>&myselect1=<?php echo $myselect1?>&myselect2=<?php echo $myselect2?>&myselect3=<?php echo $myselect3?>&myselect4=<?php echo $myselect4?>&myselect5=<?php echo $myselect5?>&myselect6=<?php echo $myselect6?>&fechaDesde=<?php echo $fechaDesde?>&fechaHasta=<?php echo $fechaHasta?>'">Generar Reporte</button>
+                   
+
+				    <!-- HABILITA O DESHABILITA EL BOTON REPORTES DEPENDIENDO SI ES ADMIN O NO!!!! -->
+                    <?php
+                    if ($_SESSION['tipo'] != "administrador") {
+                    ?>
+                    	<button class="btn btn-info" type="button" disabled>Generar Reporte</button>
+				   	<?php
+				   	}else{
+				   	?>
+				   		 <button class="btn btn-info" type="button" onclick="location.href='ReporteTurnos.php?filtro=<?php echo $filtro?>&myselect1=<?php echo $myselect1?>&myselect2=<?php echo $myselect2?>&myselect3=<?php echo $myselect3?>&myselect4=<?php echo $myselect4?>&myselect5=<?php echo $myselect5?>&myselect6=<?php echo $myselect6?>&fechaDesde=<?php echo $fechaDesde?>&fechaHasta=<?php echo $fechaHasta?>'">Generar Reporte</button>
+				   	<?php
+				   	}
+				   	?>
+
 
 			</div>
 			<br></br>
