@@ -319,7 +319,7 @@ $myselect6 = $_REQUEST['myselect6'];
 					?>
 				</select>
 			</div>	
-			<div style="margin-left: 253px; margin-top: -150px;">
+			<div style="margin-left: 253px; margin-top: -256px;">
 				<!-- ***************************** SELECT DE OBRAS SOCIALES ***************************** -->
 				<label>Obra Social:</label>
 				<select id="myselect4" name="myselect4">
@@ -345,7 +345,7 @@ $myselect6 = $_REQUEST['myselect6'];
 				<label>Fecha Hasta:</label>
 				<input class="fechaHasta" name="fechaHasta" type="date" >
 			</div>	
-			<div style="margin-left: 506px; margin-top: -150px;">
+			<div style="margin-left: 506px; margin-top: -177px;">
 			
 			
 			
@@ -385,7 +385,7 @@ $myselect6 = $_REQUEST['myselect6'];
 				</select>
 				</br>
 			
-				<button class='btn btn-warning' style="margin-top: 50px;" type='button' onclick='AceptarFiltro();'> Buscar </button>
+				<button class='btn btn-warning' style="margin-top: 110px; margin-left: -179px;" type='button' onclick='AceptarFiltro();'> Buscar </button>
 			</div>
 		</form>
 	</div>
@@ -396,7 +396,7 @@ $myselect6 = $_REQUEST['myselect6'];
 	?>
 			
 			<!-- COMIENZA BARRA DE OPCIONES -->
-			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
+			<div class="btn-group" style="margin-top: -13px; margin-left: 270;">
 			        <button class="btn btn-info" type="button" onclick="location.href='AltaTurnos1.php'">Generar Turno</button>
                     <button class="btn btn-info" type="button" onclick="location.href='ReporteTurnos.php?filtro=<?php echo $filtro?>&myselect1=<?php echo $myselect1?>&myselect2=<?php echo $myselect2?>&myselect3=<?php echo $myselect3?>&myselect4=<?php echo $myselect4?>&myselect5=<?php echo $myselect5?>&myselect6=<?php echo $myselect6?>&fechaDesde=<?php echo $fechaDesde?>&fechaHasta=<?php echo $fechaHasta?>'">Generar Reporte</button>
 
