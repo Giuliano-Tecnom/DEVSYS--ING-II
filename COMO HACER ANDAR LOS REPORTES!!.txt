@@ -1,0 +1,3 @@
+para que los reportes anden en easyphp hay que ir a configuracion, desp ir a PHP.
+luego buscar donde dice error_reporting = E_ALL y modificarlo por: error_reporting = E_ALL & ~E_STRICT & ~E_NOTICE
+guardamos y listo!!!.. saludos espero q les funcione!!
