@@ -8,7 +8,8 @@
 	
 	include_once('mysqlconnect.php');
 	
-	$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito." OR 0 = ".$ojito." ";
+	//$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito." OR 0 = ".$ojito." ";
+	$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito;
     $resultado = mysql_query($consulta);
 	
 ?> 
@@ -138,7 +139,7 @@
 			<!-- COMIENZA BARRA DE OPCIONES -->
 			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
 					<button class="btn btn-info" type="button" onclick="location.href='AltaMedicos.php'">Medico Nuevo</button>
-					<button class="btn btn-info" type="button">Generar Reporte</button>
+					<button class="btn btn-info" type="button" onclick="location.href='ReporteMedicos.php?ojito=<?php echo $ojito;?>'">Generar Reporte</button>
 					<button class="btn btn-info" type="button" onclick="location.href='GestionLicencias.php'">Licencias</button>
 					<button class="btn btn-info" type="button"
 					<?php	if($ojito == 1){ ?>

@@ -5,12 +5,21 @@
 		$ojito=$_GET['ojito'];
 	}
 	include_once('mysqlconnect.php');
+	
+	// $consulta = "SELECT idlicencia,med.idmedico,fechaDesde,fechaHasta,nombre,apellido,
+	             // case estado when 1 then 'Activa' else 'Inactiva' end as estado
+               	// FROM licencias as lic
+				
+                     // INNER JOIN medicos as med on med.idmedico=lic.idmedico
+				// where estado = ".$ojito." OR 0 = ".$ojito." ";
+	
+	
 	$consulta = "SELECT idlicencia,med.idmedico,fechaDesde,fechaHasta,nombre,apellido,
 	             case estado when 1 then 'Activa' else 'Inactiva' end as estado
                	FROM licencias as lic
 				
                      INNER JOIN medicos as med on med.idmedico=lic.idmedico
-				where estado = ".$ojito." OR 0 = ".$ojito." ";
+				where estado = ".$ojito."";
     $resultado = mysql_query($consulta);
 	
 	
@@ -67,7 +76,7 @@
 			<!-- COMIENZA BARRA DE OPCIONES -->
 			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
 			        <button class="btn btn-info" type="button" onclick="location.href='AltaLicencias.php'">Agregar Licencia</button>
-                    <button class="btn btn-info" type="button">Generar Reporte</button>
+                    <button class="btn btn-info" type="button"onclick="location.href='ReporteLicencias.php?ojito=<?php echo $ojito ?>'">Generar Reporte</button>
 				    <button class="btn btn-info" type="button"
 					<?php	if($ojito == 1){ ?>
 								onclick="location.href='GestionLicencias.php?ojito=0'"> Mostrar Inactivas <i class="icon-eye-close" style="margin-left: 3px;"></i>
