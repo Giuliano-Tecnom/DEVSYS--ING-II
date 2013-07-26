@@ -62,7 +62,7 @@
 					}
 				}
 				
-				if(isset($_GET['Error'])){<
+				if(isset($_GET['Error'])){
 					if($_GET['Error'] == 1){
 					echo"<div class='alert alert-error'>
 						<h4>Error!! </h4>
