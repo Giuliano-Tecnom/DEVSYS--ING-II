@@ -428,7 +428,15 @@ $myselect6 = $_REQUEST['myselect6'];
 						<td><?php echo $valor["apemed"].', '.$valor["nommed"]; ?></td>
 						<td><?php echo $valor["area"]; ?></td>
 						<td><?php echo $valor["pacape"].', '.$valor["pacnom"]; ?></td>
-						<td><?php echo $valor["nomobra"]; ?></td>
+						<?php
+						if(is_null($valor["nomobra"] )){
+						?>	
+							<td>Sin Obra Social</td>
+						<?php
+						}else{
+						?>	
+						<td><?php echo $valor["nomobra"];}?></td>
+						
 						<td><?php echo $valor["fecha"]; ?></td>
 						<td><?php echo $valor["hora"]; ?></td>
 						<td><a data-toggle="modal" role="button" href="#borrar<?php echo $valor["idturno"]; ?>" class="btn btn-danger"><?php echo $valor["estado"];?></a></td>
