@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2013 at 12:41 AM
+-- Generation Time: Jul 26, 2013 at 09:10 PM
 -- Server version: 5.6.11-log
 -- PHP Version: 5.4.14
 
@@ -110,8 +110,8 @@ INSERT INTO `horarios` (`idhorario`, `horaIn`, `horaOut`, `dia`, `dia_nro`, `fec
 (4, '14:00:00', '20:00:00', 'Martes', 2, '2013-07-30'),
 (5, '08:00:00', '14:00:00', 'Miercoles', 3, '2013-07-31'),
 (6, '14:00:00', '20:00:00', 'Miercoles', 3, '2013-07-31'),
-(7, '08:00:00', '14:00:00', 'Jueves', 4, '2013-07-25'),
-(8, '14:00:00', '20:00:00', 'Jueves', 4, '2013-07-25'),
+(7, '08:00:00', '14:00:00', 'Jueves', 4, '2013-08-01'),
+(8, '14:00:00', '20:00:00', 'Jueves', 4, '2013-08-01'),
 (9, '08:00:00', '14:00:00', 'Viernes', 5, '2013-07-26'),
 (10, '14:00:00', '20:00:00', 'Viernes', 5, '2013-07-26'),
 (11, '08:00:00', '14:00:00', 'Sabado', 6, '2013-07-27');
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `obrasociales` (
   `nombre` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idobra`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `obrasociales`
@@ -266,7 +266,8 @@ INSERT INTO `obrasociales` (`idobra`, `nombre`, `activo`) VALUES
 (1, 'GALEN', 1),
 (2, 'OSDE', 1),
 (3, 'IOMA', 1),
-(4, 'OSCPU', 1);
+(4, 'OSCPU', 1),
+(5, 'prueba obraa', 0);
 
 -- --------------------------------------------------------
 
@@ -335,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `turnos` (
   `idhora` int(11) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`idturno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `turnos`
@@ -355,7 +356,8 @@ INSERT INTO `turnos` (`idturno`, `idmedico`, `idpaciente`, `idobra`, `idhora`, `
 (12, 3, 0, 1, 3, '2013-06-25'),
 (13, 3, 0, 1, 4, '2013-06-25'),
 (14, 4, 77, 1, 19, '2013-06-25'),
-(16, 4, 77, 1, 19, '2013-06-25');
+(16, 4, 77, 1, 19, '2013-06-25'),
+(17, 0, 0, 0, 0, '0000-00-00');
 
 -- --------------------------------------------------------
 
