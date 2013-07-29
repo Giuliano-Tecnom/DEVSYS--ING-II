@@ -8,8 +8,8 @@
 	
 	include_once('mysqlconnect.php');
 	
-	//$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito." OR 0 = ".$ojito." ";
-	$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito;
+	$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito." OR 0 = ".$ojito." ";
+	//$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito;
     $resultado = mysql_query($consulta);
 	
 ?> 

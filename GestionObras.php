@@ -6,6 +6,7 @@
 	}
 	include_once('mysqlconnect.php');
 	$consulta = "SELECT idobra,nombre,activo FROM obrasociales where activo = ".$ojito." OR 0 = ".$ojito." ";
+	//$consulta = "SELECT idobra,nombre,activo FROM obrasociales where activo = ".$ojito."";
     $resultado = mysql_query($consulta);
 	
 
@@ -71,7 +72,7 @@
                     <?php
 				    }else{
 				    ?>
-				    	<button class="btn btn-info" type="button">Generar Reporte</button>
+				    	<button class="btn btn-info" type="button" onclick="location.href='ReporteObras.php?ojito= <?php echo $ojito ?>'">Generar Reporte</button>
 				    <?php
 				    }
 				    ?>

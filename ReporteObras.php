@@ -9,28 +9,16 @@ if (!isset($_GET['ojito'])) {
 	
 if ($ojito == 1) {
  $nombre= 'ACTIVAS';
-
-  
- } 	
+ 
+} 	
 	include_once('mysqlconnect.php');
 	
 	
-	 $consulta = "SELECT idlicencia,med.idmedico,fechaDesde,fechaHasta,nombre,apellido,
-	              case estado when 1 then 'Activa' else 'Inactiva' end as estado
-               	 FROM licencias as lic
-				
-                      INNER JOIN medicos as med on med.idmedico=lic.idmedico
-				 where estado = ".$ojito." OR 0 = ".$ojito." ";
 	
 	
-	// $consulta = "SELECT idlicencia,med.idmedico,fechaDesde,fechaHasta,nombre,apellido,
-	             // case estado when 1 then 'Activa' else 'Inactiva' end as estado
-               	// FROM licencias as lic
-				
-                     // INNER JOIN medicos as med on med.idmedico=lic.idmedico
-				// where estado = ".$ojito."";
+	$consulta = "SELECT idobra,nombre,activo FROM obrasociales where activo = ".$ojito." OR 0 = ".$ojito." ";
+	//$consulta = "SELECT idobra,nombre,activo FROM obrasociales where activo = ".$ojito."";
     $resultado = mysql_query($consulta);
-	        
 
 	
 	
@@ -67,12 +55,12 @@ $R='right ';
 
 
 $content ="";
-$porc = Array("40","40","40","40");  // Tamaño de las COLUMNAS para "A4"   // Maximo : 185% total de tr  PARA orientacion "P"    273%  PARA orientacion "L"
+$porc = Array("90","90");  // Tamaño de las COLUMNAS para "A4"   // Maximo : 185% total de tr  PARA orientacion "P"    273%  PARA orientacion "L"
 
 
  
 // Encabezado del Reporte
-$titulo_listado='LISTADO DE LICENCIAS '.$nombre;
+$titulo_listado='LISTADO DE OBRAS SOCIALES '.$nombre;
 $subtitulo_listado=' '.$estado;
 $bgcolor = $bgcolor_tit; 
  $_SESSION['repor_enc'] = '';
@@ -89,10 +77,10 @@ $bgcolor = $bgcolor_tit;
  $_SESSION['repor_enc'] .="<table border=1 align=left>";
  
  $_SESSION['repor_enc'] .= "<tr>  
-    <td   width=".$porc[0]."%  valign=middle align=".$C.$size." ".$bgcolor.">Apellido y Nombre</td>
-    <td   width=".$porc[1]."%  valign=middle align=".$C.$size." ".$bgcolor.">Fecha Desde</td>
-    <td   width=".$porc[2]."%  valign=middle align=".$C.$size." ".$bgcolor.">Fecha Hasta</td>	     
-	<td   width=".$porc[3]."%  valign=middle align=".$C.$size." ".$bgcolor.">Estado</td>";	     
+    <td   width=".$porc[0]."%  valign=middle align=".$C.$size." ".$bgcolor.">Nombre de Obra Social</td>
+    
+	<td   width=".$porc[1]."%  valign=middle align=".$C.$size." ".$bgcolor.">Estado</td>";	
+   	     
  $_SESSION['repor_enc'] .= "</tr>"; 
  $_SESSION['repor_enc'] .="</table>";
             
@@ -111,12 +99,17 @@ $size="size=7";
 				   $content .="<table border=1 >";
 				   $content .= "<tr>";
 				// datos 
+					if ($valor["activo"] == 1){
+						$nom='activa';
+					
+					}else {
+						$nom='inactiva';
+					}
 				   $content .= "
 					
-					<td  width=".$porc[0]."% valign=middle align=".$L.$size." ".$bgcolor." >".$valor["apellido"].' '.$valor["nombre"]."</td>
-					<td  width=".$porc[1]."% valign=middle align=".$L.$size." ".$bgcolor." >".$valor["fechaDesde"]."</td>
-					<td  width=".$porc[2]."% valign=middle align=".$L.$size." ".$bgcolor." >".$valor["fechaHasta"]."</td>	
-					<td  width=".$porc[3]."% valign=middle align=".$C.$size." ".$bgcolor." >".$valor["estado"]."</td>";	
+					<td  width=".$porc[0]."% valign=middle align=".$C.$size." ".$bgcolor." >".$valor["nombre"]."</td>
+					
+					<td  width=".$porc[1]."% valign=middle align=".$C.$size." ".$bgcolor." >".$nom."</td>";	
 	
 
 					$content .= "</tr></table>";  

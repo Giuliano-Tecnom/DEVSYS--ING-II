@@ -60,7 +60,7 @@
 				   	<?php
 				   	}else{
 				   	?>
-				   		<button class="btn btn-info" type="button">Generar Reporte</button>
+				   		<button class="btn btn-info" type="button" onclick="location.href='ReporteEspecialidades.php?ojito=<?php echo $ojito ?>'">Generar Reporte</button>
 				   	<?php
 				   	}
 				   	?>

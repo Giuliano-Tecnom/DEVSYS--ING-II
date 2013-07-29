@@ -6,20 +6,20 @@
 	}
 	include_once('mysqlconnect.php');
 	
-	// $consulta = "SELECT idlicencia,med.idmedico,fechaDesde,fechaHasta,nombre,apellido,
-	             // case estado when 1 then 'Activa' else 'Inactiva' end as estado
-               	// FROM licencias as lic
-				
-                     // INNER JOIN medicos as med on med.idmedico=lic.idmedico
-				// where estado = ".$ojito." OR 0 = ".$ojito." ";
-	
-	
 	$consulta = "SELECT idlicencia,med.idmedico,fechaDesde,fechaHasta,nombre,apellido,
 	             case estado when 1 then 'Activa' else 'Inactiva' end as estado
                	FROM licencias as lic
 				
                      INNER JOIN medicos as med on med.idmedico=lic.idmedico
-				where estado = ".$ojito."";
+				where estado = ".$ojito." OR 0 = ".$ojito." ";
+	
+	
+	// $consulta = "SELECT idlicencia,med.idmedico,fechaDesde,fechaHasta,nombre,apellido,
+	             // case estado when 1 then 'Activa' else 'Inactiva' end as estado
+               	// FROM licencias as lic
+				
+                     // INNER JOIN medicos as med on med.idmedico=lic.idmedico
+				// where estado = ".$ojito."";
     $resultado = mysql_query($consulta);
 	
 	

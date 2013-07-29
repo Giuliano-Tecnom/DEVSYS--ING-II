@@ -8,14 +8,13 @@ if (!isset($_GET['ojito'])) {
 
 if ($ojito == 1) {
  $nombre= 'ACTIVOS';
-}else{
-  $nombre= 'INACTIVOS';
+
   
  } 	
 
 include_once('mysqlconnect.php');	
-	
-$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito;
+$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";	
+//$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito;
  $resultado = mysql_query($consulta);
 	        
 
@@ -54,7 +53,7 @@ $R='right ';
 
 
 $content ="";
-$porc = Array("30","30","20","20","40","20","25");  // Tamaño de las COLUMNAS para "A4"   // Maximo : 185% total de tr  PARA orientacion "P"    273%  PARA orientacion "L"
+$porc = Array("25","25","20","20","35","20","20","20");  // Tamaño de las COLUMNAS para "A4"   // Maximo : 185% total de tr  PARA orientacion "P"    273%  PARA orientacion "L"
 
 
  
@@ -82,7 +81,9 @@ $bgcolor = $bgcolor_tit;
 	<td   width=".$porc[3]."%  valign=middle align=".$C.$size." ".$bgcolor.">Email</td>
     <td   width=".$porc[4]."%  valign=middle align=".$C.$size." ".$bgcolor.">Obra Social</td>
     <td   width=".$porc[5]."%  valign=middle align=".$C.$size." ".$bgcolor.">DNI</td>	
-    <td   width=".$porc[6]."%  valign=middle align=".$C.$size." ".$bgcolor.">Fecha de Nacimiento</td>";	     
+    <td   width=".$porc[6]."%  valign=middle align=".$C.$size." ".$bgcolor.">Fecha de Nacimiento</td>
+	 <td   width=".$porc[7]."%  valign=middle align=".$C.$size." ".$bgcolor.">Estado</td>";		
+		
  $_SESSION['repor_enc'] .= "</tr>"; 
  $_SESSION['repor_enc'] .="</table>";
             
@@ -121,6 +122,12 @@ $size="size=7";
 				   $content .="<table border=1 >";
 				   $content .= "<tr>";
 				// datos 
+					if ($valor["activo"] == 1){
+						$nom='activo';
+					
+					}else {
+						$nom='inactivo';
+					}
 				   $content .= "
 					
 					<td  width=".$porc[0]."% valign=middle align=".$L.$size." ".$bgcolor." >".$valor["apellido"].' '.$valor["nombre"]."</td>
@@ -129,7 +136,8 @@ $size="size=7";
 					<td  width=".$porc[3]."% valign=middle align=".$L.$size." ".$bgcolor." >".$valor["email"]."</td>
 					<td  width=".$porc[4]."% valign=middle align=".$C.$size." ".$bgcolor." >".$obraSociales."</td>
 					<td  width=".$porc[5]."% valign=middle align=".$C.$size." ".$bgcolor." >".$valor["dni"]."</td>
-					<td  width=".$porc[6]."% valign=middle align=".$C.$size." ".$bgcolor." >".$valor["fechaNac"]."</td>";	
+					<td  width=".$porc[6]."% valign=middle align=".$C.$size." ".$bgcolor." >".$valor["fechaNac"]."</td>
+					<td  width=".$porc[7]."% valign=middle align=".$C.$size." ".$bgcolor." >".$nom."</td>";	
 					
 					$content .= "</tr></table>";  
  } // fin while /FOR					
