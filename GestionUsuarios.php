@@ -53,6 +53,13 @@
 						<h4>Se Modifico al Usuario Correctamente!!</h4>
 						</div>";
 					}	
+					
+					if($_GET['Correcto'] == 3){
+					echo"<div class='alert alert-success'>
+						<h4>Se agrego al Usuario Correctamente!!</h4>
+						</div>";
+					}	
+			
 			}
 
 

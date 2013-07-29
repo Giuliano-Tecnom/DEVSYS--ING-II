@@ -21,7 +21,7 @@ include_once('mysqlconnect.php');
 				
 		mysql_query($insertar);
 
-		Header ('Location: agregarUsuarios.php?Correcto=1');
+		Header ('Location: GestionUsuarios.php?Correcto=3');
 
 	}else{
 		Header ('Location: agregarUsuarios.php?Error=1');
