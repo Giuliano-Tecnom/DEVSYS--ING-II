@@ -291,24 +291,8 @@ $fecha = $_REQUEST['fecha'];
 					<option value=>Todas</option>
 					<?php
 						$query= "SELECT DISTINCT fecha
-								 FROM horarios";
-						$res_fecha = mysql_query($query);
-
-						while ($valor = mysql_fetch_array($res_fecha)) {
-							if ($fecha == $valor["fecha"]) {
-								$sel= " SELECTED ";
-								}else{
-									$sel= "";
-								}
-						}
-					?>
-					
-					<label>Fecha:</label>
-				<select id="fecha" name="fecha" >
-					<option value=>Todas</option>
-					<?php
-						$query= "SELECT DISTINCT fecha
-								 FROM horarios";
+								 FROM horarios
+								 ORDER BY fecha";
 						$res_fecha = mysql_query($query);
 
 						while ($valor = mysql_fetch_array($res_fecha)) {

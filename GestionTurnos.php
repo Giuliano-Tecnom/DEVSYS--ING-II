@@ -14,12 +14,14 @@ $date = date("Y-m-d");
 //FIN DE CONFIGURACION DE HORA Y FECHA!!!..
 
 include_once('mysqlconnect.php');
+
 $consulta_maxFec="SELECT MAX(t.fecha) as fechamax FROM turnos as t";
 $query_maxFec = mysql_query($consulta_maxFec);
 while ($valor = mysql_fetch_array($query_maxFec)){
 	$maxFec= $valor['fechamax'];
 
 }
+
 $consulta_minFec="SELECT MIN(t.fecha) as fechamin FROM turnos as t";
 $query_minFec = mysql_query($consulta_minFec);
 while($valor = mysql_fetch_array($query_minFec)){
@@ -75,8 +77,6 @@ $myselect6 = $_REQUEST['myselect6'];
  $criterio="";
  if ($filtro=='S') {
  
- 	
-	$diaSemana = diaSemana($fec[2], $fec[1], $fec[0]);
 	
     if ($myselect1 >0) {  $criterio.="  and pacientes.idpaciente = ".$myselect1."  ";   }	
     if ($myselect2 >0) {  $criterio.="  and medicos.idmedico = ".$myselect2." ";   }	
@@ -113,6 +113,7 @@ $myselect6 = $_REQUEST['myselect6'];
 				 inner join hora on hora.idhora=t.idhora
 				 inner join especialidades as e on t.idespecialidad = e.idespecialidad
 				 WHERE 1=1  " .$criterio. "
+				 ORDER BY t.fecha,hora.hora
 				 ";
      
 	$query_busqueda = mysql_query($consultaFinal);
@@ -263,7 +264,8 @@ $myselect6 = $_REQUEST['myselect6'];
 	<div id="form-turnos">
 		<form name="filtro" class="form-horizontal">
 			<div>
-				</br><!-- ***************************** SELECT DE PACIENTES ***************************** -->
+
+				<!-- ***************************** SELECT DE PACIENTES ***************************** -->
 				<label>Paciente:</label>
 				<select id="myselect1" name="myselect1" >
 					<option value=0>Todos</option>
@@ -280,10 +282,8 @@ $myselect6 = $_REQUEST['myselect6'];
 						}
 					?>
 				</select>
-				</br>
-			
-			
-				</br><!-- ***************************** SELECT DE MEDICOS ***************************** -->
+				
+				<!-- ***************************** SELECT DE MEDICOS ***************************** -->
 				<label>Medico:</label>
 				<select id="myselect2" name="myselect2" >
 					<option value=0>Todos</option>
@@ -300,7 +300,10 @@ $myselect6 = $_REQUEST['myselect6'];
 						}
 					?>
 				</select>
-				</br>
+				
+			</div>
+			<div style="margin-left: 238px; margin-top: -130px;">
+
 				<!-- ***************************** SELECT DE ESPECIALIDADES ***************************** -->		
 				<label>Especialidad:</label>
 				<select id="myselect3" name="myselect3">
@@ -318,8 +321,7 @@ $myselect6 = $_REQUEST['myselect6'];
 						}
 					?>
 				</select>
-			</div>	
-			<div style="margin-left: 253px; margin-top: -256px;">
+				
 				<!-- ***************************** SELECT DE OBRAS SOCIALES ***************************** -->
 				<label>Obra Social:</label>
 				<select id="myselect4" name="myselect4">
@@ -337,22 +339,12 @@ $myselect6 = $_REQUEST['myselect6'];
 						}
 					?>
 				</select>	
-				</br>
-				<!-- ***************************** FECHAAAA ***************************** -->
-
-				<label>Fecha Desde:</label>
-				<input class="fechaDesde" name="fechaDesde" type="date" >
-				<label>Fecha Hasta:</label>
-				<input class="fechaHasta" name="fechaHasta" type="date" >
+				
 			</div>	
-			<div style="margin-left: 506px; margin-top: -177px;">
-			
-			
-			
-			
-			
+			<div style="margin-top: -130px; margin-left: 476px;">
+
 				<!-- ***************************** SELECT DE HORA ***************************** -->
-				<label>Franja Horaria:</label>
+				<label>Horario:</label>
 				<select id="myselect5" name="myselect5" >
 					<option value=0>Todas</option>
 					<?php
@@ -371,10 +363,9 @@ $myselect6 = $_REQUEST['myselect6'];
 						}
 					?>
 				</select>
-					
-					
-				</br><!-- ***************************** SELECT DE ESTADOS ***************************** -->
-				<label>Estados:</label>
+						
+				<!-- ***************************** SELECT DE ESTADOS ***************************** -->
+				<label>Estado:</label>
 				<select id="myselect6" name="myselect6" >
 					<option selected value="0" >Todos</option>
 					<option value="espera">En Espera</option>
@@ -383,10 +374,22 @@ $myselect6 = $_REQUEST['myselect6'];
 					<option value="ausente">Ausente</option>
 					
 				</select>
-				</br>
-			
-				<button class='btn btn-warning' style="margin-top: 110px; margin-left: -179px;" type='button' onclick='AceptarFiltro();'> Buscar </button>
+
 			</div>
+			<div style="margin-top: -130px; margin-left: 714px;">
+
+				<!-- ***************************** FECHAAAA ***************************** -->
+
+				<label>Fecha Desde:</label>
+				<input class="fechaDesde" name="fechaDesde" type="date" min="<?php echo $minFec ?>" max="<?php echo $maxFec ?>" >
+				
+				<label style="margin-top: 20px;">Fecha Hasta:</label>
+				<input class="fechaHasta" name="fechaHasta" type="date" min="<?php echo $minFec ?>" max="<?php echo $maxFec ?>" >
+
+			</div>
+
+			<button class='btn btn-warning' style="margin-top: 30px;" type='button' onclick='AceptarFiltro();'> Filtrar </button>
+
 		</form>
 	</div>
 
@@ -422,15 +425,14 @@ $myselect6 = $_REQUEST['myselect6'];
 			
 			<table class="table table-striped">
 				<tr>
-					<td>Nro Turno </td> 
-					<td>Medico</td>
-					<td>Area</td>
-					<td>Paciente</td>
-					<td>Obra Social</td>
-					<td>Fecha </td>
-					<td>Hora </td>
-					<td>Estado </td>
-					<td></td>
+					<td><b>Nro Turno </b></td> 
+					<td><b>Medico </b></td>
+					<td><b>Area </b></td>
+					<td><b>Paciente </b></td>
+					<td><b>Obra Social </b></td>
+					<td><b>Fecha </b></td>
+					<td><b>Hora </b></td>
+					<td><b>Estado </b></td>
 				</tr>
 	<?php
 			while ($valor = mysql_fetch_array($query_busqueda)) {

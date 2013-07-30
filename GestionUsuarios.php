@@ -20,7 +20,7 @@
 	
 	include_once('mysqlconnect.php');
 
-	$consulta = "SELECT idusuario, nombre, apellido, usuario FROM usuarios ";
+	$consulta = "SELECT idusuario, nombre, apellido, usuario, tipo FROM usuarios ";
 	$res = mysql_query($consulta);
 	
 	include_once('header.php'); 
@@ -80,9 +80,10 @@
 
 				<table class="table table-striped">
 					<tr>
-						<td>Usuario</td>
-						<td>Nombre</td>
-						<td>Apellido</td>
+						<td><b>Usuario</b></td>
+						<td><b>Nombre</b></td>
+						<td><b>Apellido</b></td>
+						<td><b>Tipo de Usuario</b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -93,6 +94,7 @@
 						<td><?php echo $valor["usuario"]; ?></td>
 						<td><?php echo $valor["nombre"]; ?></td>
 						<td><?php echo $valor["apellido"]; ?></td>
+						<td><?php echo $valor["tipo"]; ?></td>
 						<?php 
 						$idusuario = $valor["idusuario"];
 						?>	

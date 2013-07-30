@@ -178,14 +178,10 @@
 
 				<table class="table table-striped">
 					<tr>
-						<td><b>Nombre</b></td> 
-						<td><b>Apellido</b></td>
-						<td><b>Direccion</b></td>
-						<td><b>Telefono</b></td>
-						<td><b>Email</b></td>
-						<td><b>Obras Sociales</b></td>
+						<td><b>Apellido y Nombre</b></td>
 						<td><b>Dni</b></td>
-						<td><b>Fecha de Nacimiento</b></td>
+						<td><b>Obras Sociales</b></td>
+						<td><b>Datos Personales</b></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -194,11 +190,8 @@
 				{
 				?>
 					<tr>
-						<td><?php echo $valor["nombre"]; ?></td>
-						<td><?php echo $valor["apellido"]; ?></td>
-						<td><?php echo $valor["direccion"]; ?></td>
-						<td><?php echo $valor["telefono"]; ?></td>
-						<td><?php echo $valor["email"]; ?></td>
+						<td><?php echo $valor["apellido"]; ?> <?php echo $valor["nombre"]; ?></td>
+						<td><?php echo $valor["dni"]; ?></td>
 						
 						<?php
 						$idpaciente = $valor['idpaciente']; //¡Ojo tocando esta variable, se usa en varios lados durante la iteracion del while!.
@@ -233,8 +226,39 @@
 							</div>
 						</div>
 
-						<td><?php echo $valor["dni"]; ?></td>
-						<td><?php echo $valor["fechaNac"]; ?></td>
+						<?php
+						$consultaDatos= "SELECT email, fechaNac, direccion, telefono
+										 FROM pacientes
+										 WHERE idpaciente ='" .$valor["idpaciente"]. "'";
+						$resultadoConsultaDatos = mysql_query($consultaDatos);
+						?>
+						<td><a data-toggle="modal" role="button" href="#datosPersonalesPaciente<?php echo $idpaciente; ?>" class="btn">Ver</a></td>
+						<!-- MODAL DE VER OBRAS SOCIALES -->
+						<div id="datosPersonalesPaciente<?php echo $idpaciente; ?>" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<center><h3>Datos Personales del Paciente</h4></center>	
+								<ul>
+								<?php 
+								if (mysql_num_rows($resultadoConsultaDatos) > 0) {
+									while ($datos = mysql_fetch_array($resultadoConsultaDatos)) { ?>
+										<li><b>Direccion:</b> <?php echo $datos['direccion'] ?></li>
+										<li><b>Telefono:</b> <?php echo $datos['telefono'] ?></li>
+										<li><b>Email:</b> <?php echo $datos['email'] ?></li>
+										<li><b>Fecha de Nacimiento:</b> <?php echo $datos['fechaNac'] ?></li>
+							<?php	}
+								} else {
+									?>
+										<li><?php echo 'No se registran Datos Personales asignados al paciente.' ?></li>
+									<?php 
+								}
+									?>
+								</ul> 
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Volver</a>
+							</div>
+						</div>
+
 						<?php 
 							
 								if( $valor["activo"] == 1 ){
