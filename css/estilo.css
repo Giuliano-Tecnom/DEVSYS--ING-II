@@ -56,12 +56,13 @@
 }
 
 #form-gestion-pacientes{
-	float: left;  
+	margin-top: 50px;
 	margin-left: 15px;
+	margin-right: 15px;
 }
 
 #tabla-gestion-pacientes{
-	margin-top: 45px;
+	margin-top: 75px;
 	margin-left: 15px;
 	margin-right: 15px;
 }

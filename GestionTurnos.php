@@ -170,6 +170,7 @@ $myselect6 = $_REQUEST['myselect6'];
 	
 	
 ?> 
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -271,7 +272,7 @@ $myselect6 = $_REQUEST['myselect6'];
 					<option value=0>Todos</option>
 					<?php
 						while ($valor = mysql_fetch_array($query_pac)) {
-						    if ($myselect2 == $valor["idpaciente"]) {
+						    if ($myselect1 == $valor["idpaciente"]) {
 								$sel= " SELECTED ";
 							}else{
 								$sel= "";

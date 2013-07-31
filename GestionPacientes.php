@@ -1,17 +1,66 @@
 <?php
 	
-	if (!isset($_GET['ojito'])) {
+	if (!isset($_REQUEST['ojito'])) {
 		$ojito=1;
 	} else {
-		$ojito=$_GET['ojito'];
+		$ojito=$_REQUEST['ojito'];
 	}
 	
 	include_once('mysqlconnect.php');
-	
-	$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";
-	//$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito;
-    $resultado = mysql_query($consulta);
-	
+
+
+if(isset($_POST['filtro'])){
+    
+    $filtro = $_POST['filtro'];
+    $criterio = "";
+
+    if(isset($_POST['nom'])){
+    	$nombre = $_POST['nom'];
+    	if($nombre != ""){
+    		$criterio.="  and p.nombre LIKE '".$nombre."%'  ";
+    	}
+    }
+
+    if(isset($_POST['ape'])){
+    	$apellido = $_POST['ape'];
+    	if($apellido != ""){
+    		$criterio.="  and p.apellido LIKE '".$apellido."%' ";
+    	}
+    }
+
+    if(isset($_POST['dni'])){
+    	$dni = $_POST['dni'];
+    	if($dni != ""){
+    		$criterio.="  and p.dni = ".$dni."  ";
+    	}
+    }
+
+    if(isset($_POST['obraSocial'])){
+    	$obra = $_POST['obraSocial'];
+    	if($obra > 0){
+    		$criterio.="  and po.idobra = ".$obra."  ";
+    	}
+    }
+
+
+
+ 	$consulta = "SELECT DISTINCT * FROM pacientes as p
+ 				 INNER JOIN pac_obrasocial as po on p.idpaciente = po.idpaciente
+ 				 WHERE (p.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+ 				 GROUP BY p.dni";
+     
+	$resultado = mysql_query($consulta);
+
+
+}else{
+ 
+ 	$consulta = "SELECT * FROM pacientes WHERE (pacientes.activo = ".$ojito." OR 0 = ".$ojito.") ";
+     
+	$resultado = mysql_query($consulta);
+
+}
+
+
 ?> 
 
 <head>
@@ -87,94 +136,93 @@
 				
 			?>
 			
-			<!--
+
+			
 			<div id="form-gestion-pacientes"> 
-		   
-				<form class="form-horizontal">
-					<div class="control-group">
-						<input name="nom" type="text" placeholder="Buscar por nombre..">
+		  
+				<form class="form-horizontal" method="POST" action="GestionPacientes.php?ojito=<?php echo $ojito; ?>" enctype="multipart/form-data" >
+					<input type="hidden" name="filtro" id="filtro" value="S">
+					<div style="margin-top: 60px;">
+
+						<div class="control-group">
+							<input name="nom" id="nom" type="text" placeholder="Buscar por nombre..">
+						</div>
+						<div class="control-group">
+							<input name="ape" id="ape" type="text" placeholder="Buscar por apellido..">
+						</div>
+						<div class="control-group">
+							<input name="dni" id="dni" type="text" placeholder="Buscar por DNI..">
+						</div> 
+
 					</div>
-					<div class="control-group">
-						<input name="ape" type="text" placeholder="Buscar por apellido..">
-					</div>
-					<div class="control-group">
-						<input name="dni" type="text" placeholder="Buscar por DNI..">
-					</div> 
-					<div class="control-group">
-						<input name="email" type="text" placeholder="Buscar por Email..">
-					</div>
-					<div class="control-group">
-						Edad desde:
-						<select name="edadmin" class="span2">
-							<option value="0"> < 1 </option>
+					<div style="margin-top: -145px; margin-left: 225px;">
+
+						<?php
+							$consultaObras = "SELECT * FROM obraSociales WHERE activo = 1";
+							$resObras = mysql_query($consultaObras);
+						?>
+
+						<label>Obra Social:</label>
+						<select id="obraSocial" name="obraSocial">
+							<option value=0>Todas</option>
 							<?php
-								for($i=1; $i < 121; $i++){
-									echo " <option value='".$i."'>".$i."</option> ";
-								}	
+								while ($valor = mysql_fetch_array($resObras)) {
+									if ($obraSocial == $valor["idobra"]) {
+										$sel= " SELECTED ";
+									}else{
+										$sel= "";
+									}
 							?>
-						</select> 
-					</div>
-					<div class="control-group">
-						Edad Hasta: 
-						<select name="edadmax" class="span2">
-							<?php
-						  		for($i=120; $i > 0; $i--){
-									echo " <option value='".$i."'>".$i."</option> ";
+									<option value="<?php echo $valor["idobra"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?></option>
+							<?php	  
 								}
 							?>
-							<option value="0"> < 1 </option>
-						</select> 
-					</div>
-					<div style="margin-left: 300px;margin-top: -265px;">
-						<label>Obra Social</label>
-						<select multiple="multiple" name="obras[]">
-							<option>Cualquiera</option>
-							<option>GALENO</option>
-							<option>OSSEG</option>
-							<option>IOMA</option>
-							<option>OSDE</option>
-							<option>OSECAC</option>   
 						</select>
-					</div> 
-					<div style="margin-left:300px;margin-top: 25px;">
-						<button class="btn btn-success" type="button">Buscar</button>
-						<button class="btn btn-danger" type="button">Limpiar </button>
+
+					</div>
+
+					<div style="margin-top: 80px;">
+						<button class="btn btn-success" type="submit">Filtrar</button>
 					</div>
 					
 				</form>
 			</div>
-			-->
-			
-			<!-- COMIENZA BARRA DE OPCIONES -->
-			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
-			        <button class="btn btn-info" type="button" onclick="location.href='AltaPacientes.php'">Paciente Nuevo</button>
-                    
-                   
-				    <!-- HABILITA O DESHABILITA EL BOTON REPORTES DEPENDIENDO SI ES ADMIN O NO!!!! -->
-                    <?php
-                    if ($_SESSION['tipo'] != "administrador") {
-                    ?>
-                    	 <button class="btn btn-info" type="button" disabled>Generar Reporte</button>
-				   	<?php
-				   	}else{
-				   	?>
-				   		 <button class="btn btn-info" type="button" onclick="location.href='ReportePacientes.php?ojito=<?php echo $ojito ?>'">Generar Reporte</button>
-				   	<?php
-				   	}
-				   	?>
-
-
-				    <button class="btn btn-info" type="button"
-					<?php	if($ojito == 1){ ?>
-								onclick="location.href='GestionPacientes.php?ojito=0'"> Mostrar Inactivos <i class="icon-eye-close" style="margin-left: 3px;"></i>
-					<?php	} else { ?>			
-								onclick="location.href='GestionPacientes.php?ojito=1'"> Ocultar Inactivos <i class="icon-eye-open" style="margin-left: 3px;"></i>
-					<?php	} ?>
-					</button>
-			</div>
-			<!-- FIN BARRA DE OPCIONES -->
 			
 			<div id="tabla-gestion-pacientes">
+
+				<!-- COMIENZA BARRA DE OPCIONES -->
+				<div class="btn-group" style="margin-top: -13px; margin-left: 270;">
+
+				        <button class="btn btn-info" type="button" onclick="location.href='AltaPacientes.php'">Paciente Nuevo</button>
+	                    
+	                   
+					    <!-- HABILITA O DESHABILITA EL BOTON REPORTES DEPENDIENDO SI ES ADMIN O NO!!!! -->
+	                    <?php
+	                    if ($_SESSION['tipo'] != "administrador") {
+	                    ?>
+	                    	 <button class="btn btn-info" type="button" disabled>Generar Reporte</button>
+					   	<?php
+					   	}else{
+					   	?>
+					   		 <button class="btn btn-info" type="button" onclick="location.href='ReportePacientes.php?ojito=<?php echo $ojito ?>'">Generar Reporte</button>
+					   	<?php
+					   	}
+					   	?>
+
+
+					    <button class="btn btn-info" type="button"
+						<?php	if($ojito == 1){ ?>
+									onclick="location.href='GestionPacientes.php?ojito=0'"> Mostrar Inactivos <i class="icon-eye-close" style="margin-left: 3px;"></i>
+						<?php	} else { ?>			
+									onclick="location.href='GestionPacientes.php?ojito=1'"> Ocultar Inactivos <i class="icon-eye-open" style="margin-left: 3px;"></i>
+						<?php	} ?>
+						</button>
+				</div>
+				<br></br>
+				<br></br>
+				<!-- FIN BARRA DE OPCIONES -->
+			
+			
 
 				<table class="table table-striped">
 					<tr>
@@ -303,5 +351,6 @@
 </body>
 </html>
 
-  
+
+ 
   
