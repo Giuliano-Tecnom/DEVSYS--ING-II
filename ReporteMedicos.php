@@ -10,14 +10,73 @@ if ($ojito == 1) {
 }
 	include_once('mysqlconnect.php');
 	
-	$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito." OR 0 = ".$ojito." ";
-	//$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito;
-    $resultado = mysql_query($consulta);
+	////$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito;
+ 
+	// 	$consulta = "SELECT DISTINCT * FROM medicos as m
+ 	//			 INNER JOIN med_obrasocial as mo on m.idmedico = mo.idmedico
+ 	//			 INNER JOIN med_esp as me on m.idmedico = me.idmedico
+ 	//			 INNER JOIN med_hor as mh on m.idmedico = mh.idmedico
+ 	//			 WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$_GET['criterio']. " 
+ 	//			 GROUP BY m.nromatricula";
+     
+//	$resultado = mysql_query($consulta);
 	
-	
+//--------------------------------------------------------------------------------
 
-	
-	
+if(isset($_GET['filtro'])){
+    
+    $filtro = $_GET['filtro'];
+    $criterio = "";
+
+    if(isset($_GET['nombre'])){
+    	$nombre = $_GET['nombre'];
+    	if($nombre != ""){
+    		$criterio.="  and m.nombre LIKE '".$nombre."%'  ";
+    	}
+    }
+
+    if(isset($_GET['apellido'])){
+    	$apellido = $_GET['apellido'];
+    	if($apellido != ""){
+    		$criterio.="  and m.apellido LIKE '".$apellido."%' ";
+    	}
+    }
+
+    if(isset($_GET['matricula'])){
+    	$matricula = $_GET['matricula'];
+    	if($matricula != ""){
+    		$criterio.="  and m.nromatricula = ".$matricula."  ";
+    	}
+    }
+
+    $criterio.= $_GET['criterioreporte'];
+
+
+
+ 	$consulta = "SELECT DISTINCT * FROM medicos as m
+ 				 INNER JOIN med_obrasocial as mo on m.idmedico = mo.idmedico
+ 				 INNER JOIN med_esp as me on m.idmedico = me.idmedico
+ 				 INNER JOIN med_hor as mh on m.idmedico = mh.idmedico
+ 				 WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+ 				 GROUP BY m.nromatricula";
+     
+	$resultado = mysql_query($consulta);
+
+
+}else{
+ 
+ 	$consulta = "SELECT * FROM medicos WHERE (medicos.activo = ".$ojito." OR 0 = ".$ojito.") ";
+     
+	$resultado = mysql_query($consulta);
+
+}
+
+
+
+
+
+
+
 	
 
 // configuracion

@@ -13,10 +13,68 @@ if ($ojito == 1) {
  } 	
 
 include_once('mysqlconnect.php');	
-$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";	
+//$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";	
 //$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito;
- $resultado = mysql_query($consulta);
+ //$resultado = mysql_query($consulta);
 	        
+
+if(isset($_GET['filtro'])){
+    
+    $filtro = $_GET['filtro'];
+    $criterio = "";
+
+    if(isset($_GET['nombre'])){
+    	$nombre = $_GET['nombre'];
+    	if($nombre != ""){
+    		$criterio.="  and p.nombre LIKE '".$nombre."%'  ";
+    	}
+    }
+
+    if(isset($_GET['apellido'])){
+    	$apellido = $_GET['apellido'];
+    	if($apellido != ""){
+    		$criterio.="  and p.apellido LIKE '".$apellido."%' ";
+    	}
+    }
+
+    if(isset($_GET['dni'])){
+    	$dni = $_GET['dni'];
+    	if($dni != ""){
+    		$criterio.="  and p.dni = ".$dni."  ";
+    	}
+    }
+
+    if(isset($_GET['obra'])){
+    	$obra = $_GET['obra'];
+    	if($obra > 0){
+    		$criterio.="  and po.idobra = ".$obra."  ";
+    	}
+    }
+
+
+
+ 	$consulta = "SELECT DISTINCT * FROM pacientes as p
+ 				 INNER JOIN pac_obrasocial as po on p.idpaciente = po.idpaciente
+ 				 WHERE (p.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+ 				 GROUP BY p.dni";
+     
+	$resultado = mysql_query($consulta);
+
+
+}else{
+ 
+ 	$consulta = "SELECT * FROM pacientes WHERE (pacientes.activo = ".$ojito." OR 0 = ".$ojito.") ";
+     
+	$resultado = mysql_query($consulta);
+
+}
+
+
+
+
+
+
+
 
 	
 	

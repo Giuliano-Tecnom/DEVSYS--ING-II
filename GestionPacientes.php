@@ -204,7 +204,7 @@ if(isset($_POST['filtro'])){
 					   	<?php
 					   	}else{
 					   	?>
-					   		 <button class="btn btn-info" type="button" onclick="location.href='ReportePacientes.php?ojito=<?php echo $ojito ?>'">Generar Reporte</button>
+					   		 <button class="btn btn-info" type="button" onclick="location.href='ReportePacientes.php?ojito=<?php echo $ojito ?>&filtro=<?php echo $filtro; ?>&nombre=<?php echo $nombre; ?>&apellido=<?php echo $apellido; ?>&dni=<?php echo $dni; ?>&obra=<?php echo $obra; ?>'">Generar Reporte</button>
 					   	<?php
 					   	}
 					   	?>

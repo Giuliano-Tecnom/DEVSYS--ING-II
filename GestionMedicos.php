@@ -15,6 +15,7 @@ if(isset($_POST['filtro'])){
     
     $filtro = $_POST['filtro'];
     $criterio = "";
+    $criterioreporte ="";
 
     if(isset($_POST['nom'])){
     	$nombre = $_POST['nom'];
@@ -42,6 +43,7 @@ if(isset($_POST['filtro'])){
     if(count($obras) > 0){
     	foreach ($obras as $valor) {
     		$criterio.="  and mo.idobra = ".$valor."  ";
+    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
     	}
     }
 
@@ -49,6 +51,7 @@ if(isset($_POST['filtro'])){
     if(count($especialidades) > 0){
     	foreach ($especialidades as $valor) {
     		$criterio.="  and me.idespecialidad = ".$valor."  ";
+    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
     	}
     }
 
@@ -56,6 +59,7 @@ if(isset($_POST['filtro'])){
     if(count($dias) > 0){
     	foreach ($dias as $valor) {
     		$criterio.="  and mh.idhorario = ".$valor."  ";
+    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
     	}
     }
 
@@ -257,7 +261,7 @@ if(isset($_POST['filtro'])){
 				   	<?php
 				   	}else{
 				   	?>
-				   		<button class="btn btn-info" type="button" onclick="location.href='ReporteMedicos.php?ojito=<?php echo $ojito;?>'">Generar Reporte</button>
+				   		<button class="btn btn-info" type="submit" onclick="location.href='ReporteMedicos.php?ojito=<?php echo $ojito;?>&filtro=<?php echo $filtro;?>&nombre=<?php echo $nombre;?>&apellido=<?php echo $apellido;?>&matricula=<?php echo $matricula;?>&criterioreporte=<?php echo $criterioreporte;?>'">Generar Reporte</button>
 				   	<?php
 				   	}
 				   	?>
