@@ -8,9 +8,81 @@
 	
 	include_once('mysqlconnect.php');
 	
-	$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito." OR 0 = ".$ojito." ";
-	//$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito;
-    $resultado = mysql_query($consulta);
+
+
+
+if(isset($_POST['filtro'])){
+    
+    $filtro = $_POST['filtro'];
+    $criterio = "";
+
+    if(isset($_POST['nom'])){
+    	$nombre = $_POST['nom'];
+    	if($nombre != ""){
+    		$criterio.="  and m.nombre LIKE '".$nombre."%'  ";
+    	}
+    }
+
+    if(isset($_POST['ape'])){
+    	$apellido = $_POST['ape'];
+    	if($apellido != ""){
+    		$criterio.="  and m.apellido LIKE '".$apellido."%' ";
+    	}
+    }
+
+    if(isset($_POST['matricula'])){
+    	$matricula = $_POST['matricula'];
+    	if($matricula != ""){
+    		$criterio.="  and m.nromatricula = ".$matricula."  ";
+    	}
+    }
+
+    
+    $obras = $_POST['obras'];
+    if(count($obras) > 0){
+    	foreach ($obras as $valor) {
+    		$criterio.="  and mo.idobra = ".$valor."  ";
+    	}
+    }
+
+    $especialidades = $_POST['especialidades'];
+    if(count($especialidades) > 0){
+    	foreach ($especialidades as $valor) {
+    		$criterio.="  and me.idespecialidad = ".$valor."  ";
+    	}
+    }
+
+    $dias = $_POST['dias'];
+    if(count($dias) > 0){
+    	foreach ($dias as $valor) {
+    		$criterio.="  and mh.idhorario = ".$valor."  ";
+    	}
+    }
+
+
+
+ 	$consulta = "SELECT DISTINCT * FROM medicos as m
+ 				 INNER JOIN med_obrasocial as mo on m.idmedico = mo.idmedico
+ 				 INNER JOIN med_esp as me on m.idmedico = me.idmedico
+ 				 INNER JOIN med_hor as mh on m.idmedico = mh.idmedico
+ 				 WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+ 				 GROUP BY m.nromatricula";
+     
+	$resultado = mysql_query($consulta);
+
+
+}else{
+ 
+ 	$consulta = "SELECT * FROM medicos WHERE (medicos.activo = ".$ojito." OR 0 = ".$ojito.") ";
+     
+	$resultado = mysql_query($consulta);
+
+}
+
+
+
+
+
 	
 ?> 
 
@@ -77,64 +149,99 @@
 				}
 				
 			?>
-			<!--
+			
 			<div id="form-gestion-medicos"> 
 		   
-				<form class="form-horizontal">
+				<form class="form-horizontal" method="POST" action="GestionMedicos.php?ojito=<?php echo $ojito; ?>" enctype="multipart/form-data" >
+
+					<input type="hidden" name="filtro" id="filtro" value="S">
 					<div class="control-group">
-						<input name="nom" type="text" placeholder="Buscar por nombre..">
+						<input name="nom" id="nom" type="text" placeholder="Buscar por nombre..">
 					</div>
 					<div class="control-group">
-						<input name="ape" type="text" placeholder="Buscar por apellido..">
+						<input name="ape" id="ape" type="text" placeholder="Buscar por apellido..">
 					</div>
 					<div class="control-group">
-						<input name="dni" type="text" placeholder="Buscar por DNI..">
+						<input name="matricula" id="matricula" type="text" placeholder="Buscar por matricula..">
 					</div> 
-					<div class="control-group">
-						<input name="email" type="text" placeholder="Buscar por Email..">
-					</div>
-					<div class="control-group">
-						Edad desde:
-						<select name="edadmin" class="span2">
-							<option value="0"> < 1 </option>
-							<?php
-								for($i=1; $i < 121; $i++){
-									echo " <option value='".$i."'>".$i."</option> ";
-								}	
-							?>
-						</select> 
-					</div>
-					<div class="control-group">
-						Edad Hasta: 
-						<select name="edadmax" class="span2">
-							<?php
-								for($i=120; $i > 0; $i--){
-									echo " <option value='".$i."'>".$i."</option> ";
-								}
-							?>
-							<option value="0"> < 1 </option>
-						</select> 
-					</div>
-					<div style="margin-left: 300px;margin-top: -265px;">
+
+					<div style="margin-top: -122px; margin-left: 221px;">
+						
+						<?php
+							$consultaObras = "SELECT * FROM obraSociales WHERE activo = 1";
+							$resObras = mysql_query($consultaObras);
+						?>
+
+
 						<label>Obra Social</label>
 						<select multiple="multiple" name="obras[]">
-							<option>Cualquiera</option>
-							<option>GALENO</option>
-							<option>OSSEG</option>
-							<option>IOMA</option>
-							<option>OSDE</option>
-							<option>OSECAC</option>   
+							<?php
+								while ($valor = mysql_fetch_array($resObras)) {
+							?>
+									<option value="<?php echo $valor["idobra"];?>"><?php echo $valor["nombre"]; ?></option>
+							<?php	  
+								}
+							?>
 						</select>
+						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
+
 					</div> 
-					<div style="margin-left:300px;margin-top: 25px;">
-						<button class="btn btn-success" type="button">Buscar</button>
-						<button class="btn btn-danger" type="button">Limpiar </button>
+
+					<div style="margin-top: -132px; margin-left: 455px;">
+
+						<?php
+							$consultaesp = "SELECT * FROM especialidades WHERE activo = 1";
+							$resEsp = mysql_query($consultaesp);
+						?>
+
+
+						<label>Especialidades</label>
+						<select multiple="multiple" name="especialidades[]">
+							<?php
+								while ($valor = mysql_fetch_array($resEsp)) {
+							?>
+									<option value="<?php echo $valor["idespecialidad"];?>"><?php echo $valor["nombre"]; ?></option>
+							<?php	  
+								}
+							?>
+						</select>
+						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
+
+					</div> 
+
+					<div style="margin-top: -132px; margin-left: 689px;">
+
+						<?php
+							$consultaDia = "SELECT * FROM horarios";
+							$resDia = mysql_query($consultaDia);
+						?>
+
+
+						<label>Dia y Horario</label>
+						<select multiple="multiple" id="dias" name="dias[]" style="width: 200px;">
+						<?php
+							while ($horario = mysql_fetch_array($resDia)) {
+						?>		
+								<option value="<?php echo $horario["idhorario"];?>"><?php echo $horario["dia"]." ".$horario["horaIn"]." - ".$horario["horaOut"]?></option>
+						<?php	  
+							}
+						?>
+						</select>
+						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
+
+					</div> 
+
+
+					<div style="margin-top: -15px;">
+						<button class="btn btn-success" type="submit">Filtrar</button>	
 					</div>
-					<button class="btn btn-primary" type="button" onclick="location.href='AltaMedicos.php'"
-					style="margin-top: 25px;margin-left: 300px;">Medico Nuevo</button>
+
 				</form>
 			</div>
-			-->
+			
+
+
+
 			
 			<!-- COMIENZA BARRA DE OPCIONES -->
 			<div class="btn-group" style="margin-top: 45px; margin-left: 270;">
@@ -172,28 +279,53 @@
 
 				<table class="table table-striped">
 					<tr>
-						<td><b>Nombre</b></td> 
-						<td><b>Apellido</b></td>
+						<td><b>Apellido y Nombre</b></td>
 						<td><b>Matricula</b></td>
-						<td><b>Direccion</b></td>
-						<td><b>Telefono</b></td>
-						<td><b>Email</b></td>
+						<td><b>Dni</b></td>
+						<td><b>Datos Personales</b></td>
 						<td><b>Obras Sociales</b></td>
 						<td><b>Especialidades</b></td>
-						<td><b>Dni</b></td>
-						<td><b>Fecha de Nacimiento</b></td>
 						<td><b>Horarios</b></td>
 						<td></td>
 						<td></td>
 					</tr>
 			<?php while ($valor = mysql_fetch_array($resultado)) {	?>
 					<tr>
-						<td><?php echo $valor["nombre"]; ?></td>
-						<td><?php echo $valor["apellido"]; ?></td>
+						<td><?php echo $valor["apellido"]; ?> <?php echo $valor["nombre"]; ?></td>
 						<td><?php echo $valor["nromatricula"]; ?></td>
-						<td><?php echo $valor["direccion"]; ?></td>
-						<td><?php echo $valor["telefono"]; ?></td>
-						<td><?php echo $valor["email"]; ?></td>
+						<td><?php echo $valor["dni"]; ?></td>
+
+						<?php
+						$consultadatos= "SELECT  * from medicos as m
+												  where m.idmedico = ".$valor["idmedico"]."";
+						$resultadodatos = mysql_query($consultadatos);
+						?>
+						<td><a data-toggle="modal" role="button" href="#datosmedico<?php echo $idmedico; ?>" class="btn">Ver</a></td>
+						<!-- MODAL DE VER ESPECIALIDES-->
+						<div id="datosmedico<?php echo $idmedico; ?>" class="modal hide fade in" style="display: none; ">
+							<div class="modal-body">
+								<center><h3>Datos Personales del Medico</h4></center>	
+								<ul>
+								<?php 
+								if (mysql_num_rows($resultadodatos) > 0) {
+									while ($datos = mysql_fetch_array($resultadodatos)) { ?>
+										<li><b>Direccion:</b> <?php echo $datos['direccion'] ?></li>
+										<li><b>Telefono:</b> <?php echo $datos['telefono'] ?></li>
+										<li><b>Email:</b> <?php echo $datos['email'] ?></li>
+										<li><b>Fecha de Nacimiento:</b> <?php echo $datos['fechaNac'] ?></li>
+							<?php	}
+								} else {
+									?>
+										<li><?php echo 'No se registran datos asignadas al medico.' ?></li>
+									<?php 
+								}
+									?>
+								</ul> 
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn" data-dismiss="modal">Volver</a>
+							</div>
+						</div>
 						
 						<?php
 						$idmedico = $valor['idmedico']; //¡Ojo tocando esta variable, se usa en varios lados durante la iteracion del while!.
@@ -257,8 +389,7 @@
 							</div>
 						</div>
 						
-						<td><?php echo $valor["dni"]; ?></td>
-						<td><?php echo $valor["fechaNac"]; ?></td>
+						
 						<?php 
 							$consultaHorarios = "SELECT h.dia, h.horaIn, h.horaOut 
 												 FROM horarios as h
