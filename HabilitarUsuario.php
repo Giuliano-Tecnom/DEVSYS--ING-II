@@ -8,7 +8,7 @@ include_once('mysqlconnect.php');
 		Header ('Location: GestionUsuarios.php');
 	}
 
-	$consulta_hab = "UPDATE usuarios SET activo = 1 WHERE idusuario = '" . $_GET['idusuario'] ."';";
+	$consulta_hab = "UPDATE usuarios SET activo = 1, intentos = 0 WHERE idusuario = '" . $_GET['idusuario'] ."';";
 	mysql_query($consulta_hab);
 
 

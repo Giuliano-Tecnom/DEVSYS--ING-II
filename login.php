@@ -27,7 +27,22 @@
 			if(isset($_GET['Error'])){
 				if( $_GET['Error'] == 1 ){
 					echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
-							<h4>Ingrese un Usuario y Contraseña Correctos.</h4>
+							<h4>Ingrese un Usuario correcto.</h4>
+							</div> ";
+				}
+				if( $_GET['Error'] == 2 ){
+					echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
+							<h4>Ingrese una Contraseña correcta.</h4>
+							</div> ";
+				}
+				if( $_GET['Error'] == 3 ){
+					echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
+							<h4>Llegaste al máximo de intentos. Usuario dado de baja. Ponganse en contacto con el Administrador del sistema.</h4>
+							</div> ";
+				}
+				if( $_GET['Error'] == 4 ){
+					echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
+							<h4>Usuario dado de baja temporalmente. Ponganse en contacto con el Administrador del sistema.</h4>
 							</div> ";
 				}	
 			}
