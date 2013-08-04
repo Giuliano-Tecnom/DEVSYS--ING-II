@@ -71,7 +71,7 @@ $fechaHasta = $_REQUEST['fechaHasta'];
 if (isset($_REQUEST['myselect6'])) {
 $myselect6 = $_REQUEST['myselect6'];
 }
-	include_once('mysqlconnect.php');
+	// include_once('mysqlconnect.php');
 	
 // Consulta por una busqueda filtrada
  $criterio="";
@@ -115,7 +115,7 @@ $myselect6 = $_REQUEST['myselect6'];
 				 WHERE 1=1  " .$criterio. "
 				 ORDER BY t.fecha,hora.hora
 				 ";
-     
+    
 	$query_busqueda = mysql_query($consultaFinal);
   
 	

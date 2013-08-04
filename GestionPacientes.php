@@ -8,11 +8,15 @@
 	
 	include_once('mysqlconnect.php');
 
-
+	
+	
+	
+	
 if(isset($_POST['filtro'])){
     
     $filtro = $_POST['filtro'];
     $criterio = "";
+    $criterioreporte ="";
 
     if(isset($_POST['nom'])){
     	$nombre = $_POST['nom'];
@@ -27,30 +31,46 @@ if(isset($_POST['filtro'])){
     		$criterio.="  and p.apellido LIKE '".$apellido."%' ";
     	}
     }
-
-    if(isset($_POST['dni'])){
-    	$dni = $_POST['dni'];
-    	if($dni != ""){
-    		$criterio.="  and p.dni = ".$dni."  ";
+	
+	if(isset($_POST['dni'])){
+					$dni = $_POST['dni'];
+					if($dni != ""){
+						$criterio.="  and p.dni = ".$dni."  ";
+					}
+	
+	}
+	
+	
+    if(isset($_POST['matricula'])){
+    	$matricula = $_POST['matricula'];
+    	if($matricula != ""){
+    		$criterio.="  and m.nromatricula = ".$matricula."  ";
     	}
     }
+	
+	if(isset($_POST['obraSocial'])){
+					$obra = $_POST['obraSocial'];
+					if($obra > 0){
+						$criterio.="  and po.idobra = ".$obra."  ";
+					}
+	}
 
-    if(isset($_POST['obraSocial'])){
-    	$obra = $_POST['obraSocial'];
-    	if($obra > 0){
-    		$criterio.="  and po.idobra = ".$obra."  ";
-    	}
-    }
+    
+    
+	
+	
 
 
-
- 	$consulta = "SELECT DISTINCT * FROM pacientes as p
- 				 INNER JOIN pac_obrasocial as po on p.idpaciente = po.idpaciente
- 				 WHERE (p.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
- 				 GROUP BY p.dni";
-     
+ 	// $consulta = "SELECT DISTINCT * FROM pacientes as p
+							 // WHERE (p.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+							 // GROUP BY p.dni";
+							 
+	$consulta = "SELECT DISTINCT * FROM pacientes as p
+							 LEFT JOIN pac_obrasocial as po on p.idpaciente = po.idpaciente
+							 WHERE (p.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+							 GROUP BY p.dni";						 
+			 
 	$resultado = mysql_query($consulta);
-
 
 }else{
  
@@ -58,7 +78,11 @@ if(isset($_POST['filtro'])){
      
 	$resultado = mysql_query($consulta);
 
-}
+}	
+	
+
+	
+	
 
 
 ?> 
@@ -204,7 +228,9 @@ if(isset($_POST['filtro'])){
 					   	<?php
 					   	}else{
 					   	?>
-					   		 <button class="btn btn-info" type="button" onclick="location.href='ReportePacientes.php?ojito=<?php echo $ojito ?>&filtro=<?php echo $filtro; ?>&nombre=<?php echo $nombre; ?>&apellido=<?php echo $apellido; ?>&dni=<?php echo $dni; ?>&obra=<?php echo $obra; ?>'">Generar Reporte</button>
+					   		 
+
+							  <button class="btn btn-info" type="button" onclick="reporte2('<?php echo $ojito;?>','<?php echo $filtro; ?>','<?php echo $nombre; ?>','<?php echo $apellido; ?>','<?php echo $dni; ?>','<?php echo $obra; ?>');">Generar Reporte</button>
 					   	<?php
 					   	}
 					   	?>
@@ -334,6 +360,8 @@ if(isset($_POST['filtro'])){
 					</tr>
 				<?php
 				}
+			
+				
 				?>	
 				</table>
 			</div>
@@ -347,10 +375,16 @@ if(isset($_POST['filtro'])){
 
 
 
-
 </body>
 </html>
 
+<script type="text/javascript">
+function reporte2(ojito, filtro, nombre, apellido, dni, obra){
 
- 
+    window.open('ReportePacientes.php?ojito='+ojito+'&filtro='+filtro+'&nombre='+nombre+'&apellido='+apellido+'&dni='+dni+'&obra='+obra, '_blank');  
+}
+
+
+</script>
+
   

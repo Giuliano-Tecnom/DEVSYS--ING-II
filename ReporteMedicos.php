@@ -8,7 +8,7 @@ if (!isset($_GET['ojito'])) {
 if ($ojito == 1) {
  $nombre= 'ACTIVOS';
 }
-	include_once('mysqlconnect.php');
+include_once('mysqlconnect.php');	
 	
 	////$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito;
  
@@ -23,54 +23,63 @@ if ($ojito == 1) {
 	
 //--------------------------------------------------------------------------------
 
+
+
 if(isset($_GET['filtro'])){
-    
+   
     $filtro = $_GET['filtro'];
     $criterio = "";
+   // $criterioreporte ="";
+			if ($filtro == 'S') {
+				if(isset($_GET['nombre'])){
+					$nombre = $_GET['nombre'];
+					if($nombre != ""){
+						$criterio.="  and m.nombre LIKE '".$nombre."%'  ";
+					}
+				}
 
-    if(isset($_GET['nombre'])){
-    	$nombre = $_GET['nombre'];
-    	if($nombre != ""){
-    		$criterio.="  and m.nombre LIKE '".$nombre."%'  ";
-    	}
-    }
+				if(isset($_GET['apellido'])){
+					$apellido = $_GET['apellido'];
+					if($apellido != ""){
+						$criterio.="  and m.apellido LIKE '".$apellido."%' ";
+					}
+				}
 
-    if(isset($_GET['apellido'])){
-    	$apellido = $_GET['apellido'];
-    	if($apellido != ""){
-    		$criterio.="  and m.apellido LIKE '".$apellido."%' ";
-    	}
-    }
+				if(isset($_GET['matricula'])){
+					$matricula = $_GET['matricula'];
+					if($matricula != ""){
+						$criterio.="  and m.nromatricula = ".$matricula."  ";
+					}
+				}
+				
+				
+				
 
-    if(isset($_GET['matricula'])){
-    	$matricula = $_GET['matricula'];
-    	if($matricula != ""){
-    		$criterio.="  and m.nromatricula = ".$matricula."  ";
-    	}
-    }
-
-    $criterio.= $_GET['criterioreporte'];
-
-
-
- 	$consulta = "SELECT DISTINCT * FROM medicos as m
- 				 INNER JOIN med_obrasocial as mo on m.idmedico = mo.idmedico
- 				 INNER JOIN med_esp as me on m.idmedico = me.idmedico
- 				 INNER JOIN med_hor as mh on m.idmedico = mh.idmedico
- 				 WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
- 				 GROUP BY m.nromatricula";
-     
-	$resultado = mysql_query($consulta);
+				$criterio.= $_GET['criterioreporte'];
+				
+				
+				// $consulta = "SELECT DISTINCT * FROM medicos as m
+							 // WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+							 // GROUP BY m.nromatricula";
+							 
+				$consulta = "SELECT DISTINCT * FROM medicos as m
+							 LEFT JOIN med_obrasocial as mo on m.idmedico = mo.idmedico
+							 LEFT JOIN med_esp as me on m.idmedico = me.idmedico
+							 LEFT JOIN med_hor as mh on m.idmedico = mh.idmedico
+							 WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+							 GROUP BY m.nromatricula";
+			    
+				
+				$resultado = mysql_query($consulta);
 
 
-}else{
- 
- 	$consulta = "SELECT * FROM medicos WHERE (medicos.activo = ".$ojito." OR 0 = ".$ojito.") ";
-     
-	$resultado = mysql_query($consulta);
-
+		}else{
+			
+			$consulta = "SELECT * FROM medicos WHERE (medicos.activo = ".$ojito." OR 0 = ".$ojito.") ";
+			
+			$resultado = mysql_query($consulta);
+		}
 }
-
 
 
 
@@ -110,7 +119,7 @@ $R='right ';
 
 
 $content ="";
-$porc = Array("20","20","20","20","20","45","45","15","15","40","15");  // Tamaño de las COLUMNAS para "A4"   // Maximo : 185% total de tr  PARA orientacion "P"    273%  PARA orientacion "L"
+$porc = Array("20","20","20","20","35","30","45","15","15","40","15");  // Tamaño de las COLUMNAS para "A4"   // Maximo : 185% total de tr  PARA orientacion "P"    273%  PARA orientacion "L"
 
 
  
@@ -169,6 +178,10 @@ $size="size=7";
 						while ($especialidad = mysql_fetch_array($resultadoConsultaEspecialidades)) { 
 							$especialidades.=utf8_decode($especialidad['nombre']).' - '; 
 						}
+					}else{
+					
+						$especialidades='Sin Especialidad asignada';
+						
 					}
 					
 					//fin especialidades
@@ -186,6 +199,10 @@ $size="size=7";
 										$obraSocial.=utf8_decode($obra['nombre']).' - ';
 								}
 								
+					}else{
+					
+						$obraSocial= 'Sin Obra Social';
+						
 					}
 					
 									
@@ -206,6 +223,10 @@ $size="size=7";
 						while ($horario = mysql_fetch_array($resultadoConsultaHorarios)) {
 							$horarios.= $horario['dia']." - ".$horario['horaIn']." - ".$horario['horaOut'].' <br> '; 
 						}
+					}else{
+					
+						$horarios='Sin Horarios asignados';
+						
 					}
 					
 					

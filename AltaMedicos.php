@@ -160,15 +160,7 @@
 			</div>
 				
 			
-			<!-- BOTON DE SALIR Y ATRAS-->
-			<ul class="breadcrumb" style="margin-top: 600px;">
-				<li> 
-					<div style="margin-left: 800px;">
-						<button class="btn btn-primary"type="button" onclick="javascript:history.go(-1)"> Atras </button>
-						<button class="btn btn-inverse" type="button" onclick="window.close();"> Salir </button>
-					</div>
-				</li>
-			</ul>
+			
 			
 		</div>     <!-- FIN DIV CONTENDOR -->
 	

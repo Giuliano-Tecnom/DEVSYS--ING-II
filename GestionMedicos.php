@@ -51,7 +51,7 @@ if(isset($_POST['filtro'])){
     if(count($especialidades) > 0){
     	foreach ($especialidades as $valor) {
     		$criterio.="  and me.idespecialidad = ".$valor."  ";
-    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
+    		$criterioreporte.="  and me.idespecialidad = ".$valor."  ";
     	}
     }
 
@@ -59,19 +59,23 @@ if(isset($_POST['filtro'])){
     if(count($dias) > 0){
     	foreach ($dias as $valor) {
     		$criterio.="  and mh.idhorario = ".$valor."  ";
-    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
+    		$criterioreporte.="  and mh.idhorario = ".$valor."  ";
     	}
     }
 
 
 
+	// $consulta = "SELECT DISTINCT * FROM medicos as m
+ 				 // WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
+ 				 // GROUP BY m.nromatricula";
+				 
  	$consulta = "SELECT DISTINCT * FROM medicos as m
- 				 INNER JOIN med_obrasocial as mo on m.idmedico = mo.idmedico
- 				 INNER JOIN med_esp as me on m.idmedico = me.idmedico
- 				 INNER JOIN med_hor as mh on m.idmedico = mh.idmedico
+ 				 LEFT JOIN med_obrasocial as mo on m.idmedico = mo.idmedico
+ 				 LEFT JOIN med_esp as me on m.idmedico = me.idmedico
+ 				 LEFT JOIN med_hor as mh on m.idmedico = mh.idmedico
  				 WHERE (m.activo = ".$ojito." OR 0 = ".$ojito.") " .$criterio. " 
  				 GROUP BY m.nromatricula";
-     
+    //echo $consulta; 
 	$resultado = mysql_query($consulta);
 
 
@@ -261,8 +265,10 @@ if(isset($_POST['filtro'])){
 				   	<?php
 				   	}else{
 				   	?>
-				   		<button class="btn btn-info" type="submit" onclick="location.href='ReporteMedicos.php?ojito=<?php echo $ojito;?>&filtro=<?php echo $filtro;?>&nombre=<?php echo $nombre;?>&apellido=<?php echo $apellido;?>&matricula=<?php echo $matricula;?>&criterioreporte=<?php echo $criterioreporte;?>'">Generar Reporte</button>
-				   	<?php
+				   		
+				   	
+						 <button class="btn btn-info" type="button" onclick="reporte2('<?php echo $ojito;?>','<?php echo $filtro; ?>','<?php echo $nombre; ?>','<?php echo $apellido; ?>','<?php echo $matricula; ?>','<?php echo $criterioreporte; ?>');">Generar Reporte</button>
+					<?php
 				   	}
 				   	?>
 
@@ -470,5 +476,12 @@ if(isset($_POST['filtro'])){
 </body>
 </html>
 
-  
+<script type="text/javascript">
+function reporte2(ojito, filtro, nombre, apellido, matricula, criterioreporte){
+
+    window.open('ReporteMedicos.php?ojito='+ojito+'&filtro='+filtro+'&nombre='+nombre+'&apellido='+apellido+'&matricula='+matricula+'&criterioreporte='+criterioreporte, '_blank');  
+}
+
+
+</script>  
   
