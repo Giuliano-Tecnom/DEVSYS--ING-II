@@ -14,10 +14,34 @@
 				 inner join especialidades as e on t.idespecialidad = e.idespecialidad
 				 WHERE t.idturno = ".$_GET['idturno'].";
 				 ";
-	
-							
-						
 	$restur = mysql_query($turnos);
+	
+	
+	$consultaIdMedico = "SELECT m.idmedico 
+						 FROM medicos as m
+						 INNER JOIN turnos as t
+						 ON m.idmedico = t.idmedico
+						 where t.idturno = ".$_GET['idturno'].";";
+	$rescidm = mysql_query($consultaIdMedico);
+	$idm;
+	while ($idmedicoinactivo = mysql_fetch_array($rescidm)) {
+		$idm = $idmedicoinactivo['idmedico'];
+	}
+	if ($idm != '') {
+	
+	
+		$consultaMedicoInactivo = "SELECT m.activo
+									FROM medicos as m
+									WHERE m.idmedico = ".$idm."
+									AND m.activo = 0;";
+		$resMedicoInactivo = mysql_query($consultaMedicoInactivo);
+		echo $consultaMedicoInactivo;
+		echo $resMedicoInactivo;
+		if (( mysql_num_rows($resMedicoInactivo) != 0)) {
+			Header ("Location: GestionTurnos.php?Error=6");
+		}
+	}
+	
 	
 
 	

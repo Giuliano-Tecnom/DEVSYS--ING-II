@@ -43,7 +43,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 								
 								}
 								
-								if ($cant_intentos == 3){
+								if ($cant_intentos == 2){
 									$Consulta_mod ="UPDATE usuarios SET activo = 0 WHERE usuario = '".$usuario."'";
 									$Modificacion = mysql_query($Consulta_mod);
 									header("location:login.php?Error=3");

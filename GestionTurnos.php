@@ -256,7 +256,14 @@ $myselect6 = $_REQUEST['myselect6'];
 					if( $_GET['Error'] == 5 ){
 						echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
 								<h4>Aviso!!</h4>
-								El medico con el que se desea dar el turno,en esa fecha estara de licencia.
+								El medico con el que se desea dar el turno estara de licencia en esa fecha.
+								</div> ";
+								}
+					
+					if( $_GET['Error'] == 6 ){
+						echo "  <div class='alert alert-error' style='margin-left: 10px; margin-right: 10px;'>
+								<h4>Aviso!!</h4>
+								El medico con el que se desea dar el turno se encuentra deshabilitado, por lo tanto no se puede cambiar el estado del turno.
 								</div> ";
 								}
 					}

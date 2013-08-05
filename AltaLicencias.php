@@ -2,10 +2,15 @@
 
 include_once('mysqlconnect.php');
 
-$consulta = "SELECT medicos.idmedico as idmedico , medicos.nombre as nombre, medicos.apellido as apellido , licencias.estado FROM medicos 
+$consulta = "SELECT distinct medicos.idmedico as idmedico , medicos.nombre as nombre, medicos.apellido as apellido , licencias.estado FROM medicos 
 			left JOIN licencias on licencias.idmedico = medicos.idmedico			
 			WHERE medicos.activo = 1 
-			and (licencias.estado is null or licencias.estado=0)";
+			and (licencias.estado is null or licencias.estado=0)
+			and medicos.idmedico not in (SELECT m.idmedico
+										FROM licencias as l 
+										INNER JOIN medicos as m
+										ON l.idmedico = m.idmedico
+										WHERE l.estado = 1) ";
 $query_med = mysql_query($consulta);
 ?>
 
@@ -54,6 +59,13 @@ $query_med = mysql_query($consulta);
 					echo"<div class='alert alert-error'>
 						<h4>Aviso!</h4>
 						La fecha desde no puede ser mayor a la fecha hasta.
+					</div>";
+					
+					}
+					if($_GET['Error'] == 3){
+					echo"<div class='alert alert-error'>
+						<h4>Aviso!</h4>
+						El medico tiene un turno asignado entre las fechas designadas, no se puede dar de alta la licencia.
 					</div>";
 					
 					}
