@@ -2,7 +2,7 @@
  
 	include_once('mysqlconnect.php');
 	
-	if(isset($_GET['idpaciente'])){
+	if( isset($_GET['idpaciente'])){
 		
 		$obrasString = $_GET['obras'];
 		

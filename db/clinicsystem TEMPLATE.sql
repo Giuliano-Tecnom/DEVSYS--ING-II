@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2013 a las 07:55:37
+-- Tiempo de generación: 06-08-2013 a las 16:35:39
 -- Versión del servidor: 5.6.11-log
 -- Versión de PHP: 5.4.14
 
@@ -32,6 +32,16 @@ CREATE TABLE IF NOT EXISTS `especialidades` (
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idespecialidad`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `especialidades`
+--
+
+INSERT INTO `especialidades` (`idespecialidad`, `nombre`, `activo`) VALUES
+(1, 'PEDIATRIA', 1),
+(2, 'ORTOPEDIA', 1),
+(3, 'GINECOLOGIA', 1),
+(4, 'CARDIOLOGIA', 1);
 
 -- --------------------------------------------------------
 
@@ -89,24 +99,24 @@ CREATE TABLE IF NOT EXISTS `horarios` (
   `dia_nro` int(2) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`idhorario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `horarios`
 --
 
 INSERT INTO `horarios` (`idhorario`, `horaIn`, `horaOut`, `dia`, `dia_nro`, `fecha`) VALUES
-(1, '08:00:00', '14:00:00', 'Lunes', 1, '2013-07-01'),
-(2, '14:00:00', '20:00:00', 'Lunes', 1, '2013-07-01'),
-(3, '08:00:00', '14:00:00', 'Martes', 2, '2013-07-02'),
-(4, '14:00:00', '20:00:00', 'Martes', 2, '2013-07-02'),
-(5, '08:00:00', '14:00:00', 'Miercoles', 3, '2013-07-03'),
-(6, '14:00:00', '20:00:00', 'Miercoles', 3, '2013-07-03'),
-(7, '08:00:00', '14:00:00', 'Jueves', 4, '2013-07-04'),
-(8, '14:00:00', '20:00:00', 'Jueves', 4, '2013-07-04'),
-(9, '08:00:00', '14:00:00', 'Viernes', 5, '2013-07-05'),
-(10, '14:00:00', '20:00:00', 'Viernes', 5, '2013-07-05'),
-(11, '08:00:00', '14:00:00', 'Sabado', 6, '2013-06-29');
+(1, '08:00:00', '14:00:00', 'Lunes', 1, '2013-08-12'),
+(2, '14:00:00', '20:00:00', 'Lunes', 1, '2013-08-12'),
+(3, '08:00:00', '14:00:00', 'Martes', 2, '2013-08-06'),
+(4, '14:00:00', '20:00:00', 'Martes', 2, '2013-08-06'),
+(5, '08:00:00', '14:00:00', 'Miercoles', 3, '2013-08-07'),
+(6, '14:00:00', '20:00:00', 'Miercoles', 3, '2013-08-07'),
+(7, '08:00:00', '14:00:00', 'Jueves', 4, '2013-08-08'),
+(8, '14:00:00', '20:00:00', 'Jueves', 4, '2013-08-08'),
+(9, '08:00:00', '14:00:00', 'Viernes', 5, '2013-08-09'),
+(10, '14:00:00', '20:00:00', 'Viernes', 5, '2013-08-09'),
+(11, '08:00:00', '14:00:00', 'Sabado', 6, '2013-08-10');
 
 -- --------------------------------------------------------
 
@@ -121,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `licencias` (
   `fechaHasta` date NOT NULL,
   `estado` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idlicencia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -141,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `medicos` (
   `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idmedico`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -190,7 +200,17 @@ CREATE TABLE IF NOT EXISTS `obrasociales` (
   `nombre` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idobra`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `obrasociales`
+--
+
+INSERT INTO `obrasociales` (`idobra`, `nombre`, `activo`) VALUES
+(1, 'OSECAC', 1),
+(3, 'OSEG', 1),
+(4, 'IOMA', 1),
+(5, 'GALENO', 1);
 
 -- --------------------------------------------------------
 
@@ -209,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   `direccion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `activo` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idpaciente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -238,8 +258,9 @@ CREATE TABLE IF NOT EXISTS `turnos` (
   `idhora` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `idespecialidad` int(11) NOT NULL,
+  `estado` varchar(500) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en espera',
   PRIMARY KEY (`idturno`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -254,8 +275,19 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `usuario` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `tipo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `activo` int(11) NOT NULL DEFAULT '1',
+  `intentos` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idusuario`, `nombre`, `apellido`, `usuario`, `password`, `tipo`, `activo`, `intentos`) VALUES
+(1, 'CRISTIAN', 'ROMERO', 'ROMERO', '12345', 'administrador', 1, 0),
+(2, 'ESTEBAN', 'SALINAS', 'SALINAS', '12345', 'usuario', 1, 0),
+(3, 'ADMIN', 'ADMIN', 'ADMIN', 'ADMIN', 'administrador', 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
