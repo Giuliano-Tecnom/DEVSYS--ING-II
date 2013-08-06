@@ -9,7 +9,6 @@ include_once('mysqlconnect.php');
 	$tipo = $_POST['tipo'];
 
 
-
 	$consulta = "SELECT * FROM usuarios WHERE usuario = '".$usuario."' ";
 	$resultado = mysql_query($consulta);
 
