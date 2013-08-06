@@ -28,7 +28,7 @@
 	
 	include_once('mysqlconnect.php');
 
-	$consulta = "SELECT idusuario, nombre, apellido, usuario, tipo, activo FROM usuarios ";
+	$consulta = "SELECT idusuario, nombre, apellido, usuario, tipo, activo FROM usuarios WHERE activo = ".$ojito." OR 0 = ".$ojito." ";
 	$res = mysql_query($consulta);
 	
 	include_once('header.php'); 
