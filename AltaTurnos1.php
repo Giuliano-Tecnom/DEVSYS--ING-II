@@ -82,9 +82,9 @@ $fecha = $_REQUEST['fecha'];
 	$diaSemana = diaSemana($fec[2], $fec[1], $fec[0]);
 	
     //if ($myselect1 >0) {  $criterio.="  and pac.idpaciente = ".$myselect1." and pac.activo = 1 ";   }	
-    if ($myselect2 >0) {  $criterio.="  and med.idmedico = ".$myselect2." and med.activo = 1 ";   }	
-    if ($myselect3 >0) {  $criterio.="  and esp.idespecialidad = ".$myselect3." and esp.activo = 1 ";   }	
-    if ($myselect4 >0) {  $criterio.="  and obr.idobra = ".$myselect4." and obr.activo = 1 ";   }	
+    if ($myselect2 >0) {  $criterio.="  and med.idmedico = ".$myselect2." ";   }	
+    if ($myselect3 >0) {  $criterio.="  and esp.idespecialidad = ".$myselect3."  ";   }	
+    if ($myselect4 >0) {  $criterio.="  and obr.idobra = ".$myselect4."  ";   }	
     if ($myselect5 >0) {  
 		if ($myselect5 == 1) { $criterio.="  and hor.idhorario in (1,3,5,7,9,11) ";}
 		if ($myselect5 == 2) { $criterio.="  and hor.idhorario in (2,4,6,8,10) "; }
@@ -92,24 +92,35 @@ $fecha = $_REQUEST['fecha'];
 	}	
 
 
-	
-    $consulta="SELECT distinct med.*, hor.idhorario, TIME_FORMAT(hor.horaIn,'%H:%m') as horaIn, TIME_FORMAT(hor.horaOut,'%H:%m') as horaOut, hor.dia, hor.dia_nro, hor.fecha, mh.*
-	FROM horarios as hor 
-	inner join med_hor as mh on hor.idhorario = mh.idhorario
-	inner join medicos as med on med.idmedico = mh.idmedico 
-	inner join med_esp as me on med.idmedico = me.idmedico
-	inner join med_obrasocial as mo on med.idmedico = mo.idmedico
-	inner join especialidades as esp on me.idespecialidad = esp.idespecialidad
-	inner join obrasociales as obr on mo.idobra = obr.idobra
-	where  hor.fecha between '$fecha_desde' and '$fecha_hasta' " .$criterio. " order by hor.fecha, hor.horaIn, med.apellido ";	  
-     
-	$query_busqueda = mysql_query($consulta);
+	if($myselect4 > 0) {
+	    $consulta="SELECT distinct med.*, hor.idhorario, TIME_FORMAT(hor.horaIn,'%H:%m') as horaIn, TIME_FORMAT(hor.horaOut,'%H:%m') as horaOut, hor.dia, hor.dia_nro, hor.fecha, mh.*
+		FROM horarios as hor 
+		inner join med_hor as mh on hor.idhorario = mh.idhorario
+		inner join medicos as med on med.idmedico = mh.idmedico 
+		inner join med_esp as me on med.idmedico = me.idmedico
+		inner join med_obrasocial as mo on med.idmedico = mo.idmedico
+		inner join especialidades as esp on me.idespecialidad = esp.idespecialidad
+		inner join obrasociales as obr on mo.idobra = obr.idobra
+		where  hor.fecha between '$fecha_desde' and '$fecha_hasta' and med.activo = 1 and esp.activo = 1 and obr.activo = 1 " .$criterio. " order by hor.fecha, hor.horaIn, med.apellido ";	  
+	     
+		$query_busqueda = mysql_query($consulta);
+	}else{
+		$consulta="SELECT distinct med.*, hor.idhorario, TIME_FORMAT(hor.horaIn,'%H:%m') as horaIn, TIME_FORMAT(hor.horaOut,'%H:%m') as horaOut, hor.dia, hor.dia_nro, hor.fecha, mh.*
+		FROM horarios as hor 
+		inner join med_hor as mh on hor.idhorario = mh.idhorario
+		inner join medicos as med on med.idmedico = mh.idmedico 
+		inner join med_esp as me on med.idmedico = me.idmedico
+		inner join especialidades as esp on me.idespecialidad = esp.idespecialidad
+		where  hor.fecha between '$fecha_desde' and '$fecha_hasta' and med.activo = 1 and esp.activo = 1 " .$criterio. " order by hor.fecha, hor.horaIn, med.apellido ";	  
+	     
+		$query_busqueda = mysql_query($consulta);
+	}
   
 
  
  }
 
-
+echo $consulta;
 
 
 	
