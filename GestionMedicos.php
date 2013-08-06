@@ -40,32 +40,35 @@ if(isset($_POST['filtro'])){
 
     if(isset($_POST['obras'])){
 	    $obras = $_POST['obras'];
-	    if(count($obras) > 0){
-	    	foreach ($obras as $valor) {
-	    		$criterio.="  and mo.idobra = ".$valor."  ";
-	    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
-	    	}
-	    }
+		if($obras > 0){
+	    	$criterio.="  mo.idobra = ".$obras."  ";
+	    	$criterioreporte.="  and mo.idobra = ".$obras."  ";
+		}
+
+
+
+
+
 	}
 
 	if(isset($_POST['especialidades'])){
 	    $especialidades = $_POST['especialidades'];
-	    if(count($especialidades) > 0){
-	    	foreach ($especialidades as $valor) {
-	    		$criterio.="  and me.idespecialidad = ".$valor."  ";
-	    		$criterioreporte.="  and me.idespecialidad = ".$valor."  ";
-	    	}
-	    }
+		if($especialidades > 0){
+			$criterio.="  and me.idespecialidad = ".$especialidades."  ";
+	    	$criterioreporte.="  and me.idespecialidad = ".$especialidades."  ";
+		}
+
+
 	}
 
 	if(isset($_POST['dias'])){
 	    $dias = $_POST['dias'];
-	    if(count($dias) > 0){
-	    	foreach ($dias as $valor) {
-	    		$criterio.="  and mh.idhorario = ".$valor."  ";
-	    		$criterioreporte.="  and mh.idhorario = ".$valor."  ";
-	    	}
-	    }
+		if($dias > 0){
+			$criterio.="  and mh.idhorario = ".$dias."  ";
+	    	$criterioreporte.="  and mh.idhorario = ".$dias."  ";
+		}
+
+
 	}
 
 
@@ -177,7 +180,7 @@ if(isset($_POST['filtro'])){
 						<input name="matricula" id="matricula" type="text" placeholder="Buscar por matricula..">
 					</div> 
 
-					<div style="margin-top: -122px; margin-left: 221px;">
+					<div style="margin-top: -146px; margin-left: 221px;">
 						
 						<?php
 							$consultaObras = "SELECT * FROM obraSociales WHERE activo = 1";
@@ -186,20 +189,25 @@ if(isset($_POST['filtro'])){
 
 
 						<label>Obra Social</label>
-						<select multiple="multiple" name="obras[]">
+						<select id="obras" name="obras">
+							<option value=0>Todas</option>
 							<?php
 								while ($valor = mysql_fetch_array($resObras)) {
+									if ($obras == $valor["idobra"]) {
+										$sel= " SELECTED ";
+									}else{
+										$sel= "";
+									}
 							?>
-									<option value="<?php echo $valor["idobra"];?>"><?php echo $valor["nombre"]; ?></option>
+									<option value="<?php echo $valor["idobra"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?></option>
 							<?php	  
 								}
 							?>
 						</select>
-						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 
 					</div> 
 
-					<div style="margin-top: -132px; margin-left: 455px;">
+					<div style="margin-top: -56px; margin-left: 455px;">
 
 						<?php
 							$consultaesp = "SELECT * FROM especialidades WHERE activo = 1";
@@ -208,20 +216,25 @@ if(isset($_POST['filtro'])){
 
 
 						<label>Especialidades</label>
-						<select multiple="multiple" name="especialidades[]">
+						<select id="especialidades" name="especialidades">
+							<option value=0>Todas</option>
 							<?php
 								while ($valor = mysql_fetch_array($resEsp)) {
+									if ($especialidades == $valor["idespecialidad"]) {
+										$sel= " SELECTED ";
+									}else{
+										$sel= "";
+									}
 							?>
-									<option value="<?php echo $valor["idespecialidad"];?>"><?php echo $valor["nombre"]; ?></option>
+									<option value="<?php echo $valor["idespecialidad"];?>"<?php echo $sel;?>><?php echo $valor["nombre"]; ?></option>
 							<?php	  
 								}
 							?>
 						</select>
-						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
 
 					</div> 
 
-					<div style="margin-top: -132px; margin-left: 689px;">
+					<div style="margin-top: -56px; margin-left: 689px;">
 
 						<?php
 							$consultaDia = "SELECT * FROM horarios";
@@ -230,21 +243,25 @@ if(isset($_POST['filtro'])){
 
 
 						<label>Dia y Horario</label>
-						<select multiple="multiple" id="dias" name="dias[]" style="width: 200px;">
-						<?php
-							while ($horario = mysql_fetch_array($resDia)) {
-						?>		
-								<option value="<?php echo $horario["idhorario"];?>"><?php echo $horario["dia"]." ".$horario["horaIn"]." - ".$horario["horaOut"]?></option>
-						<?php	  
-							}
-						?>
+						<select id="dias" name="dias">
+							<option value=0>Todas</option>
+							<?php
+								while ($valor = mysql_fetch_array($resDia)) {
+									if ($dias == $valor["idhorario"]) {
+										$sel= " SELECTED ";
+									}else{
+										$sel= "";
+									}
+							?>
+									<option value="<?php echo $valor["idhorario"];?>"><?php echo $valor["dia"]." ".$valor["horaIn"]." - ".$valor["horaOut"]?></option>
+							<?php	  
+								}
+							?>
 						</select>
-						<span class="help-block" style="font-size: 9px;"> Para una Seleccion multiple: Ctrl + Click Izq.</span>
-
 					</div> 
 
 
-					<div style="margin-top: -15px;">
+					<div style="margin-top: 83px;">
 						<button class="btn btn-success" type="submit">Filtrar</button>	
 					</div>
 
