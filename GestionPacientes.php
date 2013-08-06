@@ -74,7 +74,7 @@ if(isset($_POST['filtro'])){
 
 }else{
  
- 	$consulta = "SELECT * FROM pacientes WHERE (pacientes.activo = ".$ojito." OR 0 = ".$ojito.") ";
+ 	$consulta = "SELECT * FROM pacientes WHERE pacientes.activo = ".$ojito." OR 0 = ".$ojito." ";
      
 	$resultado = mysql_query($consulta);
 
@@ -303,7 +303,7 @@ if(isset($_POST['filtro'])){
 						<?php
 						$consultaDatos= "SELECT email, fechaNac, direccion, telefono
 										 FROM pacientes
-										 WHERE idpaciente ='" .$valor["idpaciente"]. "'";
+										 WHERE idpaciente ='" .$valor['idpaciente']. "'";
 						$resultadoConsultaDatos = mysql_query($consultaDatos);
 						?>
 						<td><a data-toggle="modal" role="button" href="#datosPersonalesPaciente<?php echo $idpaciente; ?>" class="btn">Ver</a></td>
@@ -313,7 +313,11 @@ if(isset($_POST['filtro'])){
 								<center><h3>Datos Personales del Paciente</h4></center>	
 								<ul>
 								<?php 
+					
 								if (mysql_num_rows($resultadoConsultaDatos) > 0) {
+							
+
+
 									while ($datos = mysql_fetch_array($resultadoConsultaDatos)) { ?>
 										<li><b>Direccion:</b> <?php echo $datos['direccion'] ?></li>
 										<li><b>Telefono:</b> <?php echo $datos['telefono'] ?></li>
@@ -321,6 +325,7 @@ if(isset($_POST['filtro'])){
 										<li><b>Fecha de Nacimiento:</b> <?php echo $datos['fechaNac'] ?></li>
 							<?php	}
 								} else {
+			
 									?>
 										<li><?php echo 'No se registran Datos Personales asignados al paciente.' ?></li>
 									<?php 
