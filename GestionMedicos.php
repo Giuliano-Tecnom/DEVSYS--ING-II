@@ -81,7 +81,7 @@ if(isset($_POST['filtro'])){
 
 }else{
  
- 	$consulta = "SELECT * FROM medicos WHERE (medicos.activo = ".$ojito." OR 0 = ".$ojito.") ";
+ 	$consulta = "SELECT * FROM medicos WHERE medicos.activo = ".$ojito." OR 0 = ".$ojito." ";
      
 	$resultado = mysql_query($consulta);
 
@@ -310,9 +310,9 @@ if(isset($_POST['filtro'])){
 												  where m.idmedico = ".$valor["idmedico"]."";
 						$resultadodatos = mysql_query($consultadatos);
 						?>
-						<td><a data-toggle="modal" role="button" href="#datosmedico<?php echo $idmedico; ?>" class="btn">Ver</a></td>
+						<td><a data-toggle="modal" role="button" href="#datosmedico<?php echo $valor["idmedico"]; ?>" class="btn">Ver</a></td>
 						<!-- MODAL DE VER ESPECIALIDES-->
-						<div id="datosmedico<?php echo $idmedico; ?>" class="modal hide fade in" style="display: none; ">
+						<div id="datosmedico<?php echo $valor["idmedico"]; ?>" class="modal hide fade in" style="display: none; ">
 							<div class="modal-body">
 								<center><h3>Datos Personales del Medico</h4></center>	
 								<ul>
