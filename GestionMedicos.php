@@ -41,11 +41,9 @@ if(isset($_POST['filtro'])){
     if(isset($_POST['obras'])){
 	    $obras = $_POST['obras'];
 		if($obras > 0){
-	    	$criterio.="  mo.idobra = ".$obras."  ";
-	    	$criterioreporte.="  and mo.idobra = ".$obras."  ";
+	    	$criterio.=" and mo.idobra = ".$obras."  ";
+	    	$criterioreporte.=" and mo.idobra = ".$obras."  ";
 		}
-
-
 
 
 
@@ -93,7 +91,6 @@ if(isset($_POST['filtro'])){
 	$resultado = mysql_query($consulta);
 
 }
-
 
 
 
