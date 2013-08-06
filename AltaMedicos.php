@@ -141,7 +141,7 @@
 								</div>
 								<div class="modal-footer">
 									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-									<button class="btn btn-success" type="submit" onclick="location.href='AgregarPaciente.php'">Aceptar</button>
+									<button class="btn btn-success" type="submit" onclick="location.href='AgregarMedico.php'">Aceptar</button>
 								</div>
 							</div>
 							
@@ -154,7 +154,7 @@
 								</div>
 								<div class="modal-footer">
 									<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-									<a class="btn btn-danger"  href="GestionPacientes.php">Aceptar</a>
+									<a class="btn btn-danger"  href="GestionMedicos.php">Aceptar</a>
 								</div>
 							</div>
 					</div>
