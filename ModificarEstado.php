@@ -35,8 +35,7 @@
 									WHERE m.idmedico = ".$idm."
 									AND m.activo = 0;";
 		$resMedicoInactivo = mysql_query($consultaMedicoInactivo);
-		echo $consultaMedicoInactivo;
-		echo $resMedicoInactivo;
+
 		if (( mysql_num_rows($resMedicoInactivo) != 0)) {
 			Header ("Location: GestionTurnos.php?Error=6");
 		}
