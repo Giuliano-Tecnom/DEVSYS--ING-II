@@ -1,4 +1,5 @@
-<!doctype html>  
+<!doctype html> 
+ 
 <?php
 
 	if (!isset($_REQUEST['ojito'])) {
