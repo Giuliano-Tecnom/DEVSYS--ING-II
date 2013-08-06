@@ -120,7 +120,6 @@ $fecha = $_REQUEST['fecha'];
  
  }
 
-echo $consulta;
 
 
 	
