@@ -38,31 +38,35 @@ if(isset($_POST['filtro'])){
     	}
     }
 
-    
-    $obras = $_POST['obras'];
-    if(count($obras) > 0){
-    	foreach ($obras as $valor) {
-    		$criterio.="  and mo.idobra = ".$valor."  ";
-    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
-    	}
-    }
+    if(isset($_POST['obras'])){
+	    $obras = $_POST['obras'];
+	    if(count($obras) > 0){
+	    	foreach ($obras as $valor) {
+	    		$criterio.="  and mo.idobra = ".$valor."  ";
+	    		$criterioreporte.="  and mo.idobra = ".$valor."  ";
+	    	}
+	    }
+	}
 
-    $especialidades = $_POST['especialidades'];
-    if(count($especialidades) > 0){
-    	foreach ($especialidades as $valor) {
-    		$criterio.="  and me.idespecialidad = ".$valor."  ";
-    		$criterioreporte.="  and me.idespecialidad = ".$valor."  ";
-    	}
-    }
+	if(isset($_POST['especialidades'])){
+	    $especialidades = $_POST['especialidades'];
+	    if(count($especialidades) > 0){
+	    	foreach ($especialidades as $valor) {
+	    		$criterio.="  and me.idespecialidad = ".$valor."  ";
+	    		$criterioreporte.="  and me.idespecialidad = ".$valor."  ";
+	    	}
+	    }
+	}
 
-    $dias = $_POST['dias'];
-    if(count($dias) > 0){
-    	foreach ($dias as $valor) {
-    		$criterio.="  and mh.idhorario = ".$valor."  ";
-    		$criterioreporte.="  and mh.idhorario = ".$valor."  ";
-    	}
-    }
-
+	if(isset($_POST['dias'])){
+	    $dias = $_POST['dias'];
+	    if(count($dias) > 0){
+	    	foreach ($dias as $valor) {
+	    		$criterio.="  and mh.idhorario = ".$valor."  ";
+	    		$criterioreporte.="  and mh.idhorario = ".$valor."  ";
+	    	}
+	    }
+	}
 
 
 	// $consulta = "SELECT DISTINCT * FROM medicos as m
